@@ -243,6 +243,55 @@
             transform: translateY(-2px);
         }
 
+        .btn-clear {
+            width: 100%;
+            background: rgba(100, 100, 100, 0.3);
+            color: #aaa;
+            border: 1px solid rgba(150, 150, 150, 0.3);
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .btn-clear:hover {
+            background: rgba(150, 150, 150, 0.4);
+            color: #fff;
+            border-color: rgba(200, 200, 200, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .workflow-guide {
+            background: rgba(30, 120, 180, 0.15);
+            border: 1px solid rgba(100, 180, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+
+        .workflow-guide strong {
+            color: #5dade2;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .workflow-guide ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .workflow-guide li {
+            padding: 4px 0;
+            color: #d4a574;
+        }
+
+        .workflow-guide li::before {
+            content: "→ ";
+            color: #5dade2;
+            font-weight: bold;
+        }
+
         .btn-copy {
             background: rgba(139, 69, 19, 0.5);
             color: #D4AF37;
@@ -698,7 +747,17 @@
                 </div>
 
                 <button class="btn-generate" onclick="generateContent()">✨ Generate Complete Content</button>
-                <button class="btn-regenerate" onclick="regenerateContent()" style="display: none;" id="btn-regenerate">🔄 Regenerate (Same Settings)</button>
+                <button class="btn-regenerate" onclick="regenerateContent()" style="display: none;" id="btn-regenerate">🔄 Regenerate With Current Settings</button>
+                <button class="btn-clear" onclick="clearForm()">🗑️ Clear All Fields & Start Fresh</button>
+
+                <div class="workflow-guide">
+                    <strong>🎯 How To Use:</strong>
+                    <ul>
+                        <li><strong>Generate</strong> - Creates new content with your current settings</li>
+                        <li><strong>Regenerate</strong> - Keep settings, shuffle caption order, update any changes</li>
+                        <li><strong>Clear</strong> - Reset everything to start a brand new project</li>
+                    </ul>
+                </div>
 
                 <div class="tips">
                     <div class="tips-title">💡 What You Get:</div>
@@ -865,6 +924,57 @@
 
             // Update last generated options
             lastGeneratedOptions = JSON.parse(JSON.stringify(currentOptions));
+        }
+
+        function clearForm() {
+            if (confirm('Clear all fields and start fresh? This will reset everything.')) {
+                // Reset all dropdowns to defaults
+                document.getElementById('ai-platform').value = 'gemini';
+                document.getElementById('category').value = 'product-showcase';
+                document.getElementById('season').value = 'any';
+                document.getElementById('audience').value = 'general';
+
+                // Clear custom text inputs
+                document.getElementById('custom-category').value = '';
+                document.getElementById('custom-occasion').value = '';
+                document.getElementById('custom-audience').value = '';
+                document.getElementById('product-name').value = '';
+                document.getElementById('special-notes').value = '';
+
+                // Reset checkboxes to defaults
+                document.getElementById('include-text').checked = true;
+                document.getElementById('include-logo').checked = true;
+                document.getElementById('include-location').checked = true;
+                document.getElementById('include-people').checked = false;
+                document.getElementById('include-emojis').checked = true;
+                document.getElementById('include-questions').checked = true;
+                document.getElementById('strong-cta').checked = true;
+                document.getElementById('suggest-gifs').checked = false;
+                document.getElementById('formal-tone').checked = false;
+
+                // Reset platform and style to defaults by clicking the first option
+                const firstPlatformBtn = document.querySelector('[data-platform="instagram-square"]');
+                if (firstPlatformBtn && !firstPlatformBtn.classList.contains('active')) {
+                    firstPlatformBtn.click();
+                }
+
+                const firstStyleBtn = document.querySelector('[data-style="photography"]');
+                if (firstStyleBtn && !firstStyleBtn.classList.contains('active')) {
+                    firstStyleBtn.click();
+                }
+
+                // Clear output area
+                document.getElementById('output').innerHTML = '<div class="placeholder">Generated content will appear here...</div>';
+
+                // Hide regenerate button
+                document.getElementById('btn-regenerate').style.display = 'none';
+
+                // Clear stored options
+                lastGeneratedOptions = null;
+
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
 
         function buildImagePrompt(options) {
@@ -1060,6 +1170,133 @@ FINAL RESULT: Museum-quality food photography suitable for premium brand marketi
             };
         }
 
+        function generateContextualHashtags(options, captionIndex, captionText) {
+            // CORE BRAND HASHTAGS (always included)
+            const coreBrand = ['#ChocolatOnJames', '#HamiltonsChocolate'];
+
+            // LOCATION HASHTAGS
+            const locationTags = ['#HamiltonOntario', '#JamesStreetNorth', '#HamOnt', '#ExploreHamilton', '#HamiltonLocalBusiness', '#ShopLocalHamilton'];
+
+            // CATEGORY-SPECIFIC HASHTAGS
+            const categoryTags = {
+                'product-showcase': ['#ArtisanChocolate', '#HandmadeChocolate', '#ChocolateArt', '#ChocolateCraft', '#GourmetChocolate', '#LuxuryChocolate', '#PremiumChocolate', '#ChocolateLovers', '#ChocolateAddict'],
+                'promotional': ['#ChocolateSale', '#ChocolateDeals', '#TreatYourself', '#ChocolateSpecial', '#LimitedOffer', '#ShopNow', '#DealOfTheDay', '#SaveOnChocolate'],
+                'seasonal': ['#SeasonalChocolate', '#HolidayChocolate', '#FestiveChocolate', '#ChocolateGifts', '#GiftIdeas', '#CelebrationChocolate', '#SpecialOccasion'],
+                'educational': ['#ChocolateFacts', '#ChocolateKnowledge', '#ChocolateCraft', '#LearnAboutChocolate', '#ChocolateMaking', '#ArtisanTechniques', '#ChocolateEducation'],
+                'behind-scenes': ['#BehindTheScenes', '#ChocolateMaking', '#ArtisanProcess', '#HandcraftedWithLove', '#SmallBatchChocolate', '#ChocolateCraftsmanship', '#MadeByHand'],
+                'lifestyle': ['#ChocolateLife', '#SelfCare', '#IndulgeYourself', '#ChocolateMoments', '#TreatYoSelf', '#LuxuryLifestyle', '#DailyIndulgence', '#ChocolateVibes'],
+                'local-hamilton': ['#HamiltonPride', '#ShopLocalHamilton', '#HamiltonBusiness', '#JamesStreetNorthLife', '#HamiltonCommunity', '#LocallyMade', '#HamiltonLove'],
+                'customer-engagement': ['#ChocolateLovers', '#ChocolateCommunity', '#ShareYourChocolate', '#ChocolateGoals', '#ChocolateTime', '#ChocolateObsessed']
+            };
+
+            // OCCASION/SEASONAL HASHTAGS
+            const occasionTags = {
+                'february': ['#ValentinesChocolate', '#ValentinesDay', '#LoveAndChocolate', '#RomanticGift', '#ValentinesTreat'],
+                'march': ['#SpringChocolate', '#EasterChocolate', '#SpringTreats'],
+                'april': ['#EasterChocolate', '#SpringVibes', '#MothersDay', '#SpringGifts'],
+                'may': ['#MothersDay', '#MomDeservesChocolate', '#MothersDayGift', '#TreatMom'],
+                'june': ['#FathersDay', '#DadDeservesChocolate', '#FathersDayGift', '#SummerChocolate'],
+                'july': ['#SummerTreats', '#SummerChocolate', '#SweetSummer'],
+                'august': ['#BackToSchool', '#TeacherAppreciation', '#SummerTreats'],
+                'september': ['#FallFlavors', '#AutumnChocolate', '#FallTreats', '#CozyVibes'],
+                'october': ['#Halloween', '#HalloweenChocolate', '#TrickOrTreat', '#SpookySeason', '#FallFlavors'],
+                'november': ['#Thanksgiving', '#HolidayPrep', '#GivingThanks', '#FallFlavors', '#HolidaySeason'],
+                'december': ['#ChristmasChocolate', '#HolidayGifts', '#FestiveChocolate', '#ChristmasGifts', '#HolidayTreats', '#SeasonOfGiving']
+            };
+
+            // AUDIENCE-SPECIFIC HASHTAGS
+            const audienceTags = {
+                'hamilton-locals': ['#HamiltonLocalBusiness', '#HamiltonCommunity', '#ShopLocalHamilton'],
+                'gift-buyers': ['#ChocolateGifts', '#GiftIdeas', '#PerfectGift', '#ThoughtfulGifts'],
+                'corporate': ['#CorporateGifts', '#BusinessGifts', '#ClientAppreciation', '#EmployeeRecognition'],
+                'foodies': ['#FoodieLife', '#GourmetFood', '#FoodLovers', '#TasteTheDifference'],
+                'luxury': ['#LuxuryChocolate', '#FinerThings', '#LuxuryGifts', '#PremiumQuality'],
+                'millennials': ['#TreatYoSelf', '#InstaFood', '#FoodPorn', '#ChocolateGram']
+            };
+
+            // PRODUCT-TYPE HASHTAGS (detected from caption or product name)
+            const productKeywords = {
+                'truffle': ['#ChocolateTruffles', '#Truffles', '#GourmetTruffles'],
+                'caramel': ['#Caramel', '#CaramelChocolate', '#SaltedCaramel'],
+                'bark': ['#ChocolateBark', '#ChocolateBar', '#ChocolateSlabs'],
+                'gift': ['#ChocolateGift', '#GiftBox', '#ChocolateGiftBox', '#GiftIdeas'],
+                'box': ['#ChocolateBox', '#ChocolateAssortment', '#MixedChocolates'],
+                'dark': ['#DarkChocolate', '#DarkChocolateLovers'],
+                'milk': ['#MilkChocolate', '#Creamy'],
+                'white': ['#WhiteChocolate'],
+                'sea salt': ['#SeaSalt', '#SaltedChocolate'],
+                'heart': ['#ChocolateHearts', '#HeartShaped'],
+                'bar': ['#ChocolateBar', '#ChocolateBars']
+            };
+
+            // THEME/MOOD HASHTAGS (detected from caption content)
+            const themeTags = {
+                'love': ['#MadeWithLove', '#LoveInEveryBite', '#ChocolateLove'],
+                'handmade': ['#Handmade', '#HandcraftedGoodness', '#MadeByHand'],
+                'fresh': ['#FreshBatch', '#FreshlyMade', '#MadeDaily'],
+                'quality': ['#QualityMatters', '#PremiumIngredients', '#TopQuality'],
+                'gift': ['#PerfectGift', '#GiftWorthy', '#ThoughtfulGifts'],
+                'treat': ['#TreatYourself', '#SweetTreat', '#Indulgence'],
+                'artisan': ['#ArtisanMade', '#ArtisanQuality', '#CraftedWithCare'],
+                'celebration': ['#Celebrate', '#CelebrationTime', '#SpecialMoment']
+            };
+
+            // SEO & LLM-OPTIMIZED TRENDING HASHTAGS
+            const trendingTags = ['#ChocolateLovers', '#ChocolateAddict', '#ChocolateObsessed', '#ChocolateCommunity', '#ChocolateGram', '#FoodPorn', '#InstaChocolate', '#DessertGoals', '#SweetTooth', '#ChocoholicLife', '#FoodieFinds', '#LocalBusiness', '#SmallBusiness', '#SupportLocal'];
+
+            // BUILD UNIQUE HASHTAG SET FOR THIS CAPTION
+            let selectedTags = [...coreBrand]; // Always start with core brand
+
+            // Add 1-2 location tags (rotate based on index)
+            const locationPool = locationTags.slice((captionIndex * 2) % locationTags.length, ((captionIndex * 2) % locationTags.length) + 2);
+            selectedTags.push(...locationPool);
+
+            // Add 2-3 category-specific tags
+            const catTags = categoryTags[options.category] || categoryTags['product-showcase'];
+            const catPool = catTags.slice((captionIndex * 2) % catTags.length, ((captionIndex * 2) % catTags.length) + 3);
+            selectedTags.push(...catPool);
+
+            // Add seasonal/occasion tags if applicable
+            if (options.season && options.season !== 'any' && occasionTags[options.season]) {
+                const occasionPool = occasionTags[options.season].slice(0, 2);
+                selectedTags.push(...occasionPool);
+            }
+
+            // Add audience-specific tags
+            if (options.audience && audienceTags[options.audience]) {
+                selectedTags.push(audienceTags[options.audience][captionIndex % audienceTags[options.audience].length]);
+            }
+
+            // Detect and add product-type tags from product name and caption
+            const textToAnalyze = (options.productName + ' ' + captionText).toLowerCase();
+            for (const [keyword, tags] of Object.entries(productKeywords)) {
+                if (textToAnalyze.includes(keyword)) {
+                    selectedTags.push(tags[0]); // Add primary tag
+                    break; // Only add one product type
+                }
+            }
+
+            // Detect and add theme tags from caption content
+            for (const [keyword, tags] of Object.entries(themeTags)) {
+                if (textToAnalyze.includes(keyword)) {
+                    selectedTags.push(tags[captionIndex % tags.length]);
+                }
+            }
+
+            // Add 1-2 trending/SEO tags (different for each caption)
+            const trendingPool = trendingTags.slice((captionIndex * 2) % trendingTags.length, ((captionIndex * 2) % trendingTags.length) + 2);
+            selectedTags.push(...trendingPool);
+
+            // Remove duplicates and limit to 8-12 hashtags (Instagram best practice)
+            selectedTags = [...new Set(selectedTags)];
+            const maxTags = options.platform === 'instagram-story' ? 5 : (options.platform === 'pinterest' ? 8 : 10);
+            selectedTags = selectedTags.slice(0, maxTags);
+
+            // Format with emoji if requested
+            const hashtagString = selectedTags.join(' ');
+            return options.includeEmojis ? `🍫 ${hashtagString}` : hashtagString;
+        }
+
         function buildSocialMediaCopy(options, isRegenerate = false) {
             const posts = [];
             const productName = options.productName || 'artisan chocolates';
@@ -1067,16 +1304,6 @@ FINAL RESULT: Museum-quality food photography suitable for premium brand marketi
             const useEmojis = options.includeEmojis;
             const addQuestions = options.includeQuestions;
             const useFormal = options.formalTone;
-
-            // Hashtags by platform
-            const hashtags = {
-                'instagram-square': useEmojis ? '🍫 #ChocolatOnJames #HamiltonsChocolate #HamiltonOntario #JamesStreetNorth #ArtisanChocolate #HandmadeChocolate #ChocolateLovers #HamOnt #SupportLocal' : '#ChocolatOnJames #HamiltonsChocolate #HamiltonOntario #JamesStreetNorth #ArtisanChocolate #HandmadeChocolate #ChocolateLovers #HamOnt #SupportLocal',
-                'instagram-story': useEmojis ? '🍫 #ChocolatOnJames #HamiltonOntario' : '#ChocolatOnJames #HamiltonOntario',
-                'facebook-ad': '',
-                'pinterest': '#ChocolateRecipes #ChocolateGifts #ArtisanChocolate #GourmetChocolate #HandmadeChocolate'
-            };
-
-            const platformHashtags = hashtags[options.platform] || '';
 
             // CTAs
             const ctas = {
@@ -1101,11 +1328,14 @@ FINAL RESULT: Museum-quality food photography suitable for premium brand marketi
                     copy = `[GIF IDEA: ${gifSuggestions[index % gifSuggestions.length]}]\n\n${copy}`;
                 }
 
+                // Generate contextual hashtags for THIS specific caption
+                const contextualHashtags = generateContextualHashtags(options, index, template);
+
                 // Add CTA and hashtags
                 if (options.platform === 'facebook-ad') {
                     copy = `${copy}\n\n${cta}`;
                 } else {
-                    copy = `${copy}\n\n${cta}\n\n${platformHashtags}`;
+                    copy = `${copy}\n\n${cta}\n\n${contextualHashtags}`;
                 }
 
                 posts.push({
@@ -1142,12 +1372,99 @@ FINAL RESULT: Museum-quality food photography suitable for premium brand marketi
             const emoji = options.includeEmojis;
             const question = options.includeQuestions;
             const formal = options.formalTone;
+            const specialNotes = options.specialNotes || '';
+
+            // Detect special occasions from special notes
+            const notesLower = specialNotes.toLowerCase();
+            const isBirthday = notesLower.includes('birthday') || notesLower.includes('bday') || notesLower.includes('b-day');
+            const isAnniversary = notesLower.includes('anniversary');
+            const isWedding = notesLower.includes('wedding');
+            const isGraduation = notesLower.includes('graduation') || notesLower.includes('grad');
+            const isCorporate = notesLower.includes('corporate') || notesLower.includes('client') || notesLower.includes('employee');
+
+            // Extract name from special notes if present (e.g., "Sam Birthday" -> "Sam")
+            let recipientName = '';
+            if (isBirthday) {
+                const nameMatch = specialNotes.match(/(\w+)['s]*\s*(birthday|bday|b-day)/i);
+                if (nameMatch) recipientName = nameMatch[1];
+            }
 
             let templates = [];
             const e = emoji; // shorthand
 
-            // If custom category, create custom-themed captions
-            if (options.category === 'custom' && customCat) {
+            // If special notes contain specific occasions, create occasion-themed captions
+            if (isBirthday && recipientName) {
+                templates.push(
+                    `${e ? '🎂 ' : ''}Happy Birthday ${recipientName}! ${e ? '🎉 ' : ''}Celebrate with our delicious ${productName} - the perfect birthday treat!${question ? ` ${e ? '🍫 ' : ''}What better way to celebrate than with Hamilton's finest chocolate?` : ''}`,
+                    `${e ? '🎈 ' : ''}${recipientName}'s birthday deserves something special! ${e ? '🍫 ' : ''}Try our handcrafted ${productName} made fresh on James Street North.${question ? ` ${e ? '🎁 ' : ''}Ready to make this birthday unforgettable?` : ''}`,
+                    `${e ? '✨ ' : ''}Birthday wishes for ${recipientName}! ${e ? '🎂 ' : ''}Our ${productName} are perfect for birthday celebrations.${question ? ` ${e ? '🎉 ' : ''}Who else loves chocolate for their birthday?` : ''}`,
+                    `${e ? '🎁 ' : ''}Make ${recipientName}'s birthday extra sweet with ${productName} from Chocolate on James! ${e ? '🍫 ' : ''}Handmade with love in Hamilton.`,
+                    `${e ? '🎉 ' : ''}Celebrating ${recipientName} today! ${e ? '🎂 ' : ''}Our ${productName} are the perfect birthday surprise. Made fresh daily!${question ? ` ${e ? '🎈 ' : ''}What's your favorite birthday treat?` : ''}`,
+                    `${e ? '🍫 ' : ''}${recipientName}'s special day calls for special chocolate! ${e ? '✨ ' : ''}Treat them to our artisan ${productName}.${question ? ` ${e ? '💝 ' : ''}Ready to make their day?` : ''}`,
+                    `${e ? '🎂 ' : ''}Happy Birthday to ${recipientName}! ${e ? '🎉 ' : ''}Celebrate with Hamilton's finest ${productName} - handcrafted perfection!`,
+                    `${e ? '🎈 ' : ''}For ${recipientName}'s birthday: ${productName} that taste as amazing as they look! ${e ? '🍫 ' : ''}Made with love on James Street North.${question ? ` ${e ? '😊 ' : ''}Birthdays + chocolate = perfection?` : ''}`,
+                    `${e ? '✨ ' : ''}${recipientName} deserves the best! ${e ? '🎂 ' : ''}Our ${productName} are handmade birthday perfection.${question ? ` ${e ? '🎁 ' : ''}How do you celebrate special birthdays?` : ''}`,
+                    `${e ? '🎉 ' : ''}Birthday celebration mode for ${recipientName}! ${e ? '🍫 ' : ''}Nothing says "Happy Birthday" like our artisan ${productName}!`
+                );
+            } else if (isBirthday && !recipientName) {
+                templates.push(
+                    `${e ? '🎂 ' : ''}Happy Birthday! ${e ? '🎉 ' : ''}Celebrate with our delicious ${productName} - the perfect birthday treat from Hamilton's finest!${question ? ` ${e ? '🍫 ' : ''}What better way to celebrate?` : ''}`,
+                    `${e ? '🎈 ' : ''}Birthday celebrations deserve special chocolate! ${e ? '🍫 ' : ''}Our handcrafted ${productName} are made fresh on James Street North.${question ? ` ${e ? '🎁 ' : ''}Ready for birthday sweetness?` : ''}`,
+                    `${e ? '✨ ' : ''}Make any birthday extra special with ${productName}! ${e ? '🎂 ' : ''}Handmade with love, perfect for celebrating.${question ? ` ${e ? '🎉 ' : ''}Who's celebrating a birthday this week?` : ''}`,
+                    `${e ? '🎁 ' : ''}Birthday treat alert! ${e ? '🍫 ' : ''}Our ${productName} from Chocolate on James are birthday perfection.`,
+                    `${e ? '🎉 ' : ''}Celebrating birthdays the chocolate way! ${e ? '🎂 ' : ''}Our ${productName} are handmade birthday magic.${question ? ` ${e ? '🎈 ' : ''}What's your go-to birthday dessert?` : ''}`,
+                    `${e ? '🍫 ' : ''}Birthday sweetness: ${productName} edition! ${e ? '✨ ' : ''}Made fresh daily in Hamilton for all your celebrations.${question ? ` ${e ? '💝 ' : ''}Ready to celebrate?` : ''}`,
+                    `${e ? '🎂 ' : ''}The perfect birthday gift: artisan ${productName}! ${e ? '🎉 ' : ''}Handcrafted on James Street North with love.`,
+                    `${e ? '🎈 ' : ''}Birthday moments deserve ${productName}! ${e ? '🍫 ' : ''}Hamilton's finest chocolate for your special day.${question ? ` ${e ? '😊 ' : ''}Birthdays + chocolate = happiness?` : ''}`,
+                    `${e ? '✨ ' : ''}Make birthdays unforgettable with our ${productName}! ${e ? '🎂 ' : ''}Handmade birthday perfection.${question ? ` ${e ? '🎁 ' : ''}How do you celebrate?` : ''}`,
+                    `${e ? '🎉 ' : ''}Birthday celebration mode activated! ${e ? '🍫 ' : ''}Our artisan ${productName} are the ultimate birthday treat!`
+                );
+            } else if (isAnniversary) {
+                templates.push(
+                    `${e ? '💕 ' : ''}Happy Anniversary! ${e ? '✨ ' : ''}Celebrate your love with our romantic ${productName} - handcrafted in Hamilton.${question ? ` ${e ? '🍫 ' : ''}How many years of sweetness?` : ''}`,
+                    `${e ? '🥂 ' : ''}Anniversary celebrations deserve exceptional chocolate! ${e ? '💝 ' : ''}Our ${productName} are the perfect way to say "I love you."`,
+                    `${e ? '💖 ' : ''}Mark this special milestone with ${productName} from Chocolate on James! ${e ? '✨ ' : ''}Made with love for love.${question ? ` ${e ? '🍫 ' : ''}What's your anniversary tradition?` : ''}`,
+                    `${e ? '🌹 ' : ''}Anniversary sweetness: ${productName} edition! ${e ? '💕 ' : ''}Handmade on James Street North for your celebration.`,
+                    `${e ? '✨ ' : ''}Celebrating love with Hamilton's finest ${productName}! ${e ? '💝 ' : ''}Perfect for anniversaries and special moments.${question ? ` ${e ? '🥂 ' : ''}How do you celebrate love?` : ''}`,
+                    `${e ? '💖 ' : ''}Anniversary magic in every bite! ${e ? '🍫 ' : ''}Our artisan ${productName} make love even sweeter.`,
+                    `${e ? '💕 ' : ''}For your anniversary: ${productName} crafted with the same care you put into your relationship! ${e ? '✨ ' : ''}`,
+                    `${e ? '🥂 ' : ''}Toast to love with our romantic ${productName}! ${e ? '💝 ' : ''}Hamilton-made for your special day.${question ? ` ${e ? '🌹 ' : ''}Chocolate or flowers?` : ''}`,
+                    `${e ? '💖 ' : ''}Anniversary perfection: handmade ${productName} from Chocolate on James! ${e ? '✨ ' : ''}Made for celebrating love.`,
+                    `${e ? '💕 ' : ''}Sweet anniversary moments deserve sweet ${productName}! ${e ? '🍫 ' : ''}Artisan quality, romantic results!`
+                );
+            } else if (isWedding) {
+                templates.push(
+                    `${e ? '💒 ' : ''}Wedding sweetness! ${e ? '✨ ' : ''}Our elegant ${productName} are perfect for your special day.${question ? ` ${e ? '🍫 ' : ''}Looking for wedding favors?` : ''}`,
+                    `${e ? '👰 ' : ''}Make your wedding unforgettable with ${productName} from Chocolate on James! ${e ? '💝 ' : ''}Handcrafted luxury for your guests.`,
+                    `${e ? '💍 ' : ''}Wedding day perfection: artisan ${productName}! ${e ? '✨ ' : ''}Elegant, delicious, and made in Hamilton.${question ? ` ${e ? '🥂 ' : ''}Planning your dream wedding?` : ''}`,
+                    `${e ? '🤵 ' : ''}Treat your wedding guests to Hamilton's finest ${productName}! ${e ? '💒 ' : ''}Handmade elegance for your celebration.`,
+                    `${e ? '💝 ' : ''}Wedding favors with wow factor: our ${productName}! ${e ? '✨ ' : ''}Made fresh on James Street North.${question ? ` ${e ? '👰 ' : ''}Want to impress your guests?` : ''}`,
+                    `${e ? '💍 ' : ''}For your special day: premium ${productName} from Chocolate on James! ${e ? '💒 ' : ''}Wedding-worthy chocolate!`,
+                    `${e ? '🥂 ' : ''}Wedding magic in every bite! ${e ? '🍫 ' : ''}Our ${productName} add sweetness to your celebration.`,
+                    `${e ? '👰 ' : ''}Perfect wedding treats: handcrafted ${productName}! ${e ? '✨ ' : ''}Hamilton quality for your big day.${question ? ` ${e ? '💝 ' : ''}Ready to wow your guests?` : ''}`,
+                    `${e ? '💒 ' : ''}From our hands to your wedding: artisan ${productName}! ${e ? '🍫 ' : ''}Made with love and attention to detail.`,
+                    `${e ? '💍 ' : ''}Wedding celebration sweetness! ${e ? '✨ ' : ''}Our ${productName} make perfect favors and gifts!`
+                );
+            } else if (specialNotes && specialNotes.length > 3) {
+                // Generic special request captions
+                templates.push(
+                    `${e ? '✨ ' : ''}Special request: ${productName} made just for you! ${e ? '🍫 ' : ''}Handcrafted in Hamilton with personal attention.${question ? ` ${e ? '💝 ' : ''}What makes your order special?` : ''}`,
+                    `${e ? '🎁 ' : ''}Custom ${productName} from Chocolate on James! ${e ? '✨ ' : ''}We love bringing your special ideas to life.`,
+                    `${e ? '💝 ' : ''}Your special ${productName} order: handmade with extra care! ${e ? '🍫 ' : ''}Hamilton quality, personalized touch.${question ? ` ${e ? '😊 ' : ''}Have a special request?` : ''}`,
+                    `${e ? '✨ ' : ''}Making magic happen: custom ${productName}! ${e ? '🎁 ' : ''}Personalized chocolate from James Street North.`,
+                    `${e ? '🍫 ' : ''}Special orders are our specialty! ${e ? '💝 ' : ''}Try our ${productName} made exactly how you want them.${question ? ` ${e ? '✨ ' : ''}Ready for something unique?` : ''}`,
+                    `${e ? '🎁 ' : ''}Personalized ${productName} perfection! ${e ? '🍫 ' : ''}We bring your chocolate vision to life in Hamilton.`,
+                    `${e ? '✨ ' : ''}Your custom ${productName} request: our pleasure! ${e ? '💝 ' : ''}Handcrafted with personal attention.`,
+                    `${e ? '🍫 ' : ''}Special occasion, special ${productName}! ${e ? '🎁 ' : ''}Made to order on James Street North.${question ? ` ${e ? '😊 ' : ''}What's your vision?` : ''}`,
+                    `${e ? '💝 ' : ''}Custom chocolate artistry: ${productName} edition! ${e ? '✨ ' : ''}Your ideas, our craftsmanship.`,
+                    `${e ? '🎁 ' : ''}Making your ${productName} dreams come true! ${e ? '🍫 ' : ''}Personalized, handmade, Hamilton-proud!`
+                );
+            }
+
+            // Only use category-based templates if special notes didn't generate templates
+            if (templates.length === 0) {
+                // If custom category, create custom-themed captions
+                if (options.category === 'custom' && customCat) {
                 templates.push(
                     `${e ? '✨ ' : ''}${customCat}: ${productName} from Chocolate on James, Hamilton's premier chocolatier. ${e ? '🍫' : ''} Handcrafted with passion on James Street North.`,
                     `${e ? '🎉 ' : ''}Special feature: ${customCat}! Enjoy ${productName} made fresh daily in Hamilton with premium ingredients and artisan care.`,
@@ -1423,6 +1740,7 @@ FINAL RESULT: Museum-quality food photography suitable for premium brand marketi
                     );
                 }
             }
+            } // Close the templates.length === 0 check
 
             // If regenerating, shuffle the templates to get different order
             if (isRegenerate) {
