@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolat on James - AI Image Prompt Generator (Enhanced)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a0f0a 0%, #2d1810 50%, #1a0f0a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #D4AF37, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #d4a574;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-left: 10px;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .controls {
+            background: rgba(30, 20, 15, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .output-area {
+            background: rgba(30, 20, 15, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            min-height: 600px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            color: #D4AF37;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        select:focus, input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #D4AF37;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .option-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .option-btn {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .option-btn:hover {
+            background: rgba(139, 69, 19, 0.3);
+            border-color: #D4AF37;
+        }
+
+        .option-btn.active {
+            background: rgba(212, 175, 55, 0.3);
+            border-color: #D4AF37;
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            color: #1a0f0a;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #FFD700, #D4AF37);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: rgba(139, 69, 19, 0.3);
+            color: #D4AF37;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(139, 69, 19, 0.5);
+            color: #FFD700;
+        }
+
+        .prompt-output {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .prompt-title {
+            color: #D4AF37;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .copy-btn {
+            padding: 8px 16px;
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(76, 175, 80, 0.3);
+            color: #66BB6A;
+        }
+
+        .copy-btn.copied {
+            background: rgba(76, 175, 80, 0.4);
+            color: #fff;
+        }
+
+        .prompt-text {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.8;
+            color: #f5f5dc;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .prompt-meta {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .meta-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(139, 69, 19, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            font-size: 0.8em;
+            color: #d4a574;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #8B7355;
+        }
+
+        .empty-state-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .empty-state-text {
+            font-size: 1.1em;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkbox-option:hover {
+            background: rgba(139, 69, 19, 0.3);
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .checkbox-option label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 0.9em;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-label {
+            display: block;
+            color: #d4a574;
+            font-size: 0.85em;
+            margin-bottom: 6px;
+        }
+
+        .custom-field {
+            background: rgba(76, 175, 80, 0.05);
+            border: 1px dashed rgba(76, 175, 80, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .custom-field-label {
+            color: #4CAF50;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .logo-instructions {
+            background: rgba(33, 150, 243, 0.1);
+            border: 1px solid rgba(33, 150, 243, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.85em;
+            color: #64B5F6;
+        }
+
+        .logo-instructions-title {
+            font-weight: 600;
+            color: #2196F3;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tips {
+            background: rgba(139, 69, 19, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.85em;
+            color: #d4a574;
+        }
+
+        .tips-title {
+            font-weight: 600;
+            color: #D4AF37;
+            margin-bottom: 8px;
+        }
+
+        .tips ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        .tips li {
+            margin-bottom: 5px;
+        }
+
+        .variations-container {
+            margin-top: 20px;
+        }
+
+        .variation-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .variation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .variation-number {
+            color: #D4AF37;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1200px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                position: relative;
+                top: 0;
+                max-height: none;
+            }
+
+            .option-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍫 AI Image Prompt Generator</h1>
+            <p class="subtitle">Create professional AI image prompts for Chocolat on James</p>
+            <span class="badge">✨ ENHANCED VERSION</span>
+        </header>
+
+        <div class="main-layout">
+            <!-- Controls Panel -->
+            <div class="controls">
+                <div class="section">
+                    <div class="section-title">📁 Content Category</div>
+                    <select id="category">
+                        <option value="">Select Category...</option>
+                        <option value="product-showcase">Product Showcase</option>
+                        <option value="promotional">Promotional & Sales</option>
+                        <option value="seasonal">Seasonal & Holiday</option>
+                        <option value="educational">Educational & Tips</option>
+                        <option value="behind-scenes">Behind-the-Scenes</option>
+                        <option value="lifestyle">Lifestyle & Inspiration</option>
+                        <option value="local-hamilton">Hamilton Local</option>
+                        <option value="customer-engagement">Customer Engagement</option>
+                    </select>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📱 Platform / Format</div>
+                    <div class="option-group">
+                        <div class="option-btn active" data-platform="instagram-square">Instagram Square</div>
+                        <div class="option-btn" data-platform="instagram-story">IG Story</div>
+                        <div class="option-btn" data-platform="facebook-ad">Facebook Ad</div>
+                        <div class="option-btn" data-platform="pinterest">Pinterest</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📅 Month / Season</div>
+                    <select id="season">
+                        <option value="any">Any Time</option>
+                        <option value="january">January</option>
+                        <option value="february">February (Valentine's)</option>
+                        <option value="march">March (Easter prep)</option>
+                        <option value="april">April (Easter/Mother's Day)</option>
+                        <option value="may">May (Mother's Day)</option>
+                        <option value="june">June (Father's Day/Summer)</option>
+                        <option value="july">July (Summer)</option>
+                        <option value="august">August (Back to School)</option>
+                        <option value="september">September (Fall)</option>
+                        <option value="october">October (Halloween)</option>
+                        <option value="november">November (Thanksgiving/Holidays)</option>
+                        <option value="december">December (Christmas)</option>
+                        <option value="custom">✨ Custom Occasion...</option>
+                    </select>
+                    
+                    <div id="customSeasonField" class="custom-field" style="display: none;">
+                        <div class="custom-field-label">✨ Custom Occasion</div>
+                        <input type="text" id="customSeason" placeholder="e.g., Company Anniversary, McMaster Event, Art Crawl, Grand Opening...">
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">👥 Target Audience</div>
+                    <select id="audience">
+                        <option value="general">General Audience</option>
+                        <option value="hamilton-locals">Hamilton Locals</option>
+                        <option value="gift-buyers">Gift Buyers</option>
+                        <option value="corporate">Corporate Clients</option>
+                        <option value="foodies">Chocolate Enthusiasts</option>
+                        <option value="luxury">Luxury Seekers</option>
+                        <option value="millennials">Millennials & Gen Z</option>
+                        <option value="custom">✨ Custom Audience...</option>
+                    </select>
+                    
+                    <div id="customAudienceField" class="custom-field" style="display: none;">
+                        <div class="custom-field-label">✨ Custom Target Audience</div>
+                        <input type="text" id="customAudience" placeholder="e.g., McMaster Students, Ti-Cats Fans, Law Firms, Healthcare Professionals...">
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎨 Image Style</div>
+                    <div class="option-group">
+                        <div class="option-btn active" data-style="photography">Photography</div>
+                        <div class="option-btn" data-style="lifestyle">Lifestyle</div>
+                        <div class="option-btn" data-style="minimalist">Minimalist</div>
+                        <div class="option-btn" data-style="artistic">Artistic</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">✨ Optional Elements</div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="includeEmojis">
+                        <label for="includeEmojis">😊 Include Emojis (for social media)</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="includeGif">
+                        <label for="includeGif">🎬 Suggest GIF/Animation Style</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="includeLogo">
+                        <label for="includeLogo">🏷️ Include Logo Placement Instructions</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="includeText">
+                        <label for="includeText">📝 Include Text Overlay Space</label>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="generatePrompt()">🎨 Generate Prompt</button>
+                
+                <div class="action-buttons" id="actionButtons" style="display: none;">
+                    <button class="btn btn-secondary" style="flex: 1;" onclick="regeneratePrompt()">🔄 Regenerate</button>
+                    <button class="btn btn-secondary" style="flex: 1;" onclick="generateVariations()">✨ 3 Variations</button>
+                </div>
+
+                <div class="tips">
+                    <div class="tips-title">💡 Pro Tips</div>
+                    <ul>
+                        <li>Use "Custom Occasion" for specific events</li>
+                        <li>Click "Regenerate" for different versions</li>
+                        <li>Enable "Logo Placement" for branding guidance</li>
+                        <li>Try "3 Variations" for multiple options</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Output Area -->
+            <div class="output-area">
+                <div id="emptyState" class="empty-state">
+                    <div class="empty-state-icon">🎨</div>
+                    <div class="empty-state-text">
+                        <p style="margin-bottom: 10px;">Select your options and click "Generate Prompt"</p>
+                        <p style="font-size: 0.9em; color: #8B7355;">Your AI-ready prompt will appear here</p>
+                    </div>
+                </div>
+
+                <div id="outputContainer" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedPlatform = 'instagram-square';
+        let selectedStyle = 'photography';
+        let lastSettings = null;
+
+        // Platform button handlers
+        document.querySelectorAll('[data-platform]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[data-platform]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                selectedPlatform = this.dataset.platform;
+            });
+        });
+
+        // Style button handlers
+        document.querySelectorAll('[data-style]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[data-style]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                selectedStyle = this.dataset.style;
+            });
+        });
+
+        // Show/hide custom fields
+        document.getElementById('season').addEventListener('change', function() {
+            const customField = document.getElementById('customSeasonField');
+            customField.style.display = this.value === 'custom' ? 'block' : 'none';
+        });
+
+        document.getElementById('audience').addEventListener('change', function() {
+            const customField = document.getElementById('customAudienceField');
+            customField.style.display = this.value === 'custom' ? 'block' : 'none';
+        });
+
+        function generatePrompt() {
+            const category = document.getElementById('category').value;
+            const season = document.getElementById('season').value;
+            const customSeason = document.getElementById('customSeason').value;
+            const audience = document.getElementById('audience').value;
+            const customAudience = document.getElementById('customAudience').value;
+            const includeEmojis = document.getElementById('includeEmojis').checked;
+            const includeGif = document.getElementById('includeGif').checked;
+            const includeLogo = document.getElementById('includeLogo').checked;
+            const includeText = document.getElementById('includeText').checked;
+
+            if (!category) {
+                alert('Please select a content category');
+                return;
+            }
+
+            // Store settings for regeneration
+            lastSettings = {
+                category, season, customSeason, audience, customAudience,
+                platform: selectedPlatform, style: selectedStyle,
+                includeEmojis, includeGif, includeLogo, includeText
+            };
+
+            const prompt = buildPrompt(lastSettings);
+            displayPrompt(prompt, lastSettings);
+        }
+
+        function regeneratePrompt() {
+            if (!lastSettings) return;
+            const prompt = buildPrompt(lastSettings, true);
+            displayPrompt(prompt, lastSettings);
+        }
+
+        function generateVariations() {
+            if (!lastSettings) return;
+            
+            const variations = [];
+            for (let i = 0; i < 3; i++) {
+                variations.push(buildPrompt(lastSettings, true));
+            }
+            
+            displayVariations(variations, lastSettings);
+        }
+
+        function buildPrompt(settings, isVariation = false) {
+            let prompt = '';
+
+            // Platform specifications
+            const platformSpecs = {
+                'instagram-square': '1080x1080px square format, Instagram feed optimized',
+                'instagram-story': '1080x1920px vertical format, Instagram Story optimized',
+                'facebook-ad': '1200x628px landscape format, Facebook Ad optimized',
+                'pinterest': '1000x1500px tall format, Pinterest optimized'
+            };
+
+            // Style descriptions
+            const styleDescriptions = {
+                'photography': 'professional product photography, studio lighting, high-end commercial style',
+                'lifestyle': 'lifestyle photography, natural setting, authentic moments, warm atmosphere',
+                'minimalist': 'minimalist composition, clean background, elegant simplicity, negative space',
+                'artistic': 'artistic and creative, unique perspective, artistic lighting, editorial style'
+            };
+
+            // Category-specific elements
+            const categoryElements = {
+                'product-showcase': 'artisan chocolate truffles, premium packaging, detailed texture',
+                'promotional': 'eye-catching sale elements, promotional feel, attention-grabbing',
+                'seasonal': 'seasonal decorations, holiday atmosphere, festive elements',
+                'educational': 'informative visual, clear demonstration, educational context',
+                'behind-scenes': 'chocolate-making process, artisan craftsmanship, workshop setting',
+                'lifestyle': 'lifestyle moment, chocolate enjoyment, aspirational scene',
+                'local-hamilton': 'Hamilton landmarks, James Street North, local pride elements',
+                'customer-engagement': 'interactive elements, engaging composition, social media friendly'
+            };
+
+            // Build main prompt
+            prompt = `Create a ${styleDescriptions[settings.style]} image for Chocolat on James. `;
+            prompt += `${platformSpecs[settings.platform]}. `;
+            prompt += `Content focus: ${categoryElements[settings.category]}. `;
+
+            // Add season/occasion
+            if (settings.season === 'custom' && settings.customSeason) {
+                prompt += `Special occasion: ${settings.customSeason}. `;
+            } else if (settings.season !== 'any') {
+                prompt += `${settings.season} theme. `;
+            }
+
+            // Add audience targeting
+            if (settings.audience === 'custom' && settings.customAudience) {
+                prompt += `Target audience: ${settings.customAudience}. `;
+            } else if (settings.audience !== 'general') {
+                prompt += `Appealing to ${settings.audience}. `;
+            }
+
+            // Add brand elements
+            prompt += `Brand: Chocolat on James - Hamilton's artisan chocolatier. `;
+            prompt += `Color palette: rich chocolate browns (#2d1810), cream (#f5f5dc), gold accents (#D4AF37). `;
+            prompt += `Premium quality, handcrafted aesthetic, local Hamilton pride. `;
+
+            // Add optional elements
+            if (settings.includeText) {
+                prompt += `Leave space for text overlay (top or bottom third). `;
+            }
+
+            if (settings.includeLogo) {
+                prompt += `Include subtle space for logo placement (bottom right corner, 120x120px area). `;
+            }
+
+            if (settings.includeGif) {
+                prompt += `Suggest animation: subtle motion like chocolate dripping, sparkle effects, or gentle rotation. `;
+            }
+
+            // Add variation elements if regenerating
+            if (isVariation) {
+                const variations = [
+                    'Close-up detail shot. ',
+                    'Wide angle scene. ',
+                    'Overhead flat lay composition. ',
+                    'Dramatic side lighting. ',
+                    'Soft natural window light. ',
+                    'Macro detail focus. '
+                ];
+                prompt += variations[Math.floor(Math.random() * variations.length)];
+            }
+
+            prompt += `Professional, high-quality, commercial photography. 8K resolution, sharp focus, perfect lighting.`;
+
+            return prompt;
+        }
+
+        function displayPrompt(prompt, settings) {
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('actionButtons').style.display = 'flex';
+            
+            const container = document.getElementById('outputContainer');
+            container.style.display = 'block';
+            
+            const emojiNote = settings.includeEmojis ? ' 😊🍫✨' : '';
+            
+            let html = `
+                <div class="prompt-output">
+                    <div class="prompt-header">
+                        <div class="prompt-title">🎨 Your AI Prompt${emojiNote}</div>
+                        <button class="copy-btn" onclick="copyPrompt(this)">📋 Copy</button>
+                    </div>
+                    <div class="prompt-text">${prompt}</div>
+                    <div class="prompt-meta">
+                        <span class="meta-tag">📱 ${settings.platform}</span>
+                        <span class="meta-tag">🎨 ${settings.style}</span>
+                        ${settings.season !== 'any' ? `<span class="meta-tag">📅 ${settings.season === 'custom' ? settings.customSeason : settings.season}</span>` : ''}
+                        ${settings.audience !== 'general' ? `<span class="meta-tag">👥 ${settings.audience === 'custom' ? settings.customAudience : settings.audience}</span>` : ''}
+                    </div>
+                </div>
+            `;
+
+            if (settings.includeLogo) {
+                html += `
+                    <div class="logo-instructions">
+                        <div class="logo-instructions-title">🏷️ Logo Upload Instructions</div>
+                        <p><strong>Step 1:</strong> Generate the image using the prompt above in ChatGPT, Midjourney, or your preferred AI tool.</p>
+                        <p><strong>Step 2:</strong> Download the generated image to your computer.</p>
+                        <p><strong>Step 3:</strong> Open the image in Canva, Photoshop, or any image editor.</p>
+                        <p><strong>Step 4:</strong> Add your Chocolat on James logo to the bottom right corner (recommended size: 120x120px).</p>
+                        <p><strong>Step 5:</strong> Ensure logo has good contrast - use white logo on dark backgrounds, dark logo on light backgrounds.</p>
+                        <p><strong>Pro Tip:</strong> Add a subtle drop shadow or white outline to the logo for better visibility!</p>
+                    </div>
+                `;
+            }
+
+            if (settings.includeEmojis) {
+                html += `
+                    <div class="tips">
+                        <div class="tips-title">😊 Emoji Suggestions for Your Post</div>
+                        <p>Add these emojis to your social media caption:</p>
+                        <p style="font-size: 1.2em; margin-top: 8px;">🍫 ✨ 💝 🎁 😋 🤤 ❤️ 🎉 🌟 💫</p>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function displayVariations(variations, settings) {
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('actionButtons').style.display = 'flex';
+            
+            const container = document.getElementById('outputContainer');
+            container.style.display = 'block';
+            
+            let html = '<div class="variations-container">';
+            html += '<h2 style="color: #D4AF37; margin-bottom: 20px;">✨ 3 Prompt Variations</h2>';
+            
+            variations.forEach((prompt, index) => {
+                html += `
+                    <div class="variation-item">
+                        <div class="variation-header">
+                            <div class="variation-number">Variation ${index + 1}</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">📋 Copy</button>
+                        </div>
+                        <div class="prompt-text">${prompt}</div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+
+            if (settings.includeLogo) {
+                html += `
+                    <div class="logo-instructions">
+                        <div class="logo-instructions-title">🏷️ Logo Upload Instructions</div>
+                        <p><strong>After generating:</strong> Add your Chocolat on James logo using Canva or image editor (bottom right, 120x120px recommended).</p>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function copyPrompt(button) {
+            const promptText = button.closest('.prompt-output, .variation-item').querySelector('.prompt-text').textContent;
+            
+            navigator.clipboard.writeText(promptText).then(() => {
+                button.textContent = '✅ Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = '📋 Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
+

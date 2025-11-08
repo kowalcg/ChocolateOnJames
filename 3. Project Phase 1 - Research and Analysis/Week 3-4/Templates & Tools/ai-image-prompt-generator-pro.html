@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate on James - AI Image Prompt Generator PRO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a0f0a 0%, #2d1810 50%, #1a0f0a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #D4AF37, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #d4a574;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        .version-badge {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, #D4AF37, #8B4513);
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .controls {
+            background: rgba(30, 20, 15, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .output-area {
+            background: rgba(30, 20, 15, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            min-height: 600px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            color: #D4AF37;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 8px;
+        }
+
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        select:focus, input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #D4AF37;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        select option {
+            background: #1a0f0a;
+            color: #e0e0e0;
+        }
+
+        .option-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .option-btn {
+            padding: 10px;
+            background: rgba(139, 69, 19, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85em;
+            text-align: center;
+        }
+
+        .option-btn:hover {
+            background: rgba(139, 69, 19, 0.5);
+            border-color: #D4AF37;
+            transform: translateY(-2px);
+        }
+
+        .option-btn.active {
+            background: linear-gradient(135deg, #D4AF37, #8B4513);
+            border-color: #FFD700;
+            color: #fff;
+        }
+
+        button {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+        }
+
+        .btn-generate {
+            width: 100%;
+            background: linear-gradient(135deg, #D4AF37, #FFD700);
+            color: #1a0f0a;
+            font-size: 1.1em;
+            margin-top: 20px;
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-copy {
+            background: rgba(139, 69, 19, 0.5);
+            color: #D4AF37;
+            border: 1px solid #D4AF37;
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        .btn-copy:hover {
+            background: rgba(139, 69, 19, 0.8);
+            color: #FFD700;
+        }
+
+        .prompt-output {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .prompt-title {
+            color: #D4AF37;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .platform-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 15px;
+            font-size: 0.75em;
+            color: #FFD700;
+            margin-left: 10px;
+        }
+
+        .prompt-text {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.8;
+            color: #f5f5dc;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .prompt-meta {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .meta-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(139, 69, 19, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            font-size: 0.8em;
+            color: #d4a574;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #8B7355;
+        }
+
+        .empty-state-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .empty-state-text {
+            font-size: 1.1em;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkbox-option:hover {
+            background: rgba(139, 69, 19, 0.3);
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .checkbox-option label {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-label {
+            display: block;
+            color: #d4a574;
+            font-size: 0.85em;
+            margin-bottom: 6px;
+        }
+
+        .platform-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .platform-tab {
+            padding: 8px 16px;
+            background: rgba(139, 69, 19, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85em;
+        }
+
+        .platform-tab:hover {
+            background: rgba(139, 69, 19, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .platform-tab.active {
+            background: linear-gradient(135deg, #D4AF37, #8B4513);
+            border-color: #FFD700;
+            color: #fff;
+        }
+
+        @media (max-width: 1200px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                position: relative;
+                top: 0;
+                max-height: none;
+            }
+        }
+
+        .tips {
+            background: rgba(139, 69, 19, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.85em;
+            color: #d4a574;
+        }
+
+        .tips-title {
+            font-weight: 600;
+            color: #D4AF37;
+            margin-bottom: 8px;
+        }
+
+        .tips ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        .tips li {
+            margin-bottom: 5px;
+        }
+
+        .usage-guide {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(139, 69, 19, 0.2);
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .usage-guide h3 {
+            color: #D4AF37;
+            margin-bottom: 15px;
+        }
+
+        .usage-guide ol {
+            color: #d4a574;
+            line-height: 1.8;
+            margin-left: 20px;
+        }
+
+        .usage-guide strong {
+            color: #FFD700;
+        }
+
+        .scrollable {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.5);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍫 AI Image Prompt Generator PRO</h1>
+            <p class="subtitle">Create professional AI image prompts for Chocolate on James</p>
+            <span class="version-badge">v2.0 - Multi-Platform Edition</span>
+        </header>
+
+        <div class="main-layout">
+            <!-- Controls Panel -->
+            <div class="controls">
+                <div class="section">
+                    <div class="section-title">🤖 AI Platform</div>
+                    <select id="ai-platform">
+                        <option value="chatgpt">ChatGPT / DALL-E 3 (Best for beginners)</option>
+                        <option value="midjourney">Midjourney (Best for artistic)</option>
+                        <option value="gemini">Google Gemini (Free option)</option>
+                        <option value="leonardo">Leonardo AI (Best for consistency)</option>
+                        <option value="ideogram">Ideogram (Best for text in images)</option>
+                        <option value="firefly">Adobe Firefly (Commercial safe)</option>
+                        <option value="stable-diffusion">Stable Diffusion (Advanced)</option>
+                        <option value="universal">Universal (Works everywhere)</option>
+                    </select>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📱 Content Category</div>
+                    <select id="category">
+                        <option value="">Select Category...</option>
+                        <option value="product-showcase">Product Showcase</option>
+                        <option value="promotional">Promotional & Sales</option>
+                        <option value="seasonal">Seasonal & Holiday</option>
+                        <option value="educational">Educational & Tips</option>
+                        <option value="behind-scenes">Behind-the-Scenes</option>
+                        <option value="lifestyle">Lifestyle & Inspiration</option>
+                        <option value="local-hamilton">Hamilton Local Pride</option>
+                        <option value="customer-engagement">Customer Engagement</option>
+                    </select>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📐 Platform / Format</div>
+                    <div class="option-group">
+                        <div class="option-btn active" data-platform="instagram-square">Instagram Square</div>
+                        <div class="option-btn" data-platform="instagram-story">IG Story</div>
+                        <div class="option-btn" data-platform="facebook-ad">Facebook Ad</div>
+                        <div class="option-btn" data-platform="pinterest">Pinterest</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📅 Month / Season</div>
+                    <select id="season">
+                        <option value="any">Any Time</option>
+                        <option value="january">January</option>
+                        <option value="february">February (Valentine's)</option>
+                        <option value="march">March (Easter prep)</option>
+                        <option value="april">April (Easter/Mother's Day)</option>
+                        <option value="may">May (Mother's Day)</option>
+                        <option value="june">June (Father's Day/Summer)</option>
+                        <option value="july">July (Summer)</option>
+                        <option value="august">August (Back to School)</option>
+                        <option value="september">September (Fall)</option>
+                        <option value="october">October (Halloween)</option>
+                        <option value="november">November (Thanksgiving/Holidays)</option>
+                        <option value="december">December (Christmas)</option>
+                    </select>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">👥 Target Audience</div>
+                    <select id="audience">
+                        <option value="general">General Audience</option>
+                        <option value="hamilton-locals">Hamilton Locals</option>
+                        <option value="gift-buyers">Gift Buyers</option>
+                        <option value="corporate">Corporate Clients</option>
+                        <option value="foodies">Chocolate Enthusiasts</option>
+                        <option value="luxury">Luxury Seekers</option>
+                        <option value="millennials">Millennials & Gen Z</option>
+                    </select>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎨 Image Style</div>
+                    <div class="option-group">
+                        <div class="option-btn active" data-style="photography">Photography</div>
+                        <div class="option-btn" data-style="lifestyle">Lifestyle</div>
+                        <div class="option-btn" data-style="minimalist">Minimalist</div>
+                        <div class="option-btn" data-style="artistic">Artistic</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">✨ Optional Elements</div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="include-text" checked>
+                        <label for="include-text">Space for text overlay</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="include-logo">
+                        <label for="include-logo">Show logo/branding</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="include-location">
+                        <label for="include-location">Hamilton location emphasis</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="include-people">
+                        <label for="include-people">Include people/hands</label>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🔧 Custom Details (Optional)</div>
+                    <div class="input-group">
+                        <label class="input-label">Specific Product</label>
+                        <input type="text" id="product-name" placeholder="e.g., Dark Chocolate Truffles">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Special Notes</label>
+                        <textarea id="special-notes" rows="3" placeholder="Any specific requirements..."></textarea>
+                    </div>
+                </div>
+
+                <button class="btn-generate" onclick="generatePrompt()">✨ Generate AI Prompts</button>
+
+                <div class="tips">
+                    <div class="tips-title">💡 Pro Tips:</div>
+                    <ul>
+                        <li>Try different AI platforms for varied results</li>
+                        <li>Generate 3-5 images per prompt</li>
+                        <li>Hamilton local content resonates more</li>
+                        <li>Use seasonal themes 2-3 weeks ahead</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Output Area -->
+            <div class="output-area">
+                <div id="output">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🎨</div>
+                        <div class="empty-state-text">
+                            Select your options and click "Generate AI Prompts"<br>
+                            to create professional image prompts optimized for each AI platform
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPlatform = 'instagram-square';
+        let currentStyle = 'photography';
+
+        // Platform selection
+        document.querySelectorAll('[data-platform]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[data-platform]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentPlatform = this.dataset.platform;
+            });
+        });
+
+        // Style selection
+        document.querySelectorAll('[data-style]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[data-style]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentStyle = this.dataset.style;
+            });
+        });
+
+        function generatePrompt() {
+            const aiPlatform = document.getElementById('ai-platform').value;
+            const category = document.getElementById('category').value;
+            const season = document.getElementById('season').value;
+            const audience = document.getElementById('audience').value;
+            const includeText = document.getElementById('include-text').checked;
+            const includeLogo = document.getElementById('include-logo').checked;
+            const includeLocation = document.getElementById('include-location').checked;
+            const includePeople = document.getElementById('include-people').checked;
+            const productName = document.getElementById('product-name').value;
+            const specialNotes = document.getElementById('special-notes').value;
+
+            if (!category) {
+                alert('Please select a content category');
+                return;
+            }
+
+            const prompts = buildPrompts({
+                aiPlatform,
+                category,
+                platform: currentPlatform,
+                season,
+                audience,
+                style: currentStyle,
+                includeText,
+                includeLogo,
+                includeLocation,
+                includePeople,
+                productName,
+                specialNotes
+            });
+
+            displayPrompts(prompts);
+        }
+
+        function buildPrompts(options) {
+            const prompts = [];
+
+            // Base content building
+            const baseContent = buildBaseContent(options);
+
+            // Generate platform-specific prompts
+            switch(options.aiPlatform) {
+                case 'chatgpt':
+                    prompts.push(buildChatGPTPrompt(baseContent, options));
+                    break;
+                case 'midjourney':
+                    prompts.push(buildMidjourneyPrompt(baseContent, options));
+                    break;
+                case 'gemini':
+                    prompts.push(buildGeminiPrompt(baseContent, options));
+                    break;
+                case 'leonardo':
+                    prompts.push(buildLeonardoPrompt(baseContent, options));
+                    break;
+                case 'ideogram':
+                    prompts.push(buildIdeogramPrompt(baseContent, options));
+                    break;
+                case 'firefly':
+                    prompts.push(buildFireflyPrompt(baseContent, options));
+                    break;
+                case 'stable-diffusion':
+                    prompts.push(buildStableDiffusionPrompt(baseContent, options));
+                    break;
+                case 'universal':
+                    prompts.push(buildUniversalPrompt(baseContent, options));
+                    break;
+            }
+
+            return prompts;
+        }
+
+        function buildBaseContent(options) {
+            const styleDescriptions = {
+                'photography': 'professional product photography, studio lighting, high-end commercial style, sharp focus, detailed textures',
+                'lifestyle': 'lifestyle photography, natural setting, authentic moment captured, warm and inviting atmosphere',
+                'minimalist': 'minimalist composition, clean aesthetic, generous negative space, modern and elegant, rule of thirds',
+                'artistic': 'artistic composition, creative styling, magazine-quality aesthetic, editorial feel'
+            };
+
+            const platformSpecs = {
+                'instagram-square': { aspect: '1:1', orientation: 'square', composition: 'centered' },
+                'instagram-story': { aspect: '9:16', orientation: 'vertical', composition: 'portrait' },
+                'facebook-ad': { aspect: '1.91:1', orientation: 'horizontal', composition: 'landscape' },
+                'pinterest': { aspect: '2:3', orientation: 'vertical', composition: 'portrait pin' }
+            };
+
+            const categoryDetails = {
+                'product-showcase': {
+                    title: 'Product Showcase Image',
+                    subject: 'artisan chocolates from Chocolate on James, Hamilton\'s premier chocolatier',
+                    focus: 'premium quality, handcrafted details, luxurious presentation, rich chocolate textures',
+                    mood: 'elegant, appetizing, premium, artisanal',
+                    keywords: 'gourmet chocolate, artisan confection, luxury treats, handmade quality'
+                },
+                'promotional': {
+                    title: 'Promotional Marketing Image',
+                    subject: 'eye-catching promotional display for chocolate sale or special offer',
+                    focus: 'bold visual impact, promotional energy, irresistible appeal, clear call-to-action space',
+                    mood: 'exciting, urgent, appealing, dynamic',
+                    keywords: 'special offer, limited time, exclusive deal, chocolate promotion'
+                },
+                'seasonal': {
+                    title: 'Seasonal Content Image',
+                    subject: 'seasonal themed chocolate display perfect for the occasion',
+                    focus: 'seasonal atmosphere, festive styling, gift-worthy presentation, holiday spirit',
+                    mood: 'celebratory, festive, warm, inviting',
+                    keywords: 'seasonal chocolate, holiday treats, festive gifts, celebration'
+                },
+                'educational': {
+                    title: 'Educational Content Image',
+                    subject: 'informative visual about chocolate making, storage, or chocolate facts',
+                    focus: 'clear information, professional presentation, educational value, easy to understand',
+                    mood: 'informative, professional, trustworthy, expert',
+                    keywords: 'chocolate education, expert tips, chocolate knowledge, how-to guide'
+                },
+                'behind-scenes': {
+                    title: 'Behind-the-Scenes Image',
+                    subject: 'authentic behind-the-scenes glimpse of chocolate creation process in artisan workshop',
+                    focus: 'craftsmanship, dedication, hands at work, artisan quality, authentic moment',
+                    mood: 'authentic, skilled, passionate, artisanal',
+                    keywords: 'handmade chocolate, artisan process, chocolate making, craftsmanship'
+                },
+                'lifestyle': {
+                    title: 'Lifestyle Inspiration Image',
+                    subject: 'aspirational lifestyle moment featuring premium chocolate as part of a beautiful scene',
+                    focus: 'emotion, aspiration, joy of indulgence, relatable luxury, warm atmosphere',
+                    mood: 'aspirational, cozy, indulgent, joyful',
+                    keywords: 'chocolate lifestyle, indulgence moment, treat yourself, everyday luxury'
+                },
+                'local-hamilton': {
+                    title: 'Hamilton Local Pride Content',
+                    subject: 'celebration of Hamilton and local chocolate craftsmanship on James Street North',
+                    focus: 'local pride, James Street North culture, Hamilton landmarks, community connection',
+                    mood: 'proud, local, community-focused, authentic',
+                    keywords: 'Hamilton chocolate, James Street North, local business, Hamilton pride'
+                },
+                'customer-engagement': {
+                    title: 'Customer Engagement Post',
+                    subject: 'engaging, interactive image that encourages customer participation and social sharing',
+                    focus: 'fun, inviting, shareable moment, social media friendly, encourages interaction',
+                    mood: 'playful, interactive, engaging, fun',
+                    keywords: 'social media, engagement, interactive post, share worthy'
+                }
+            };
+
+            const seasonalContexts = {
+                'january': 'winter freshness, new year clean aesthetic, fresh starts, minimalist winter beauty',
+                'february': 'Valentine\'s Day romance, red and pink accents, hearts, love and romance, intimate setting',
+                'march': 'spring awakening, Easter preparation, pastel hints, renewal, fresh blooms',
+                'april': 'Easter celebration, spring colors, Mother\'s Day elegance, floral touches, bright spring light',
+                'may': 'Mother\'s Day focus, elegant femininity, appreciation, soft lighting, graceful presentation',
+                'june': 'Father\'s Day masculine elegance, summer warmth beginning, bold sophistication',
+                'july': 'summer vibes, bright and fresh, warm season energy, outdoor inspiration, sunshine mood',
+                'august': 'back to school energy, teacher appreciation, late summer glow, preparation mood',
+                'september': 'fall arrival, autumn colors beginning, cozy transition, harvest tones',
+                'october': 'Halloween fun, autumn richness, festive orange and brown, playful spooky elements',
+                'november': 'Thanksgiving gratitude, pre-holiday excitement, warm autumn tones, abundant harvest',
+                'december': 'Christmas magic, holiday celebration, red and green with gold, festive sparkle, winter wonder'
+            };
+
+            const audienceNotes = {
+                'hamilton-locals': 'emphasize Hamilton pride, James Street North culture, local landmarks, community connection, support local messaging',
+                'gift-buyers': 'focus on gift-worthy presentation, elegant packaging, ribbon details, special occasion appeal, memorable gifting',
+                'corporate': 'professional presentation, bulk appeal, corporate gifting quality, branded elegance, business appropriate',
+                'foodies': 'highlight artisan craftsmanship, quality ingredients, chocolate expertise, culinary artistry, gourmet appeal',
+                'luxury': 'premium luxury aesthetic, high-end presentation, exclusive appeal, sophisticated elegance, refined taste',
+                'millennials': 'Instagram-worthy aesthetic, shareable moment, modern and trendy, authentic feel, social media ready'
+            };
+
+            const catData = categoryDetails[options.category];
+
+            // Build comprehensive description
+            let description = {
+                subject: catData.subject,
+                style: styleDescriptions[options.style],
+                platform: platformSpecs[options.platform],
+                focus: catData.focus,
+                mood: catData.mood,
+                keywords: catData.keywords,
+                brand: {
+                    colors: 'rich chocolate brown #3E2723, warm cream #F5F5DC, elegant gold accent #D4AF37',
+                    identity: 'Hamilton\'s Chocolate, artisan quality, premium positioning, locally crafted on James Street North, elegant presentation',
+                    fonts: 'Playfair Display for elegance, Montserrat for clean readability'
+                },
+                season: options.season !== 'any' ? seasonalContexts[options.season] : '',
+                audience: options.audience !== 'general' ? audienceNotes[options.audience] : '',
+                product: options.productName || '',
+                special: options.specialNotes || '',
+                elements: {
+                    textSpace: options.includeText,
+                    logo: options.includeLogo,
+                    location: options.includeLocation,
+                    people: options.includePeople
+                }
+            };
+
+            return description;
+        }
+
+        function buildChatGPTPrompt(content, options) {
+            let prompt = `Create a professional ${content.style} image featuring ${content.subject}.\n\n`;
+
+            prompt += `IMAGE COMPOSITION:\n`;
+            prompt += `- Aspect ratio: ${content.platform.aspect} (${content.platform.composition} composition)\n`;
+            prompt += `- Style: ${content.mood}\n`;
+            prompt += `- Focus on: ${content.focus}\n\n`;
+
+            if (content.product) {
+                prompt += `PRODUCT: ${content.product}\n\n`;
+            }
+
+            prompt += `VISUAL ELEMENTS:\n`;
+            prompt += `- Brand colors: ${content.brand.colors}\n`;
+            prompt += `- ${content.keywords}\n`;
+            if (content.elements.textSpace) prompt += `- Leave space for text overlay\n`;
+            if (content.elements.logo) prompt += `- Include subtle "Chocolate on James" branding\n`;
+            if (content.elements.location) prompt += `- Feature Hamilton, Ontario elements or James Street North aesthetic\n`;
+            if (content.elements.people) prompt += `- Include hands or people interacting elegantly with chocolate\n`;
+
+            if (content.season) {
+                prompt += `\nSEASONAL THEME: ${content.season}\n`;
+            }
+
+            if (content.audience) {
+                prompt += `\nTARGET AUDIENCE: ${content.audience}\n`;
+            }
+
+            if (content.special) {
+                prompt += `\nSPECIAL REQUIREMENTS: ${content.special}\n`;
+            }
+
+            prompt += `\nQUALITY: Professional commercial photography, high resolution, excellent lighting, sharp focus, appetizing, premium feel.\n`;
+            prompt += `\nBRAND: ${content.brand.identity}`;
+
+            return {
+                platform: 'ChatGPT / DALL-E 3',
+                title: content.subject,
+                prompt: prompt,
+                instructions: [
+                    'Open ChatGPT (requires ChatGPT Plus subscription)',
+                    'Copy the prompt above',
+                    'Paste into ChatGPT and say: "Generate an image based on this description"',
+                    'ChatGPT will create 1-2 images automatically',
+                    'Ask for variations: "Create 3 more variations of this image"',
+                    'Download your favorite images'
+                ],
+                tips: [
+                    'DALL-E 3 is excellent at following detailed instructions',
+                    'Can handle complex compositions and text placement',
+                    'Good at brand color accuracy',
+                    'Best for beginners - easiest to use'
+                ]
+            };
+        }
+
+        function buildMidjourneyPrompt(content, options) {
+            // Midjourney uses comma-separated keywords
+            let prompt = `${content.subject}, ${content.style}, ${content.focus}, ${content.mood}, `;
+            prompt += `${content.keywords}, brand colors ${content.brand.colors.split(' ')[0]}, `;
+
+            if (content.product) prompt += `${content.product}, `;
+            if (content.season) prompt += `${content.season}, `;
+            if (content.elements.textSpace) prompt += `negative space for text, `;
+            if (content.elements.location) prompt += `Hamilton Ontario, James Street North aesthetic, `;
+            if (content.elements.people) prompt += `elegant hands, human interaction, `;
+
+            prompt += `professional commercial photography, high-end food photography, studio lighting, sharp focus, detailed texture, appetizing, premium quality, ${content.brand.identity}`;
+
+            // Add Midjourney parameters
+            let aspectRatio = '';
+            switch(content.platform.aspect) {
+                case '1:1': aspectRatio = '--ar 1:1'; break;
+                case '9:16': aspectRatio = '--ar 9:16'; break;
+                case '1.91:1': aspectRatio = '--ar 16:9'; break;
+                case '2:3': aspectRatio = '--ar 2:3'; break;
+            }
+
+            prompt += ` ${aspectRatio} --v 6 --style raw --q 2`;
+
+            if (content.special) {
+                prompt += `\n\nAdditional notes: ${content.special}`;
+            }
+
+            return {
+                platform: 'Midjourney',
+                title: content.subject,
+                prompt: prompt,
+                instructions: [
+                    'Join Midjourney Discord server (midjourney.com)',
+                    'Go to any #general or newbie channel',
+                    'Type: /imagine and press Enter',
+                    'Paste the prompt above in the prompt field',
+                    'Wait 60 seconds for 4 image variations',
+                    'Click U1-U4 to upscale your favorite',
+                    'Click V1-V4 to create more variations',
+                    'Right-click upscaled image to save'
+                ],
+                tips: [
+                    'Parameters: --ar (aspect ratio), --v 6 (version 6), --style raw (photorealistic)',
+                    '--q 2 means quality 2 (highest quality)',
+                    'Use --style raw for realistic photography',
+                    'Best for artistic, high-quality images',
+                    'More expensive but stunning results'
+                ]
+            };
+        }
+
+        function buildGeminiPrompt(content, options) {
+            let prompt = `Generate a high-quality ${content.style} image with the following specifications:\n\n`;
+
+            prompt += `SUBJECT: ${content.subject}\n\n`;
+
+            prompt += `COMPOSITION & STYLE:\n`;
+            prompt += `- Image format: ${content.platform.aspect} aspect ratio (${content.platform.orientation})\n`;
+            prompt += `- Photography style: ${content.style}\n`;
+            prompt += `- Mood and atmosphere: ${content.mood}\n`;
+            prompt += `- Key focus areas: ${content.focus}\n\n`;
+
+            if (content.product) {
+                prompt += `FEATURED PRODUCT: ${content.product}\n\n`;
+            }
+
+            prompt += `VISUAL DETAILS:\n`;
+            prompt += `- Use these brand colors prominently: ${content.brand.colors}\n`;
+            prompt += `- Visual keywords: ${content.keywords}\n`;
+            prompt += `- Brand identity: ${content.brand.identity}\n`;
+            if (content.elements.textSpace) prompt += `- Compose with empty space for text overlay\n`;
+            if (content.elements.logo) prompt += `- Include subtle "Chocolate on James" logo or branding\n`;
+            if (content.elements.location) prompt += `- Incorporate Hamilton, Ontario elements or James Street North character\n`;
+            if (content.elements.people) prompt += `- Show hands or people elegantly enjoying chocolate\n`;
+
+            if (content.season) {
+                prompt += `\nSEASONAL ELEMENTS: Incorporate ${content.season}\n`;
+            }
+
+            if (content.audience) {
+                prompt += `\nDESIGN FOR: ${content.audience}\n`;
+            }
+
+            if (content.special) {
+                prompt += `\nADDITIONAL REQUIREMENTS: ${content.special}\n`;
+            }
+
+            prompt += `\nQUALITY STANDARDS:\n`;
+            prompt += `- Professional commercial photography quality\n`;
+            prompt += `- High resolution and sharp detail\n`;
+            prompt += `- Excellent studio lighting\n`;
+            prompt += `- Appetizing and premium appearance\n`;
+            prompt += `- Color-accurate to brand palette\n`;
+            prompt += `- Magazine-quality final result`;
+
+            return {
+                platform: 'Google Gemini',
+                title: content.subject,
+                prompt: prompt,
+                instructions: [
+                    'Open Google Gemini (gemini.google.com) - FREE!',
+                    'Copy the entire prompt above',
+                    'Paste into Gemini\'s chat',
+                    'Gemini will generate the image (may take 30-60 seconds)',
+                    'Click on the image to view full size',
+                    'Right-click to download',
+                    'Ask for variations: "Create 2 more versions with slight changes"'
+                ],
+                tips: [
+                    'Gemini is completely FREE to use',
+                    'Good at understanding detailed descriptions',
+                    'Works well with structured prompts like this',
+                    'Be specific about brand colors and composition',
+                    'Best free alternative to paid AI tools'
+                ]
+            };
+        }
+
+        function buildLeonardoPrompt(content, options) {
+            let prompt = `${content.subject}, ${content.style}, ${content.focus}. `;
+            prompt += `Mood: ${content.mood}. ${content.keywords}. `;
+
+            if (content.product) prompt += `Product focus: ${content.product}. `;
+
+            prompt += `Brand aesthetic: ${content.brand.identity}. `;
+            prompt += `Color palette: ${content.brand.colors}. `;
+
+            if (content.elements.textSpace) prompt += `Include negative space for text overlay. `;
+            if (content.elements.logo) prompt += `Subtle "Chocolate on James" branding visible. `;
+            if (content.elements.location) prompt += `Hamilton Ontario, James Street North ambiance. `;
+            if (content.elements.people) prompt += `Elegant hands interacting with chocolate. `;
+
+            if (content.season) prompt += `Seasonal theme: ${content.season}. `;
+            if (content.audience) prompt += `Designed for: ${content.audience}. `;
+            if (content.special) prompt += `${content.special}. `;
+
+            prompt += `Professional commercial food photography, studio lighting, high resolution, sharp focus, detailed textures, appetizing presentation, premium quality, color accurate.`;
+
+            let negativePrompt = `low quality, blurry, pixelated, amateur, bad lighting, oversaturated, artificial looking, cartoonish, 3d render, illustration, painting, drawing, text, watermark, signature`;
+
+            return {
+                platform: 'Leonardo AI',
+                title: content.subject,
+                prompt: prompt,
+                negativePrompt: negativePrompt,
+                settings: {
+                    dimensions: content.platform.aspect === '1:1' ? '1024x1024' : content.platform.aspect === '9:16' ? '768x1344' : content.platform.aspect === '2:3' ? '832x1216' : '1360x768',
+                    model: 'Leonardo Phoenix (recommended for photography)',
+                    guidanceScale: '7-9 (for balanced creativity and adherence)',
+                    steps: '30-40 (for high quality)'
+                },
+                instructions: [
+                    'Go to Leonardo.AI and sign in (free account available)',
+                    'Click "Image Generation"',
+                    'Select "Leonardo Phoenix" model (best for realistic photos)',
+                    'Paste the Main Prompt in the prompt field',
+                    'Paste the Negative Prompt in the negative prompt field',
+                    `Set dimensions to ${content.platform.aspect === '1:1' ? '1024x1024' : content.platform.aspect === '9:16' ? '768x1344' : content.platform.aspect === '2:3' ? '832x1216' : '1360x768'}`,
+                    'Set Guidance Scale to 7-9',
+                    'Set Steps to 30-40',
+                    'Click "Generate"',
+                    'Wait for 4 variations to appear',
+                    'Download your favorites'
+                ],
+                tips: [
+                    'Leonardo is great for consistent brand imagery',
+                    'Free tier includes daily credits',
+                    'Phoenix model is excellent for food photography',
+                    'Use negative prompts to avoid unwanted elements',
+                    'Save successful prompts as presets'
+                ]
+            };
+        }
+
+        function buildIdeogramPrompt(content, options) {
+            // Ideogram is excellent at including text in images
+            let prompt = `Professional ${content.style} photograph: ${content.subject}. `;
+            prompt += `${content.focus}. ${content.mood} atmosphere. `;
+            prompt += `${content.keywords}. `;
+
+            if (content.product) prompt += `Featuring ${content.product}. `;
+
+            prompt += `Brand color scheme: ${content.brand.colors}. `;
+            prompt += `${content.brand.identity}. `;
+
+            if (content.elements.textSpace) {
+                prompt += `Leave clear space for text that reads "Chocolate on James" or similar marketing copy. `;
+            }
+
+            if (content.elements.logo) prompt += `Include elegant "Chocolate on James" text logo. `;
+            if (content.elements.location) prompt += `Hamilton, Ontario and James Street North aesthetic. `;
+            if (content.elements.people) prompt += `Elegant hands enjoying chocolate. `;
+
+            if (content.season) prompt += `${content.season}. `;
+            if (content.audience) prompt += `Appeal to: ${content.audience}. `;
+            if (content.special) prompt += `${content.special}. `;
+
+            prompt += `High-end commercial food photography, studio lighting, professional quality, sharp detail, appetizing, premium presentation.`;
+
+            return {
+                platform: 'Ideogram',
+                title: content.subject,
+                prompt: prompt,
+                instructions: [
+                    'Go to Ideogram.ai and sign in',
+                    'Click "Create"',
+                    'Paste the prompt above',
+                    `Select aspect ratio: ${content.platform.aspect}`,
+                    'Select "General" or "Realistic" style',
+                    'Click "Generate"',
+                    'Wait for 4 variations',
+                    'Click on your favorite to enlarge',
+                    'Download the image'
+                ],
+                tips: [
+                    'Ideogram is THE BEST for including readable text in images',
+                    'Great for creating images with product names or marketing copy',
+                    'Free tier includes daily generations',
+                    'Text rendering is more reliable than other AI tools',
+                    'Perfect for promotional images with text overlays'
+                ]
+            };
+        }
+
+        function buildFireflyPrompt(content, options) {
+            let prompt = `${content.subject}, ${content.style}, ${content.focus}, ${content.mood}, `;
+            prompt += `${content.keywords}, `;
+
+            if (content.product) prompt += `${content.product}, `;
+
+            prompt += `brand colors ${content.brand.colors}, ${content.brand.identity}, `;
+
+            if (content.elements.textSpace) prompt += `space for text overlay, `;
+            if (content.elements.logo) prompt += `subtle Chocolate on James branding, `;
+            if (content.elements.location) prompt += `Hamilton Ontario aesthetic, James Street North vibe, `;
+            if (content.elements.people) prompt += `elegant hands with chocolate, `;
+
+            if (content.season) prompt += `${content.season}, `;
+            if (content.audience) prompt += `${content.audience}, `;
+            if (content.special) prompt += `${content.special}, `;
+
+            prompt += `professional commercial food photography, studio lighting, high quality, sharp focus, detailed, appetizing, premium`;
+
+            return {
+                platform: 'Adobe Firefly',
+                title: content.subject,
+                prompt: prompt,
+                instructions: [
+                    'Go to firefly.adobe.com',
+                    'Sign in (free Adobe account works)',
+                    'Click "Text to Image"',
+                    'Paste the prompt above',
+                    `Select aspect ratio: ${content.platform.aspect === '1:1' ? 'Square' : content.platform.aspect === '9:16' ? 'Portrait' : content.platform.aspect === '2:3' ? 'Tall Portrait' : 'Landscape'}`,
+                    'Select "Photo" content type',
+                    'Adjust style settings if desired',
+                    'Click "Generate"',
+                    'Wait for results (uses 1 credit)',
+                    'Download your favorite image'
+                ],
+                tips: [
+                    'Adobe Firefly images are 100% commercially safe',
+                    'No copyright concerns - perfect for business use',
+                    'Free tier includes 25 credits/month',
+                    'Integrated with Adobe Creative Cloud',
+                    'Best choice if you need legal safety for commercial use'
+                ]
+            };
+        }
+
+        function buildStableDiffusionPrompt(content, options) {
+            let prompt = `${content.subject}, ${content.style}, ${content.focus}, `;
+            prompt += `${content.mood} mood, ${content.keywords}, `;
+
+            if (content.product) prompt += `${content.product}, `;
+
+            prompt += `brand identity: ${content.brand.identity}, `;
+            prompt += `color palette: ${content.brand.colors}, `;
+
+            if (content.elements.textSpace) prompt += `negative space for text, `;
+            if (content.elements.logo) prompt += `Chocolate on James branding, `;
+            if (content.elements.location) prompt += `Hamilton Ontario, James Street aesthetic, `;
+            if (content.elements.people) prompt += `elegant hands, human interaction, `;
+
+            if (content.season) prompt += `${content.season}, `;
+            if (content.audience) prompt += `designed for ${content.audience}, `;
+            if (content.special) prompt += `${content.special}, `;
+
+            prompt += `professional commercial food photography, professional studio lighting, high resolution, 8k, ultra detailed, sharp focus, physically-based rendering, extreme detail description, professional color grading, bokeh, beautiful composition`;
+
+            let negativePrompt = `low quality, low res, blurry, text, watermark, logo, banner, extra digits, cropped, jpeg artifacts, signature, username, error, sketch, duplicate, ugly, monochrome, horror, geometry, mutation, disgusting, bad anatomy, bad proportions, bad quality, deformed, disconnected limbs, out of frame, out of focus, dehydrated, disfigured, extra arms, extra limbs, extra hands, fused fingers, gross proportions, long neck, malformed limbs, mutated, mutated hands, mutated limbs, missing arms, missing fingers, picture frame, poorly drawn hands, poorly drawn face, collage, pixel, pixelated, grainy, color aberration, amputee, autograph, bad illustration, beyond the borders, blank background, body out of frame, boring background, branding, cut off, distorted, draft, duplicate error, extra fingers, extra legs, fault, flaw, grains, hazy, identifying mark, improper scale, incorrect physiology, incorrect ratio, indistinct, kitsch, low resolution, macabre, malformed, mark, misshapen, missing hands, missing legs, mistake, morbid, mutilated, off-screen, outside the picture, poorly drawn feet, printed words, render, repellent, replicate, reproduce, revolting dimensions, script, shortened, sign, split image, squint, storyboard, tiling, trimmed, unfocused, unattractive, unnatural pose, unsightly, written language`;
+
+            let sdSettings = {
+                dimensions: content.platform.aspect === '1:1' ? '1024x1024' : content.platform.aspect === '9:16' ? '768x1360' : content.platform.aspect === '2:3' ? '832x1216' : '1360x768',
+                model: 'Realistic Vision V5.1 or DreamShaper',
+                sampler: 'DPM++ 2M Karras or Euler a',
+                steps: '30-50',
+                cfgScale: '7-10',
+                clipSkip: '2'
+            };
+
+            return {
+                platform: 'Stable Diffusion',
+                title: content.subject,
+                prompt: prompt,
+                negativePrompt: negativePrompt,
+                settings: sdSettings,
+                instructions: [
+                    'Open Stable Diffusion (AUTOMATIC1111 or ComfyUI)',
+                    'Select model: Realistic Vision V5.1 or DreamShaper',
+                    'Paste Main Prompt in positive prompt field',
+                    'Paste Negative Prompt in negative prompt field',
+                    `Set dimensions: ${sdSettings.dimensions}`,
+                    `Set Sampler: ${sdSettings.sampler}`,
+                    `Set Steps: ${sdSettings.steps}`,
+                    `Set CFG Scale: ${sdSettings.cfgScale}`,
+                    'Click "Generate"',
+                    'Generate multiple variations (4-8)',
+                    'Use img2img for refinements'
+                ],
+                tips: [
+                    'Most advanced option - full control',
+                    'Requires local installation or paid service',
+                    'Use detailed negative prompts to avoid issues',
+                    'Experiment with different models for different styles',
+                    'Can batch generate hundreds of images',
+                    'Best for power users who want complete control'
+                ]
+            };
+        }
+
+        function buildUniversalPrompt(content, options) {
+            let prompt = `Create a professional ${content.style} image.\n\n`;
+
+            prompt += `SUBJECT: ${content.subject}\n\n`;
+
+            prompt += `STYLE & MOOD:\n`;
+            prompt += `- Photography style: ${content.style}\n`;
+            prompt += `- Emotional tone: ${content.mood}\n`;
+            prompt += `- Key elements: ${content.keywords}\n\n`;
+
+            if (content.product) {
+                prompt += `PRODUCT: ${content.product}\n\n`;
+            }
+
+            prompt += `COMPOSITION:\n`;
+            prompt += `- Aspect ratio: ${content.platform.aspect}\n`;
+            prompt += `- Orientation: ${content.platform.orientation}\n`;
+            prompt += `- Focus: ${content.focus}\n\n`;
+
+            prompt += `BRAND IDENTITY:\n`;
+            prompt += `- Colors: ${content.brand.colors}\n`;
+            prompt += `- Brand: ${content.brand.identity}\n`;
+            if (content.elements.textSpace) prompt += `- Include space for text overlay\n`;
+            if (content.elements.logo) prompt += `- Show "Chocolate on James" branding\n`;
+            if (content.elements.location) prompt += `- Feature Hamilton, Ontario or James Street North elements\n`;
+            if (content.elements.people) prompt += `- Include hands or people with chocolate\n`;
+
+            if (content.season) {
+                prompt += `\nSEASONAL: ${content.season}\n`;
+            }
+
+            if (content.audience) {
+                prompt += `\nAUDIENCE: ${content.audience}\n`;
+            }
+
+            if (content.special) {
+                prompt += `\nSPECIAL: ${content.special}\n`;
+            }
+
+            prompt += `\nQUALITY: Professional commercial photography, high resolution, excellent lighting, sharp focus, detailed textures, appetizing presentation, premium quality.`;
+
+            return {
+                platform: 'Universal (All Platforms)',
+                title: content.subject,
+                prompt: prompt,
+                instructions: [
+                    'Copy the prompt above',
+                    'Paste into ANY AI image generator:',
+                    '  • ChatGPT / DALL-E 3',
+                    '  • Midjourney (adapt to comma-separated format)',
+                    '  • Google Gemini',
+                    '  • Leonardo AI',
+                    '  • Adobe Firefly',
+                    '  • Ideogram',
+                    '  • Stable Diffusion',
+                    '  • Or any other AI image tool',
+                    'Adjust platform-specific settings as needed',
+                    'Generate and enjoy!'
+                ],
+                tips: [
+                    'This format works with most AI image generators',
+                    'Adjust the level of detail based on platform',
+                    'More detail = better results in most cases',
+                    'Experiment with different AI tools to compare results',
+                    'Each platform has strengths - try multiple!'
+                ]
+            };
+        }
+
+        function displayPrompts(prompts) {
+            const output = document.getElementById('output');
+            let html = '';
+
+            prompts.forEach(promptData => {
+                html += `
+                    <div class="prompt-output">
+                        <div class="prompt-header">
+                            <div>
+                                <div class="prompt-title">${promptData.title}</div>
+                                <span class="platform-badge">${promptData.platform}</span>
+                            </div>
+                            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copy Prompt</button>
+                        </div>
+                        <div class="prompt-text">${promptData.prompt}</div>
+
+                        ${promptData.negativePrompt ? `
+                            <div style="margin-top: 15px;">
+                                <strong style="color: #D4AF37;">Negative Prompt:</strong>
+                                <div class="prompt-text" style="margin-top: 8px;">${promptData.negativePrompt}</div>
+                                <button class="btn-copy" style="margin-top: 8px;" onclick="copyNegativePrompt(this)">📋 Copy Negative Prompt</button>
+                            </div>
+                        ` : ''}
+
+                        ${promptData.settings ? `
+                            <div style="margin-top: 15px; padding: 15px; background: rgba(139, 69, 19, 0.2); border-radius: 8px;">
+                                <strong style="color: #D4AF37;">Recommended Settings:</strong>
+                                <div style="color: #d4a574; margin-top: 8px; font-size: 0.9em;">
+                                    ${Object.entries(promptData.settings).map(([key, value]) =>
+                                        `<div style="margin: 4px 0;">• <strong>${key}:</strong> ${value}</div>`
+                                    ).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <div class="usage-guide">
+                        <h3>📖 How to Use with ${promptData.platform}</h3>
+                        <ol>
+                            ${promptData.instructions.map(instruction => `<li>${instruction}</li>`).join('')}
+                        </ol>
+
+                        ${promptData.tips ? `
+                            <div style="margin-top: 15px; padding: 12px; background: rgba(212, 175, 55, 0.1); border-radius: 6px;">
+                                <strong style="color: #FFD700;">💡 Pro Tips:</strong>
+                                <ul style="margin-top: 8px; margin-left: 20px;">
+                                    ${promptData.tips.map(tip => `<li>${tip}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+
+            output.innerHTML = html;
+        }
+
+        function copyPrompt(button) {
+            const promptText = button.closest('.prompt-output').querySelector('.prompt-text').textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.style.background = 'rgba(34, 139, 34, 0.5)';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '';
+                }, 2000);
+            });
+        }
+
+        function copyNegativePrompt(button) {
+            const promptText = button.previousElementSibling.textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.style.background = 'rgba(34, 139, 34, 0.5)';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

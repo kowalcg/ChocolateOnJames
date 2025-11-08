@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolat on James - Ultimate AI Content Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a0f0a 0%, #2d1810 50%, #1a0f0a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 40px 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #D4AF37, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #d4a574;
+            font-size: 1.3em;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 700;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .controls {
+            background: rgba(30, 20, 15, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .output-area {
+            background: rgba(30, 20, 15, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            min-height: 600px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            color: #D4AF37;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        select:focus, input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #D4AF37;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .option-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .option-btn {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .option-btn:hover {
+            background: rgba(139, 69, 19, 0.3);
+            border-color: #D4AF37;
+        }
+
+        .option-btn.active {
+            background: rgba(212, 175, 55, 0.3);
+            border-color: #D4AF37;
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #D4AF37, #B8941F);
+            color: #1a0f0a;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #FFD700, #D4AF37);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: rgba(139, 69, 19, 0.3);
+            color: #D4AF37;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            padding: 12px;
+            font-size: 1em;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(139, 69, 19, 0.5);
+            color: #FFD700;
+        }
+
+        .content-package {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .package-title {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .copy-all-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .copy-all-btn:hover {
+            background: linear-gradient(135deg, #66BB6A, #4CAF50);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .section-block {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .block-title {
+            color: #D4AF37;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            padding: 6px 14px;
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(76, 175, 80, 0.3);
+            color: #66BB6A;
+        }
+
+        .copy-btn.copied {
+            background: rgba(76, 175, 80, 0.5);
+            color: #fff;
+        }
+
+        .prompt-text {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.8;
+            color: #f5f5dc;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .captions-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .caption-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+
+        .caption-item:hover {
+            border-color: #D4AF37;
+            background: rgba(139, 69, 19, 0.2);
+        }
+
+        .caption-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .caption-number {
+            color: #D4AF37;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .caption-text {
+            color: #f5f5dc;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .caption-meta {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .meta-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(139, 69, 19, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            font-size: 0.75em;
+            color: #d4a574;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #8B7355;
+        }
+
+        .empty-state-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        .empty-state-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .custom-field {
+            background: rgba(76, 175, 80, 0.05);
+            border: 1px dashed rgba(76, 175, 80, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .custom-field-label {
+            color: #4CAF50;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .gif-suggestions {
+            background: rgba(156, 39, 176, 0.1);
+            border: 1px solid rgba(156, 39, 176, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .gif-title {
+            color: #BA68C8;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gif-list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .gif-item {
+            color: #CE93D8;
+            font-size: 0.9em;
+            padding: 8px;
+            background: rgba(156, 39, 176, 0.1);
+            border-radius: 6px;
+        }
+
+        .logo-instructions {
+            background: rgba(33, 150, 243, 0.1);
+            border: 1px solid rgba(33, 150, 243, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 0.85em;
+            color: #64B5F6;
+        }
+
+        .logo-title {
+            font-weight: 600;
+            color: #2196F3;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 1400px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                position: relative;
+                top: 0;
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Ultimate AI Content Generator</h1>
+            <p class="subtitle">Complete Social Media Content Packages in One Click</p>
+            <div class="badge">🎨 AI Prompt + 10 Captions + Hashtags + GIFs + Emojis</div>
+        </header>
+
+        <div class="main-layout">
+            <!-- Controls Panel -->
+            <div class="controls">
+                <div class="section">
+                    <div class="section-title">📁 Content Category</div>
+                    <select id="category">
+                        <option value="">Select Category...</option>
+                        <option value="product-showcase">Product Showcase</option>
+                        <option value="promotional">Promotional & Sales</option>
+                        <option value="seasonal">Seasonal & Holiday</option>
+                        <option value="educational">Educational & Tips</option>
+                        <option value="behind-scenes">Behind-the-Scenes</option>
+                        <option value="lifestyle">Lifestyle & Inspiration</option>
+                        <option value="local-hamilton">Hamilton Local</option>
+                        <option value="customer-engagement">Customer Engagement</option>
+                    </select>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📱 Platform / Format</div>
+                    <div class="option-group">
+                        <div class="option-btn active" data-platform="instagram-square">Instagram Square</div>
+                        <div class="option-btn" data-platform="instagram-story">IG Story</div>
+                        <div class="option-btn" data-platform="facebook-ad">Facebook Ad</div>
+                        <div class="option-btn" data-platform="pinterest">Pinterest</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📅 Month / Season</div>
+                    <select id="season">
+                        <option value="any">Any Time</option>
+                        <option value="january">January</option>
+                        <option value="february">February (Valentine's)</option>
+                        <option value="march">March (Easter prep)</option>
+                        <option value="april">April (Easter/Mother's Day)</option>
+                        <option value="may">May (Mother's Day)</option>
+                        <option value="june">June (Father's Day/Summer)</option>
+                        <option value="july">July (Summer)</option>
+                        <option value="august">August (Back to School)</option>
+                        <option value="september">September (Fall)</option>
+                        <option value="october">October (Halloween)</option>
+                        <option value="november">November (Thanksgiving/Holidays)</option>
+                        <option value="december">December (Christmas)</option>
+                        <option value="custom">✨ Custom Occasion...</option>
+                    </select>
+                    
+                    <div id="customSeasonField" class="custom-field" style="display: none;">
+                        <div class="custom-field-label">✨ Custom Occasion</div>
+                        <input type="text" id="customSeason" placeholder="e.g., McMaster Event, Art Crawl, Corporate Anniversary...">
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">👥 Target Audience</div>
+                    <select id="audience">
+                        <option value="general">General Audience</option>
+                        <option value="hamilton-locals">Hamilton Locals</option>
+                        <option value="gift-buyers">Gift Buyers</option>
+                        <option value="corporate">Corporate Clients</option>
+                        <option value="foodies">Chocolate Enthusiasts</option>
+                        <option value="luxury">Luxury Seekers</option>
+                        <option value="millennials">Millennials & Gen Z</option>
+                        <option value="custom">✨ Custom Audience...</option>
+                    </select>
+                    
+                    <div id="customAudienceField" class="custom-field" style="display: none;">
+                        <div class="custom-field-label">✨ Custom Target Audience</div>
+                        <input type="text" id="customAudience" placeholder="e.g., McMaster Students, Law Firms, Ti-Cats Fans...">
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎨 Image Style</div>
+                    <div class="option-group">
+                        <div class="option-btn active" data-style="photography">Photography</div>
+                        <div class="option-btn" data-style="lifestyle">Lifestyle</div>
+                        <div class="option-btn" data-style="minimalist">Minimalist</div>
+                        <div class="option-btn" data-style="artistic">Artistic</div>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="generateCompleteContent()">🚀 Generate Complete Content Package</button>
+                
+                <div class="action-buttons" id="actionButtons" style="display: none;">
+                    <button class="btn btn-secondary" style="flex: 1;" onclick="regenerateContent()">🔄 Regenerate All</button>
+                </div>
+            </div>
+
+            <!-- Output Area -->
+            <div class="output-area">
+                <div id="emptyState" class="empty-state">
+                    <div class="empty-state-icon">🚀</div>
+                    <div class="empty-state-text">
+                        <p style="margin-bottom: 15px; font-weight: 600;">Ready to create your complete content package?</p>
+                        <p style="font-size: 0.95em; color: #8B7355; margin-bottom: 10px;">You'll get:</p>
+                        <p style="font-size: 0.9em; color: #d4a574;">✨ AI Image Prompt<br>📝 10 Ready-to-Use Captions<br>🎬 GIF Suggestions<br>📱 Hashtags & Emojis<br>🏷️ Logo Instructions</p>
+                    </div>
+                </div>
+
+                <div id="outputContainer" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedPlatform = 'instagram-square';
+        let selectedStyle = 'photography';
+        let lastSettings = null;
+
+        // Platform button handlers
+        document.querySelectorAll('[data-platform]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[data-platform]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                selectedPlatform = this.dataset.platform;
+            });
+        });
+
+        // Style button handlers
+        document.querySelectorAll('[data-style]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[data-style]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                selectedStyle = this.dataset.style;
+            });
+        });
+
+        // Show/hide custom fields
+        document.getElementById('season').addEventListener('change', function() {
+            document.getElementById('customSeasonField').style.display = this.value === 'custom' ? 'block' : 'none';
+        });
+
+        document.getElementById('audience').addEventListener('change', function() {
+            document.getElementById('customAudienceField').style.display = this.value === 'custom' ? 'block' : 'none';
+        });
+
+        function generateCompleteContent() {
+            const category = document.getElementById('category').value;
+            if (!category) {
+                alert('Please select a content category');
+                return;
+            }
+
+            const season = document.getElementById('season').value;
+            const customSeason = document.getElementById('customSeason').value;
+            const audience = document.getElementById('audience').value;
+            const customAudience = document.getElementById('customAudience').value;
+
+            lastSettings = {
+                category, season, customSeason, audience, customAudience,
+                platform: selectedPlatform, style: selectedStyle
+            };
+
+            const content = buildCompleteContent(lastSettings);
+            displayCompleteContent(content, lastSettings);
+        }
+
+        function regenerateContent() {
+            if (!lastSettings) return;
+            const content = buildCompleteContent(lastSettings);
+            displayCompleteContent(content, lastSettings);
+        }
+
+        function buildCompleteContent(settings) {
+            return {
+                prompt: buildAIPrompt(settings),
+                captions: buildCaptions(settings),
+                gifs: buildGIFSuggestions(settings),
+                hashtags: buildHashtags(settings)
+            };
+        }
+
+        function buildAIPrompt(settings) {
+            const platformSpecs = {
+                'instagram-square': '1080x1080px square format, Instagram feed optimized',
+                'instagram-story': '1080x1920px vertical format, Instagram Story optimized',
+                'facebook-ad': '1200x628px landscape format, Facebook Ad optimized',
+                'pinterest': '1000x1500px tall format, Pinterest optimized'
+            };
+
+            const styleDescriptions = {
+                'photography': 'professional product photography, studio lighting, high-end commercial style',
+                'lifestyle': 'lifestyle photography, natural setting, authentic moments, warm atmosphere',
+                'minimalist': 'minimalist composition, clean background, elegant simplicity, negative space',
+                'artistic': 'artistic and creative, unique perspective, artistic lighting, editorial style'
+            };
+
+            const categoryElements = {
+                'product-showcase': 'artisan chocolate truffles, premium packaging, detailed texture',
+                'promotional': 'eye-catching sale elements, promotional feel, attention-grabbing',
+                'seasonal': 'seasonal decorations, holiday atmosphere, festive elements',
+                'educational': 'informative visual, clear demonstration, educational context',
+                'behind-scenes': 'chocolate-making process, artisan craftsmanship, workshop setting',
+                'lifestyle': 'lifestyle moment, chocolate enjoyment, aspirational scene',
+                'local-hamilton': 'Hamilton landmarks, James Street North, local pride elements',
+                'customer-engagement': 'interactive elements, engaging composition, social media friendly'
+            };
+
+            let prompt = `Create a ${styleDescriptions[settings.style]} image for Chocolat on James. `;
+            prompt += `${platformSpecs[settings.platform]}. `;
+            prompt += `Content focus: ${categoryElements[settings.category]}. `;
+
+            if (settings.season === 'custom' && settings.customSeason) {
+                prompt += `Special occasion: ${settings.customSeason}. `;
+            } else if (settings.season !== 'any') {
+                prompt += `${settings.season} theme. `;
+            }
+
+            if (settings.audience === 'custom' && settings.customAudience) {
+                prompt += `Target audience: ${settings.customAudience}. `;
+            } else if (settings.audience !== 'general') {
+                prompt += `Appealing to ${settings.audience}. `;
+            }
+
+            prompt += `Brand: Chocolat on James - Hamilton's artisan chocolatier. `;
+            prompt += `Color palette: rich chocolate browns (#2d1810), cream (#f5f5dc), gold accents (#D4AF37). `;
+            prompt += `Premium quality, handcrafted aesthetic, local Hamilton pride. `;
+            prompt += `Leave space for text overlay (bottom third). Include subtle space for logo placement (bottom right corner, 120x120px area). `;
+            prompt += `Professional, high-quality, commercial photography. 8K resolution, sharp focus, perfect lighting.`;
+
+            return prompt;
+        }
+
+        function buildCaptions(settings) {
+            const captions = [];
+            const occasion = settings.season === 'custom' ? settings.customSeason : settings.season;
+            const audienceText = settings.audience === 'custom' ? settings.customAudience : settings.audience;
+
+            // Caption templates based on category
+            const templates = {
+                'product-showcase': [
+                    {text: `Handcrafted perfection in every bite 🍫✨ Our artisan truffles are made with love right here in Hamilton. Each chocolate is a little piece of heaven! 💝\n\nTaste the difference that quality makes.\n\n#ChocolatOnJames #HamiltonsChocolate #ArtisanChocolate #HandmadeChocolate #HamiltonOntario #JamesStreetNorth #ChocolateLover #TreatYourself`, type: 'Product Focus', cta: 'Visit us today!'},
+                    {text: `✨ Meet your new favorite indulgence! These beauties are calling your name 😍🍫\n\nMade fresh daily with premium ingredients. No artificial anything - just pure chocolate artistry.\n\nWhich flavor would you try first? 👇\n\n#ChocolatOnJames #HamiltonsChocolate #ChocolateTruffles #HamiltonEats #SupportLocal #FoodieLife #ChocolateAddict`, type: 'Engagement', cta: 'Comment below!'},
+                    {text: `Behind every truffle is a story of craftsmanship 🎨🍫\n\nOur chocolatiers pour their heart into creating these little masterpieces. From bean to bar to your taste buds - it's a journey of flavor!\n\nExperience Hamilton's finest chocolate.\n\n#ChocolatOnJames #HamiltonsChocolate #ArtisanChocolate #HandcraftedWithLove #HamiltonOntario #LuxuryChocolate #ChocolateArt`, type: 'Story', cta: 'Shop now!'},
+                    {text: `🍫 CHOCOLATE GOALS 🍫\n\nWhen your chocolate is THIS good, you can't help but show it off! 📸✨\n\nPremium ingredients + artisan techniques + Hamilton pride = perfection in every bite.\n\n#ChocolatOnJames #HamiltonsChocolate #ChocolateGoals #HamiltonOntario #JamesStreetNorth #ChocolateLover #FoodPorn #InstaChocolate`, type: 'Aspirational', cta: 'Tag a chocolate lover!'},
+                    {text: `Your taste buds deserve this! 😋🍫\n\nWe're not just making chocolate - we're creating experiences. Each truffle is carefully crafted to deliver the perfect balance of flavor, texture, and pure indulgence.\n\nCome taste the difference at 123 James Street North!\n\n#ChocolatOnJames #HamiltonsChocolate #ChocolateExperience #HamiltonOntario #ArtisanChocolate #TreatYourself #ChocolateLovers`, type: 'Invitation', cta: 'Visit us!'}
+                ],
+                'promotional': [
+                    {text: `🎉 SPECIAL OFFER ALERT! 🎉\n\nTreat yourself (you deserve it!) 🍫✨\n\nLimited time only - don't miss out on Hamilton's finest artisan chocolates at an amazing price!\n\nVisit us at 123 James Street North or order online.\n\n#ChocolatOnJames #HamiltonsChocolate #ChocolateSale #HamiltonOntario #SpecialOffer #ChocolateDeals #TreatYourself`, type: 'Sale', cta: 'Shop now!'},
+                    {text: `Your sweet tooth is calling 📞🍫\n\nAnd we're answering with this AMAZING offer! ✨\n\nPremium artisan chocolates, handcrafted in Hamilton, now more irresistible than ever.\n\nHurry - offer ends soon!\n\n#ChocolatOnJames #HamiltonsChocolate #ChocolateDeals #HamiltonOntario #JamesStreetNorth #ChocolateLover #LimitedTimeOffer`, type: 'Urgency', cta: 'Don\\'t wait!'},
+                    {text: `💝 GIFT YOURSELF HAPPINESS 💝\n\nBecause you're worth it! 🍫✨\n\nOur artisan chocolates make the perfect treat for YOU (or someone special). Handcrafted with love in Hamilton.\n\nSpecial pricing available now!\n\n#ChocolatOnJames #HamiltonsChocolate #GiftIdeas #SelfCare #HamiltonOntario #ChocolateGifts #TreatYourself`, type: 'Self-Gift', cta: 'Treat yourself!'},
+                    {text: `🌟 CHOCOLATE LOVERS, THIS IS YOUR MOMENT! 🌟\n\nAmazing offer on Hamilton's finest artisan chocolates! 🍫\n\nHandmade, premium quality, absolutely delicious. What more could you want?\n\nShop now before it's gone!\n\n#ChocolatOnJames #HamiltonsChocolate #ChocolateSale #HamiltonOntario #ChocolateLovers #ArtisanChocolate #ShopLocal`, type: 'Excitement', cta: 'Shop the sale!'},
+                    {text: `The sweetest deal in Hamilton! 🍫💰\n\nOur premium artisan chocolates at a price that'll make you smile as much as the taste! 😊✨\n\nHandcrafted with love, priced with care.\n\nLimited time - visit us at 123 James Street North!\n\n#ChocolatOnJames #HamiltonsChocolate #BestDeal #HamiltonOntario #ArtisanChocolate #ChocolateDeals #JamesStreetNorth`, type: 'Value', cta: 'Visit today!'}
+                ],
+                'seasonal': [
+                    {text: `${occasion === 'february' ? '💝' : '🎄'} The perfect ${occasion === 'february' ? 'Valentine\\'s' : 'holiday'} gift is here! ${occasion === 'february' ? '💝' : '🎄'}\n\nShow your love with Hamilton's finest artisan chocolates 🍫✨\n\nHandcrafted with care, delivered with love. Make this ${occasion === 'february' ? 'Valentine\\'s Day' : 'season'} unforgettable!\n\nOrder now for guaranteed delivery!\n\n#ChocolatOnJames #HamiltonsChocolate #${occasion === 'february' ? 'ValentinesDay' : 'HolidayGifts'} #GiftIdeas #HamiltonOntario #ChocolateGifts #${occasion === 'february' ? 'LoveIsSweet' : 'HolidayTreats'}`, type: 'Gift Focus', cta: 'Order now!'},
+                    {text: `✨ Make this ${occasion} extra special! ✨\n\nOur seasonal collection is here and it's absolutely stunning! 🍫💝\n\nLimited edition flavors, beautiful packaging, unforgettable taste.\n\nPerfect for gifts or treating yourself!\n\n#ChocolatOnJames #HamiltonsChocolate #SeasonalCollection #HamiltonOntario #ArtisanChocolate #GiftIdeas #TreatYourself`, type: 'Seasonal Collection', cta: 'Shop collection!'},
+                    {text: `Countdown to sweetness! ⏰🍫\n\nDon't wait until the last minute - our ${occasion} chocolates are selling fast! ✨\n\nHandcrafted in Hamilton with love and care. Each box is a work of art!\n\nOrder today for guaranteed availability!\n\n#ChocolatOnJames #HamiltonsChocolate #${occasion.replace(/\s+/g, '')} #HamiltonOntario #ChocolateGifts #LastMinuteGifts #ArtisanChocolate`, type: 'Urgency', cta: 'Order now!'},
+                    {text: `The gift that everyone wants 🎁🍫\n\nOur ${occasion} collection combines premium chocolate with stunning presentation. It's not just a gift - it's an experience!\n\nMade with love in Hamilton. ❤️\n\nPre-order now!\n\n#ChocolatOnJames #HamiltonsChocolate #PerfectGift #HamiltonOntario #ChocolateGifts #ArtisanChocolate #GiftIdeas`, type: 'Perfect Gift', cta: 'Pre-order!'},
+                    {text: `Celebrate ${occasion} the sweet way! 🍫✨\n\nOur artisan chocolates are the perfect way to show you care. Handcrafted in Hamilton with premium ingredients and lots of love!\n\nLimited availability - order soon!\n\n#ChocolatOnJames #HamiltonsChocolate #Celebration #HamiltonOntario #ArtisanChocolate #ChocolateGifts #HandmadeWithLove`, type: 'Celebration', cta: 'Order today!'}
+                ],
+                'educational': [
+                    {text: `🍫 CHOCOLATE FACT OF THE DAY 🍫\n\nDid you know? The best chocolate is stored at 15-18°C (60-65°F) to preserve its flavor and texture! ✨\n\nAt Chocolat on James, we're passionate about chocolate education. Follow us for more tips!\n\n#ChocolatOnJames #HamiltonsChocolate #ChocolateFacts #ChocolateEducation #HamiltonOntario #ChocolateTips #LearnWithUs`, type: 'Educational', cta: 'Follow for more tips!'},
+                    {text: `Pro tip from our chocolatiers! 🎓🍫\n\nNever store chocolate in the fridge! It can cause "sugar bloom" and affect the taste. Keep it in a cool, dry place instead. ✨\n\nWant to learn more? Visit us at 123 James Street North!\n\n#ChocolatOnJames #HamiltonsChocolate #ChocolateTips #ProTips #HamiltonOntario #ChocolateEducation #ArtisanChocolate`, type: 'Pro Tip', cta: 'Visit us!'},
+                    {text: `The art of chocolate pairing 🍫🍷\n\nDark chocolate pairs beautifully with red wine, while milk chocolate loves coffee! ☕✨\n\nOur chocolatiers can help you find the perfect pairing for any occasion.\n\nCome taste and learn!\n\n#ChocolatOnJames #HamiltonsChocolate #ChocolatePairing #FoodPairing #HamiltonOntario #ChocolateEducation #Foodies`, type: 'Pairing Guide', cta: 'Learn more!'},
+                    {text: `What makes artisan chocolate special? 🎨🍫\n\nIt's all about the craft! Small batches, premium ingredients, attention to detail, and lots of love. ❤️\n\nEvery truffle we make is a work of art. Come see the difference!\n\n#ChocolatOnJames #HamiltonsChocolate #ArtisanChocolate #Craftsmanship #HamiltonOntario #HandmadeChocolate #QualityMatters`, type: 'Craftsmanship', cta: 'Experience it!'},
+                    {text: `Behind every truffle is a story 📖🍫\n\nFrom selecting the finest cocoa beans to hand-decorating each piece, creating artisan chocolate is a labor of love! ✨\n\nWant to learn more about our process? Visit us in Hamilton!\n\n#ChocolatOnJames #HamiltonsChocolate #ChocolateMaking #ArtisanProcess #HamiltonOntario #BehindTheScenes #HandcraftedWithLove`, type: 'Process', cta: 'Visit us!'}
+                ],
+                'behind-scenes': [
+                    {text: `A peek behind the curtain! 🎬🍫\n\nThis is where the magic happens! ✨ Our chocolatiers start work at 6am to ensure every truffle is fresh and perfect.\n\nHandcrafted with love in Hamilton. 💝\n\n#ChocolatOnJames #HamiltonsChocolate #BehindTheScenes #ChocolateMaking #HamiltonOntario #ArtisanLife #HandmadeChocolate`, type: 'Morning Routine', cta: 'Follow our journey!'},
+                    {text: `Meet the hands behind your favorite chocolates! 👋🍫\n\nOur team of passionate chocolatiers pour their hearts into every creation. It's not just a job - it's a craft! ✨\n\nCome meet us at 123 James Street North!\n\n#ChocolatOnJames #HamiltonsChocolate #MeetTheTeam #ChocolateMakers #HamiltonOntario #LocalBusiness #ArtisanChocolate`, type: 'Team Introduction', cta: 'Visit us!'},
+                    {text: `The art of tempering chocolate 🎨🍫\n\nIt takes skill, patience, and years of practice to get it just right! Our chocolatiers are true artists. ✨\n\nWatch our stories for more behind-the-scenes magic!\n\n#ChocolatOnJames #HamiltonsChocolate #ChocolateArt #Tempering #HamiltonOntario #BehindTheScenes #ArtisanCraft`, type: 'Technique', cta: 'Watch our Stories!'},
+                    {text: `From cocoa to creation 🍫✨\n\nEvery step of our process is done with care and precision. This is what artisan chocolate is all about! 💝\n\nHandcrafted in Hamilton with love.\n\n#ChocolatOnJames #HamiltonsChocolate #ChocolateProcess #ArtisanChocolate #HamiltonOntario #HandmadeWithLove #BehindTheScenes`, type: 'Process', cta: 'Experience it!'},
+                    {text: `Early morning chocolate making! ☀️🍫\n\nWhile Hamilton sleeps, we're already creating today's fresh batch of truffles! ✨\n\nFresh, handmade, and absolutely delicious. That's the Chocolat on James way! 💝\n\n#ChocolatOnJames #HamiltonsChocolate #FreshDaily #BehindTheScenes #HamiltonOntario #ArtisanChocolate #MorningRoutine`, type: 'Fresh Daily', cta: 'Visit for fresh treats!'}
+                ],
+                'lifestyle': [
+                    {text: `Life's too short for bad chocolate! 🍫✨\n\nTreat yourself to a moment of pure indulgence. You deserve it! 💝\n\nHandcrafted artisan chocolates from Hamilton's finest chocolatier.\n\n#ChocolatOnJames #HamiltonsChocolate #TreatYourself #SelfCare #HamiltonOntario #ChocolateLover #LifestyleGoals`, type: 'Self-Care', cta: 'Treat yourself!'},
+                    {text: `The perfect pairing: good friends + great chocolate! 👯‍♀️🍫\n\nCreate sweet memories with the people you love. ✨💝\n\nVisit us at 123 James Street North for the ultimate chocolate experience!\n\n#ChocolatOnJames #HamiltonsChocolate #FriendshipGoals #HamiltonOntario #ChocolateLovers #GoodTimes #SweetMoments`, type: 'Friendship', cta: 'Tag your bestie!'},
+                    {text: `Happiness is... a box of artisan chocolates! 😊🍫\n\nSometimes the best moments are the simple ones. Like savoring a perfectly crafted truffle. ✨\n\nFind your happy place at Chocolat on James!\n\n#ChocolatOnJames #HamiltonsChocolate #Happiness #SimpleJoys #HamiltonOntario #ChocolateLover #TreatYourself`, type: 'Happiness', cta: 'Find your joy!'},
+                    {text: `Slow down and savor the moment 🍫✨\n\nIn our fast-paced world, taking time to enjoy quality chocolate is a form of self-care. 💝\n\nHandcrafted with love in Hamilton.\n\n#ChocolatOnJames #HamiltonsChocolate #SlowLiving #Mindfulness #HamiltonOntario #SelfCare #QualityTime`, type: 'Mindfulness', cta: 'Savor life!'},
+                    {text: `Weekend vibes = chocolate + relaxation! 🍫☕✨\n\nHow are you treating yourself this weekend? We recommend starting with artisan chocolate! 😊💝\n\nVisit us at James Street North!\n\n#ChocolatOnJames #HamiltonsChocolate #WeekendVibes #Relaxation #HamiltonOntario #SelfCare #WeekendTreats`, type: 'Weekend', cta: 'Visit this weekend!'}
+                ],
+                'local-hamilton': [
+                    {text: `Proud to be Hamilton's Chocolate! 🍁🍫\n\nBorn and crafted right here on James Street North. We're not just making chocolate - we're building community! ✨💝\n\nSupport local, taste the difference!\n\n#ChocolatOnJames #HamiltonsChocolate #HamiltonOntario #JamesStreetNorth #SupportLocal #HamOnt #LocalBusiness`, type: 'Local Pride', cta: 'Shop local!'},
+                    {text: `Hamilton, this one's for you! 🏙️🍫\n\nWe're honored to serve this amazing community with handcrafted artisan chocolates. Thank you for your support! ✨💝\n\nVisit us at 123 James Street North!\n\n#ChocolatOnJames #HamiltonsChocolate #HamiltonOntario #CommunityFirst #LocalBusiness #HamOnt #JamesStreetNorth`, type: 'Community', cta: 'Visit us!'},
+                    {text: `See you at Art Crawl! 🎨🍫\n\nJoin us this Friday on James Street North for art, chocolate, and good vibes! ✨\n\nSpecial treats and samples available! 💝\n\n#ChocolatOnJames #HamiltonsChocolate #ArtCrawl #JamesStreetNorth #HamiltonOntario #HamOnt #LocalEvents`, type: 'Event', cta: 'See you there!'},
+                    {text: `Hamilton's sweetest destination! 🍫✨\n\nLocated in the heart of James Street North, we're your go-to spot for premium artisan chocolates! 💝\n\nCome visit us and taste why Hamilton loves Chocolat on James!\n\n#ChocolatOnJames #HamiltonsChocolate #HamiltonOntario #JamesStreetNorth #LocalBusiness #HamOnt #VisitHamilton`, type: 'Location', cta: 'Visit us!'},
+                    {text: `Made in Hamilton, loved everywhere! 🍁🍫\n\nOur artisan chocolates are crafted with local pride and shared with love. Thank you Hamilton for making us part of your community! ✨💝\n\n#ChocolatOnJames #HamiltonsChocolate #MadeInHamilton #HamiltonOntario #LocalPride #SupportLocal #CommunityLove`, type: 'Pride', cta: 'Taste local!'}
+                ],
+                'customer-engagement': [
+                    {text: `Which flavor would YOU choose? 🍫✨\n\nA) Dark Chocolate Truffle 🖤\nB) Milk Chocolate Caramel 🤎\nC) White Chocolate Raspberry 🤍\nD) All of the above! 😋\n\nComment below! 👇\n\n#ChocolatOnJames #HamiltonsChocolate #ChocolatePoll #HamiltonOntario #ChocolateLovers #EngageWithUs #YourChoice`, type: 'Poll', cta: 'Vote now!'},
+                    {text: `Tag someone who needs chocolate today! 🍫💝\n\nWe all have that friend who could use a sweet pick-me-up! Tag them below and spread the love! ✨\n\n#ChocolatOnJames #HamiltonsChocolate #TagAFriend #SpreadLove #HamiltonOntario #ChocolateLovers #ShareTheLove`, type: 'Tag Friend', cta: 'Tag them!'},
+                    {text: `CAPTION THIS! 📸🍫\n\nWhat's this chocolate thinking? Wrong answers only! 😂✨\n\nBest caption wins a special surprise! 💝\n\nComment below! 👇\n\n#ChocolatOnJames #HamiltonsChocolate #CaptionThis #FunContest #HamiltonOntario #ChocolateHumor #EngageWithUs`, type: 'Caption Contest', cta: 'Comment now!'},
+                    {text: `Show us your Chocolat on James moment! 📸🍫\n\nTag us in your photos for a chance to be featured! ✨💝\n\nWe love seeing how you enjoy our chocolates!\n\n#ChocolatOnJames #HamiltonsChocolate #ShareYourMoment #UGC #HamiltonOntario #ChocolateLovers #FeatureMe`, type: 'UGC Request', cta: 'Tag us!'},
+                    {text: `Question of the day: What's your go-to chocolate pairing? 🍫❓\n\nCoffee? Wine? Champagne? Or straight-up chocolate solo? 😋✨\n\nTell us in the comments! 👇\n\n#ChocolatOnJames #HamiltonsChocolate #QuestionOfTheDay #ChocolatePairing #HamiltonOntario #EngageWithUs #ChocolateLovers`, type: 'Question', cta: 'Answer below!'}
+                ]
+            };
+
+            const categoryTemplates = templates[settings.category] || templates['product-showcase'];
+            return categoryTemplates;
+        }
+
+        function buildGIFSuggestions(settings) {
+            const gifsByCategory = {
+                'product-showcase': [
+                    '🎬 Chocolate dripping in slow motion',
+                    '✨ Sparkle effects appearing on gold accents',
+                    '🔄 Gentle 360° rotation of truffle box',
+                    '🔍 Zoom in on chocolate texture details',
+                    '💫 Shimmer effect over product'
+                ],
+                'promotional': [
+                    '🎉 Confetti explosion animation',
+                    '💥 "SALE" badge bouncing in',
+                    '⏰ Countdown timer animation',
+                    '🏷️ Price tag flip animation',
+                    '✨ Discount percentage glowing'
+                ],
+                'seasonal': [
+                    '❄️ Snowflakes falling (winter)',
+                    '💝 Hearts floating (Valentine\\'s)',
+                    '🎄 Twinkling lights (Christmas)',
+                    '🎃 Spooky elements (Halloween)',
+                    '🍂 Leaves falling (autumn)'
+                ],
+                'educational': [
+                    '📚 Pages turning animation',
+                    '💡 Light bulb appearing',
+                    '👆 Pointing finger highlighting tips',
+                    '✅ Checkmark appearing',
+                    '🎓 Knowledge sparkles'
+                ],
+                'behind-scenes': [
+                    '🎬 Clapperboard animation',
+                    '🔄 Process sequence animation',
+                    '👋 Waving hand greeting',
+                    '⏰ Time-lapse effect',
+                    '🎥 Camera zoom effect'
+                ],
+                'lifestyle': [
+                    '☕ Steam rising from coffee',
+                    '💆 Relaxation wave effect',
+                    '😊 Smiley face appearing',
+                    '🌟 Happiness sparkles',
+                    '💝 Love hearts floating'
+                ],
+                'local-hamilton': [
+                    '🏙️ City skyline animation',
+                    '🍁 Canadian flag waving',
+                    '📍 Location pin dropping',
+                    '🎨 Paint brush stroke (Art Crawl)',
+                    '🏛️ Building reveal'
+                ],
+                'customer-engagement': [
+                    '👆 Tap here animation',
+                    '💬 Comment bubble popping',
+                    '❤️ Like button animation',
+                    '🎯 Target/bullseye effect',
+                    '🎪 Attention-grabbing bounce'
+                ]
+            };
+
+            return gifsByCategory[settings.category] || gifsByCategory['product-showcase'];
+        }
+
+        function buildHashtags(settings) {
+            const base = ['#ChocolatOnJames', '#HamiltonsChocolate', '#HamiltonOntario', '#ArtisanChocolate'];
+            const seasonal = {
+                'february': ['#ValentinesDay', '#LoveIsSweet', '#ValentineGifts'],
+                'december': ['#ChristmasGifts', '#HolidayTreats', '#ChristmasChocolate'],
+                'october': ['#Halloween', '#HalloweenTreats', '#SpookySeason']
+            };
+            const audience = {
+                'corporate': ['#CorporateGifts', '#BusinessGifts', '#B2BGifts'],
+                'gift-buyers': ['#GiftIdeas', '#PerfectGift', '#ChocolateGifts']
+            };
+
+            let hashtags = [...base];
+            if (seasonal[settings.season]) hashtags.push(...seasonal[settings.season]);
+            if (audience[settings.audience]) hashtags.push(...audience[settings.audience]);
+            
+            hashtags.push('#JamesStreetNorth', '#ChocolateLover', '#SupportLocal', '#HandmadeChocolate');
+            
+            return hashtags.slice(0, 15); // Limit to 15 hashtags
+        }
+
+        function displayCompleteContent(content, settings) {
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('actionButtons').style.display = 'flex';
+            
+            const container = document.getElementById('outputContainer');
+            container.style.display = 'block';
+            
+            let html = `
+                <div class="content-package">
+                    <div class="package-header">
+                        <div class="package-title">
+                            🚀 Complete Content Package
+                        </div>
+                        <button class="copy-all-btn" onclick="copyAllContent()">📋 Copy All</button>
+                    </div>
+
+                    <!-- AI Image Prompt -->
+                    <div class="section-block">
+                        <div class="block-title">
+                            🎨 AI Image Prompt
+                            <button class="copy-btn" onclick="copyText(this, 'prompt')">📋 Copy</button>
+                        </div>
+                        <div class="prompt-text" data-content="prompt">${content.prompt}</div>
+                        <div class="logo-instructions" style="margin-top: 15px;">
+                            <div class="logo-title">🏷️ After Generating Image</div>
+                            <p>1. Copy prompt above and paste into ChatGPT, Midjourney, or DALL-E</p>
+                            <p>2. Download the generated image</p>
+                            <p>3. Open in Canva or image editor</p>
+                            <p>4. Add your Chocolat on James logo (bottom right, 120x120px)</p>
+                            <p>5. Use white logo on dark backgrounds, dark logo on light backgrounds</p>
+                        </div>
+                    </div>
+
+                    <!-- 10 Social Media Captions -->
+                    <div class="section-block">
+                        <div class="block-title">
+                            📝 10 Ready-to-Use Captions
+                        </div>
+                        <div class="captions-grid">
+            `;
+
+            content.captions.forEach((caption, index) => {
+                html += `
+                    <div class="caption-item">
+                        <div class="caption-header">
+                            <span class="caption-number">Caption ${index + 1} - ${caption.type}</span>
+                            <button class="copy-btn" onclick="copyText(this, 'caption-${index}')">📋 Copy</button>
+                        </div>
+                        <div class="caption-text" data-content="caption-${index}">${caption.text}</div>
+                        <div class="caption-meta">
+                            <span class="meta-tag">${caption.type}</span>
+                            <span class="meta-tag">CTA: ${caption.cta}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                        </div>
+                    </div>
+
+                    <!-- GIF Suggestions -->
+                    <div class="section-block">
+                        <div class="block-title">
+                            🎬 GIF/Animation Suggestions
+                            <button class="copy-btn" onclick="copyText(this, 'gifs')">📋 Copy</button>
+                        </div>
+                        <div class="gif-suggestions">
+                            <div class="gif-title">🎥 Use these for Instagram Stories/Reels:</div>
+                            <div class="gif-list" data-content="gifs">
+            `;
+
+            content.gifs.forEach(gif => {
+                html += `<div class="gif-item">${gif}</div>`;
+            });
+
+            html += `
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hashtags -->
+                    <div class="section-block">
+                        <div class="block-title">
+                            #️⃣ Hashtags
+                            <button class="copy-btn" onclick="copyText(this, 'hashtags')">📋 Copy</button>
+                        </div>
+                        <div class="prompt-text" data-content="hashtags">${content.hashtags.join(' ')}</div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function copyText(button, contentId) {
+            const element = document.querySelector(`[data-content="${contentId}"]`);
+            const text = element.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = '✅ Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = '📋 Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function copyAllContent() {
+            const allText = [];
+            
+            // Get prompt
+            const prompt = document.querySelector('[data-content="prompt"]');
+            if (prompt) allText.push('=== AI IMAGE PROMPT ===\n' + prompt.textContent + '\n\n');
+            
+            // Get all captions
+            allText.push('=== 10 SOCIAL MEDIA CAPTIONS ===\n\n');
+            for (let i = 0; i < 10; i++) {
+                const caption = document.querySelector(`[data-content="caption-${i}"]`);
+                if (caption) allText.push(`Caption ${i + 1}:\n${caption.textContent}\n\n`);
+            }
+            
+            // Get GIFs
+            const gifs = document.querySelector('[data-content="gifs"]');
+            if (gifs) allText.push('=== GIF SUGGESTIONS ===\n' + gifs.textContent + '\n\n');
+            
+            // Get hashtags
+            const hashtags = document.querySelector('[data-content="hashtags"]');
+            if (hashtags) allText.push('=== HASHTAGS ===\n' + hashtags.textContent);
+            
+            const fullText = allText.join('');
+            
+            navigator.clipboard.writeText(fullText).then(() => {
+                const btn = event.target;
+                btn.textContent = '✅ All Copied!';
+                setTimeout(() => {
+                    btn.textContent = '📋 Copy All';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
+

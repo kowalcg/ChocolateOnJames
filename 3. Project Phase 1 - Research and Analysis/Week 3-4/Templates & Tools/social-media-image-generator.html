@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate on James - Social Media Image Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #D4AF37, #8B4513);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #d4a574;
+            font-size: 1.1em;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .controls-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .canvas-area {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #8B4513;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .template-btn {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .template-btn:hover {
+            border-color: #D4AF37;
+            background: #fffbf0;
+            transform: translateY(-2px);
+        }
+
+        .template-btn.active {
+            border-color: #D4AF37;
+            background: linear-gradient(135deg, #D4AF37, #8B4513);
+            color: white;
+        }
+
+        .size-info {
+            font-size: 0.75em;
+            color: #666;
+            display: block;
+            margin-top: 3px;
+        }
+
+        input[type="text"],
+        input[type="color"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95em;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #D4AF37;
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .color-picker-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .color-input {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .color-input label {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        input[type="color"] {
+            height: 45px;
+            cursor: pointer;
+        }
+
+        .preset-colors {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .preset-color {
+            width: 100%;
+            height: 35px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid #e0e0e0;
+            transition: transform 0.2s;
+        }
+
+        .preset-color:hover {
+            transform: scale(1.1);
+            border-color: #D4AF37;
+        }
+
+        .canvas-wrapper {
+            position: relative;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        #canvas {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #D4AF37, #8B4513);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #8B4513;
+            border: 2px solid #8B4513;
+        }
+
+        .btn-secondary:hover {
+            background: #8B4513;
+            color: white;
+        }
+
+        .slider-container {
+            margin-top: 10px;
+        }
+
+        .slider-container label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e0e0e0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #D4AF37;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #D4AF37;
+            cursor: pointer;
+            border: none;
+        }
+
+        .quick-templates {
+            display: grid;
+            gap: 10px;
+        }
+
+        .quick-template {
+            padding: 15px;
+            background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-template:hover {
+            border-color: #D4AF37;
+            transform: translateX(5px);
+        }
+
+        .quick-template-title {
+            font-weight: 600;
+            color: #8B4513;
+            margin-bottom: 5px;
+        }
+
+        .quick-template-desc {
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls-panel {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        .logo-upload {
+            margin-top: 10px;
+        }
+
+        .logo-upload input[type="file"] {
+            display: none;
+        }
+
+        .upload-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .upload-btn:hover {
+            border-color: #D4AF37;
+            background: #fffbf0;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍫 Chocolate on James</h1>
+            <p class="subtitle">Social Media Image Generator</p>
+        </header>
+
+        <div class="main-grid">
+            <div class="controls-panel">
+                <div class="section">
+                    <div class="section-title">Platform / Size</div>
+                    <div class="template-grid">
+                        <button class="template-btn active" data-size="1080x1080" data-platform="instagram">
+                            Instagram Post
+                            <span class="size-info">1080 × 1080</span>
+                        </button>
+                        <button class="template-btn" data-size="1080x1920" data-platform="story">
+                            Instagram Story
+                            <span class="size-info">1080 × 1920</span>
+                        </button>
+                        <button class="template-btn" data-size="1200x628" data-platform="facebook">
+                            Facebook Ad
+                            <span class="size-info">1200 × 628</span>
+                        </button>
+                        <button class="template-btn" data-size="1080x1350" data-platform="portrait">
+                            Portrait Post
+                            <span class="size-info">1080 × 1350</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Quick Templates</div>
+                    <div class="quick-templates">
+                        <div class="quick-template" data-template="product-showcase">
+                            <div class="quick-template-title">Product Showcase</div>
+                            <div class="quick-template-desc">Highlight your artisan chocolates</div>
+                        </div>
+                        <div class="quick-template" data-template="special-offer">
+                            <div class="quick-template-title">Special Offer</div>
+                            <div class="quick-template-desc">Promote sales & discounts</div>
+                        </div>
+                        <div class="quick-template" data-template="quote">
+                            <div class="quick-template-title">Inspirational Quote</div>
+                            <div class="quick-template-desc">Share chocolate wisdom</div>
+                        </div>
+                        <div class="quick-template" data-template="announcement">
+                            <div class="quick-template-title">Announcement</div>
+                            <div class="quick-template-desc">New products & events</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Text Content</div>
+                    <input type="text" id="mainText" placeholder="Main Headline" value="Handcrafted Artisan Chocolates">
+                    <div style="height: 10px;"></div>
+                    <textarea id="subText" placeholder="Subtitle or description">Made with Love in Hamilton</textarea>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Colors</div>
+                    <div class="color-picker-group">
+                        <div class="color-input">
+                            <label>Background</label>
+                            <input type="color" id="bgColor" value="#2d1810">
+                        </div>
+                        <div class="color-input">
+                            <label>Text Color</label>
+                            <input type="color" id="textColor" value="#ffffff">
+                        </div>
+                    </div>
+                    <div class="preset-colors">
+                        <div class="preset-color" style="background: #2d1810;" data-bg="#2d1810" data-text="#ffffff" title="Dark Chocolate"></div>
+                        <div class="preset-color" style="background: #8B4513;" data-bg="#8B4513" data-text="#ffffff" title="Milk Chocolate"></div>
+                        <div class="preset-color" style="background: #D4AF37;" data-bg="#D4AF37" data-text="#2d1810" title="Gold"></div>
+                        <div class="preset-color" style="background: #f5f5dc;" data-bg="#f5f5dc" data-text="#2d1810" title="Cream"></div>
+                        <div class="preset-color" style="background: #4a2c2a;" data-bg="#4a2c2a" data-text="#ffffff" title="Deep Brown"></div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Font Size</div>
+                    <div class="slider-container">
+                        <label>
+                            <span>Main Text</span>
+                            <span id="mainSizeValue">60px</span>
+                        </label>
+                        <input type="range" id="mainSize" min="30" max="120" value="60">
+                    </div>
+                    <div class="slider-container">
+                        <label>
+                            <span>Subtitle</span>
+                            <span id="subSizeValue">32px</span>
+                        </label>
+                        <input type="range" id="subSize" min="16" max="60" value="32">
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Logo / Image</div>
+                    <div class="logo-upload">
+                        <label for="logoUpload" class="upload-btn">
+                            📁 Upload Logo/Image
+                        </label>
+                        <input type="file" id="logoUpload" accept="image/*">
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="showLogo" checked>
+                        <label for="showLogo">Show Logo</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="canvas-area">
+                <div class="canvas-wrapper">
+                    <canvas id="canvas" width="1080" height="1080"></canvas>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-primary" id="downloadBtn">⬇️ Download Image</button>
+                    <button class="btn-secondary" id="resetBtn">🔄 Reset</button>
+                    <button class="btn-secondary" id="copyBtn">📋 Copy to Clipboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let currentSize = { width: 1080, height: 1080 };
+        let uploadedLogo = null;
+
+        // Initial render
+        renderCanvas();
+
+        // Platform size buttons
+        document.querySelectorAll('.template-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.template-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const [width, height] = this.dataset.size.split('x');
+                currentSize = { width: parseInt(width), height: parseInt(height) };
+                canvas.width = currentSize.width;
+                canvas.height = currentSize.height;
+                renderCanvas();
+            });
+        });
+
+        // Quick templates
+        document.querySelectorAll('.quick-template').forEach(template => {
+            template.addEventListener('click', function() {
+                const type = this.dataset.template;
+                applyTemplate(type);
+            });
+        });
+
+        function applyTemplate(type) {
+            const templates = {
+                'product-showcase': {
+                    mainText: 'Artisan Chocolates',
+                    subText: 'Handcrafted with Premium Ingredients',
+                    bgColor: '#2d1810',
+                    textColor: '#D4AF37'
+                },
+                'special-offer': {
+                    mainText: '20% OFF',
+                    subText: 'This Weekend Only!',
+                    bgColor: '#8B4513',
+                    textColor: '#ffffff'
+                },
+                'quote': {
+                    mainText: 'Life is Sweet',
+                    subText: 'Especially with Chocolate',
+                    bgColor: '#4a2c2a',
+                    textColor: '#f5f5dc'
+                },
+                'announcement': {
+                    mainText: 'New Flavours',
+                    subText: 'Coming This Fall',
+                    bgColor: '#D4AF37',
+                    textColor: '#2d1810'
+                }
+            };
+
+            const template = templates[type];
+            if (template) {
+                document.getElementById('mainText').value = template.mainText;
+                document.getElementById('subText').value = template.subText;
+                document.getElementById('bgColor').value = template.bgColor;
+                document.getElementById('textColor').value = template.textColor;
+                renderCanvas();
+            }
+        }
+
+        // Text inputs
+        document.getElementById('mainText').addEventListener('input', renderCanvas);
+        document.getElementById('subText').addEventListener('input', renderCanvas);
+
+        // Color inputs
+        document.getElementById('bgColor').addEventListener('input', renderCanvas);
+        document.getElementById('textColor').addEventListener('input', renderCanvas);
+
+        // Preset colors
+        document.querySelectorAll('.preset-color').forEach(preset => {
+            preset.addEventListener('click', function() {
+                document.getElementById('bgColor').value = this.dataset.bg;
+                document.getElementById('textColor').value = this.dataset.text;
+                renderCanvas();
+            });
+        });
+
+        // Font size sliders
+        document.getElementById('mainSize').addEventListener('input', function() {
+            document.getElementById('mainSizeValue').textContent = this.value + 'px';
+            renderCanvas();
+        });
+
+        document.getElementById('subSize').addEventListener('input', function() {
+            document.getElementById('subSizeValue').textContent = this.value + 'px';
+            renderCanvas();
+        });
+
+        // Logo upload
+        document.getElementById('logoUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        uploadedLogo = img;
+                        renderCanvas();
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('showLogo').addEventListener('change', renderCanvas);
+
+        // Render canvas
+        function renderCanvas() {
+            const mainText = document.getElementById('mainText').value;
+            const subText = document.getElementById('subText').value;
+            const bgColor = document.getElementById('bgColor').value;
+            const textColor = document.getElementById('textColor').value;
+            const mainSize = parseInt(document.getElementById('mainSize').value);
+            const subSize = parseInt(document.getElementById('subSize').value);
+            const showLogo = document.getElementById('showLogo').checked;
+
+            // Clear canvas
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Add gradient overlay
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, 'rgba(212, 175, 55, 0.1)');
+            gradient.addColorStop(1, 'rgba(139, 69, 19, 0.1)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Add decorative elements
+            ctx.fillStyle = 'rgba(212, 175, 55, 0.15)';
+            ctx.beginPath();
+            ctx.arc(canvas.width * 0.1, canvas.height * 0.2, 150, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(canvas.width * 0.9, canvas.height * 0.8, 200, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Draw logo if uploaded and enabled
+            if (uploadedLogo && showLogo) {
+                const logoSize = Math.min(canvas.width, canvas.height) * 0.2;
+                const logoX = (canvas.width - logoSize) / 2;
+                const logoY = canvas.height * 0.15;
+                ctx.drawImage(uploadedLogo, logoX, logoY, logoSize, logoSize);
+            }
+
+            // Draw main text
+            ctx.fillStyle = textColor;
+            ctx.font = `bold ${mainSize}px Arial, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            const mainY = canvas.height * 0.45;
+            wrapText(ctx, mainText, canvas.width / 2, mainY, canvas.width * 0.85, mainSize * 1.2);
+
+            // Draw subtitle
+            ctx.font = `${subSize}px Arial, sans-serif`;
+            const subY = canvas.height * 0.6;
+            wrapText(ctx, subText, canvas.width / 2, subY, canvas.width * 0.85, subSize * 1.2);
+
+            // Draw brand name at bottom
+            ctx.font = `${canvas.height * 0.03}px Arial, sans-serif`;
+            ctx.fillStyle = textColor;
+            ctx.globalAlpha = 0.7;
+            ctx.fillText('Chocolate on James', canvas.width / 2, canvas.height * 0.92);
+            ctx.globalAlpha = 1;
+        }
+
+        function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+            const words = text.split(' ');
+            let line = '';
+            const lines = [];
+
+            for (let i = 0; i < words.length; i++) {
+                const testLine = line + words[i] + ' ';
+                const metrics = ctx.measureText(testLine);
+                const testWidth = metrics.width;
+
+                if (testWidth > maxWidth && i > 0) {
+                    lines.push(line);
+                    line = words[i] + ' ';
+                } else {
+                    line = testLine;
+                }
+            }
+            lines.push(line);
+
+            const startY = y - ((lines.length - 1) * lineHeight) / 2;
+            lines.forEach((line, index) => {
+                ctx.fillText(line, x, startY + (index * lineHeight));
+            });
+        }
+
+        // Download button
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const link = document.createElement('a');
+            const platform = document.querySelector('.template-btn.active').dataset.platform;
+            const timestamp = new Date().getTime();
+            link.download = `chocolate-on-james-${platform}-${timestamp}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+
+        // Reset button
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            document.getElementById('mainText').value = 'Handcrafted Artisan Chocolates';
+            document.getElementById('subText').value = 'Made with Love in Hamilton';
+            document.getElementById('bgColor').value = '#2d1810';
+            document.getElementById('textColor').value = '#ffffff';
+            document.getElementById('mainSize').value = 60;
+            document.getElementById('subSize').value = 32;
+            document.getElementById('mainSizeValue').textContent = '60px';
+            document.getElementById('subSizeValue').textContent = '32px';
+            renderCanvas();
+        });
+
+        // Copy to clipboard button
+        document.getElementById('copyBtn').addEventListener('click', async function() {
+            try {
+                canvas.toBlob(async (blob) => {
+                    const item = new ClipboardItem({ 'image/png': blob });
+                    await navigator.clipboard.write([item]);
+                    alert('Image copied to clipboard!');
+                });
+            } catch (err) {
+                alert('Failed to copy image. Try downloading instead.');
+            }
+        });
+    </script>
+</body>
+</html>
