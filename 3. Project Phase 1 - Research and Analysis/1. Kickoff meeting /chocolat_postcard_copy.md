@@ -94,7 +94,7 @@ For over a decade, Chocolat on James has been Hamilton's destination for handcra
 **What We Offer:**
 
 **ARTISAN CHOCOLATES**  
-Handcrafted truffles, caramels, toffee, and our famous chocolate sponge. Premium Belgian chocolate in milk, dark, white, and vegan options.
+Signature truffles, caramels, toffee, and our famous chocolate sponge. Premium Belgian chocolate in milk, dark, white, and vegan options.
 
 **CHOCOLATE-COVERED DELIGHTS**  
 Oreos, pretzels, sour keys, chips, and more—elevated with artisan chocolate.

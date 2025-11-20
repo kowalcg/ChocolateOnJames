@@ -523,7 +523,7 @@ This marketing strategy transforms Chocolat on James from zero marketing spend t
 
 ### Brand Positioning Statement
 
-"Chocolat on James is Hamilton's premier artisan chocolatier, creating handcrafted chocolates, truffles, and confections using traditional techniques and quality ingredients. Located in the heart of James Street North's arts district, we're a local business committed to delivering exceptional taste experiences for everyday indulgence and special occasions."
+"Chocolat on James is Hamilton's premier artisan chocolatier, creating handcrafted chocolates and confections using traditional techniques and quality ingredients while curating premium truffles from trusted partners. Located in the heart of James Street North's arts district, we're a local business committed to delivering exceptional taste experiences for everyday indulgence and special occasions."
 
 ### Key Messages
 

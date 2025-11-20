@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>SEO-ONPAGE-PLAYBOOK-NOV2025</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="on-page-seo-playbook">On-Page SEO Playbook</h1>
+<p><strong>Chocolat on James - Week 3-4 Deliverable</strong></p>
+<p><strong>Date:</strong> November 7, 2025<br />
+<strong>Prepared by:</strong> SEO &amp; Content Agent<br />
+<strong>Project:</strong> Phase 1 - Research &amp; Analysis<br />
+<strong>Status:</strong> Complete</p>
+<hr />
+<h2 id="executive-summary">Executive Summary</h2>
+<p>This on-page SEO playbook provides step-by-step instructions to
+optimize every page of chocolatonjames.com for search engines and users.
+Implementation of these recommendations will improve search rankings,
+organic traffic, and conversion rates.</p>
+<p><strong>Expected Results:</strong> - Month 3: 3-5 keywords in top 10
+- Month 6: 8-12 keywords in top 10 - Month 12: 15-20 keywords in top 10,
+#1 for “chocolate shop Hamilton”</p>
+<hr />
+<h2 id="on-page-seo-fundamentals">On-Page SEO Fundamentals</h2>
+<h3 id="the-seo-optimization-checklist">The SEO Optimization
+Checklist</h3>
+<p>Every page must have: - Unique, keyword-optimized title tag (50-60
+characters) - Compelling meta description (150-160 characters) - Single
+H1 tag with primary keyword - H2-H6 subheadings with related keywords -
+Keyword-rich content (300+ words minimum) - Image alt text (descriptive,
+keyword-rich) - Internal links to related pages (3-5 minimum) - Clean,
+keyword-rich URL structure - Mobile-optimized layout - Fast loading
+speed (&lt;3 seconds) - Schema markup (where applicable)</p>
+<hr />
+<h2 id="homepage-optimization">Homepage Optimization</h2>
+<h3 id="current-state">Current State</h3>
+<ul>
+<li>URL: https://chocolatonjames.com/</li>
+<li>Title: “Chocolat On James | The finest chocolates by chocolatier
+Sheryl Cronsbury”</li>
+<li>Meta Description: <strong>MISSING</strong> (needs immediate
+attention)</li>
+</ul>
+<h3 id="recommended-optimization">Recommended Optimization</h3>
+<p><strong>Title Tag</strong> (58 characters):</p>
+<pre><code>Chocolat on James | Hamilton&#39;s Premier Chocolate Shop</code></pre>
+<p><strong>Meta Description</strong> (158 characters):</p>
+<pre><code>Discover Hamilton&#39;s finest artisan chocolates on James Street North. Signature truffles, gift boxes &amp; same-day delivery. Visit Hamilton&#39;s chocolate destination.</code></pre>
+<p><strong>H1 Tag:</strong></p>
+<pre><code>Hamilton&#39;s Artisan Chocolate Shop</code></pre>
+<p><strong>H2 Tags:</strong> - Handcrafted Chocolates &amp; Signature
+Truffle Collection - Same-Day Delivery in Hamilton - Perfect Gifts for
+Every Occasion - Visit Us on James Street North</p>
+<p><strong>Content Structure</strong> (400-500 words):</p>
+<h4 id="h1-hamiltons-artisan-chocolate-shop">H1: Hamilton’s Artisan
+Chocolate Shop</h4>
+<p>Welcome to Chocolat on James, Hamilton’s premier destination for
+handcrafted artisan chocolates. Located in the heart of James Street
+North’s vibrant arts district, we create small-batch chocolates,
+bonbons, and chocolate gifts using traditional techniques and premium
+ingredients—alongside a curated truffle collection sourced from trusted
+partners.</p>
+<h4 id="h2-handcrafted-chocolates-signature-truffle-collection">H2:
+Handcrafted Chocolates &amp; Signature Truffle Collection</h4>
+<p>Our in-house chocolates are handmade with care in our Hamilton shop.
+From classic caramels to innovative seasonal ganaches, each bite
+showcases the art of chocolate-making. Alongside these creations, we
+feature a signature truffle collection sourced from artisan producers
+who meet our quality standards. Whether you’re treating yourself or
+finding the perfect gift, our selection delivers an unforgettable taste
+experience.</p>
+<ul>
+<li><strong>Our Signature Collections</strong>
+<ul>
+<li>Signature Truffle Collection (12+ flavors)</li>
+<li>Vegan &amp; Dietary-Friendly Options</li>
+<li>Seasonal Collections</li>
+<li>Corporate Gifting Packages</li>
+</ul></li>
+</ul>
+<h4 id="h2-same-day-delivery-in-hamilton">H2: Same-Day Delivery in
+Hamilton</h4>
+<p>Can’t visit us in person? We offer same-day chocolate delivery
+throughout Hamilton. Order by 2pm for delivery the same day, or schedule
+delivery for any date. Perfect for last-minute gifts, special occasions,
+or treating yourself to Hamilton’s finest chocolates.</p>
+<h4 id="h2-perfect-gifts-for-every-occasion">H2: Perfect Gifts for Every
+Occasion</h4>
+<p>Our beautifully packaged chocolate gift boxes make memorable gifts
+for birthdays, anniversaries, corporate appreciation, romantic
+celebrations, holidays, and thank-you moments.</p>
+<h4 id="h2-visit-us-on-james-street-north">H2: Visit Us on James Street
+North</h4>
+<p>Experience Hamilton’s chocolate destination in person at our James
+Street North location. Browse our full selection, watch chocolates being
+made, and enjoy personalized service from our knowledgeable team.</p>
+<ul>
+<li><strong>Store Hours:</strong> [Insert hours]</li>
+<li><strong>Address:</strong> 123 James St N, Hamilton, ON L8R 2K8</li>
+<li><strong>Phone:</strong> (289) 396-5097</li>
+<li><strong>Primary CTAs:</strong> [Shop Online] · [Visit Us] ·
+[Corporate Gifting]</li>
+</ul>
+<p><strong>Internal Links:</strong> - Link to “Shop” page - Link to
+“About Us” page - Link to “Corporate Gifting” page - Link to “Delivery”
+page - Link to product categories</p>
+<p><strong>Images:</strong> - Hero image: Beautiful chocolate display
+(Alt: “Artisan chocolates at Chocolat on James Hamilton”) - Product
+photos: 6-8 images (Alt: “Signature chocolate truffles Hamilton”,
+“Chocolate gift boxes Hamilton”, etc.) - Store photo (Alt: “Chocolat on
+James storefront James Street North Hamilton”)</p>
+<p><strong>Schema Markup:</strong> - LocalBusiness schema (see Technical
+SEO section) - Organization schema - BreadcrumbList schema</p>
+<hr />
+<h2 id="product-category-pages">Product Category Pages</h2>
+<h3 id="example-truffles-collection-page">Example: Truffles Collection
+Page</h3>
+<p><strong>URL:</strong> /collections/truffles</p>
+<p><strong>Title Tag</strong> (56 characters):</p>
+<pre><code>Artisan Chocolate Truffles | Chocolat on James Hamilton</code></pre>
+<p><strong>Meta Description</strong> (157 characters):</p>
+<pre><code>Signature chocolate truffles curated in Hamilton. Dark, milk &amp; white chocolate varieties. Order online for same-day delivery or visit our James St shop.</code></pre>
+<p><strong>H1 Tag:</strong></p>
+<pre><code>Artisan Chocolate Truffles</code></pre>
+<p><strong>Content Structure</strong> (300-400 words):</p>
+<h4 id="h1-artisan-chocolate-truffles">H1: Artisan Chocolate
+Truffles</h4>
+<p>Discover our signature truffle collection curated for Hamilton. Each
+selection combines premium chocolate with carefully chosen ingredients
+to create unforgettable flavor experiences.</p>
+<h4 id="h2-our-truffle-collection">H2: Our Truffle Collection</h4>
+<ul>
+<li><strong>Classic Truffles:</strong> [Product grid with images]</li>
+<li><strong>Vegan Truffles:</strong> [Product grid]</li>
+<li><strong>Seasonal Truffles:</strong> [Product grid]</li>
+</ul>
+<h4 id="h2-why-choose-chocolat-on-james-truffles">H2: Why Choose
+Chocolat on James Truffles?</h4>
+<ul>
+<li><strong>Hamilton Crafted Chocolates:</strong> Our house-made
+chocolates are handmade in small batches and paired with a signature
+truffle collection sourced from artisan partners.</li>
+<li><strong>Premium Ingredients:</strong> We use only the finest
+chocolate and natural ingredients—no artificial flavors or
+preservatives.</li>
+<li><strong>Freshly Curated:</strong> We restock frequently to ensure
+peak flavor and texture.</li>
+<li><strong>Perfect for Gifting:</strong> Beautiful packaging makes our
+truffles ideal for any occasion.</li>
+</ul>
+<h4 id="h2-how-to-order">H2: How to Order</h4>
+<ul>
+<li><strong>Shop Online:</strong> Browse our full selection and order
+for delivery or pickup.</li>
+<li><strong>Same-Day Delivery:</strong> Order by 2pm for delivery in
+Hamilton.</li>
+<li><strong>Visit Our Shop:</strong> 123 James St N, Hamilton—taste
+before you buy!</li>
+<li><strong>Corporate Orders:</strong> Volume discounts
+available—[contact us].</li>
+</ul>
+<p><strong>Primary CTAs:</strong> [View All Products] · [Build Your Own
+Box] · [Corporate Gifting]</p>
+<p><strong>Internal Links:</strong> - Link to individual product pages -
+Link to “Build Your Own Box” - Link to “Corporate Gifting” - Link to
+“Delivery Information” - Link to related categories (Chocolates, Gift
+Boxes)</p>
+<p><strong>Images:</strong> - Category hero image (Alt: “Signature
+chocolate truffles Hamilton Ontario”) - Individual product images (Alt:
+“Dark chocolate sea salt truffle”, “Raspberry white chocolate truffle”,
+etc.)</p>
+<hr />
+<h2 id="individual-product-pages">Individual Product Pages</h2>
+<h3 id="example-dark-sea-salt-caramel-truffle">Example: Dark Sea Salt
+Caramel Truffle</h3>
+<p><strong>URL:</strong> /products/dark-sea-salt-caramel-truffle</p>
+<p><strong>Title Tag</strong> (59 characters):</p>
+<pre><code>Dark Sea Salt Caramel Truffle | Chocolat on James Hamilton</code></pre>
+<p><strong>Meta Description</strong> (159 characters):</p>
+<pre><code>Silky dark chocolate ganache with sea salt caramel center. Signature truffle curated for Chocolat on James. Order online or visit our James Street North shop.</code></pre>
+<p><strong>H1 Tag:</strong></p>
+<pre><code>Dark Sea Salt Caramel Truffle</code></pre>
+<p><strong>Content Structure</strong> (200-300 words):</p>
+<h4 id="h1-dark-sea-salt-caramel-truffle">H1: Dark Sea Salt Caramel
+Truffle</h4>
+<p>Bite into the smooth, glossy shell to discover a luscious caramel
+center that melts on your tongue. The perfect balance of rich cocoa,
+buttery caramel, and a delicate crunch of fleur de sel creates an
+unforgettable taste experience.</p>
+<h4 id="h2-product-details">H2: Product Details</h4>
+<ul>
+<li><strong>Flavor Profile:</strong> Rich dark chocolate (70% cocoa)
+with buttery caramel and sea salt</li>
+<li><strong>Ingredients:</strong> Dark chocolate (cocoa beans, sugar,
+cocoa butter), cream, butter, cane sugar, sea salt, vanilla</li>
+<li><strong>Allergens:</strong> Contains dairy. Made in a facility that
+processes nuts.</li>
+<li><strong>Size:</strong> Approximately 1.25 inches in diameter</li>
+<li><strong>Storage:</strong> Best enjoyed within 2 weeks. Store in a
+cool, dry place away from direct sunlight.</li>
+</ul>
+<h4 id="h2-perfect-for">H2: Perfect For</h4>
+<ul>
+<li>The discerning chocolate lover</li>
+<li>After-dinner treats</li>
+<li>Sophisticated gifts</li>
+<li>Pairing with bold red wine or espresso</li>
+</ul>
+<h4 id="h2-how-to-order-1">H2: How to Order</h4>
+<ul>
+<li><strong>Single Truffle:</strong> $3.99</li>
+<li><strong>Add to Gift Box:</strong> Build your own custom
+selection</li>
+<li><strong>Corporate Orders:</strong> Volume discounts available</li>
+<li><strong>Primary CTAs:</strong> [Add to Cart] · [Build Your Own Box]
+· [Corporate Gifting]</li>
+</ul>
+<h4 id="h2-customer-reviews">H2: Customer Reviews</h4>
+<ul>
+<li>[Review widget]</li>
+</ul>
+<h4 id="h2-you-may-also-like">H2: You May Also Like</h4>
+<ul>
+<li>[Related products: Milk Chocolate Caramel, Espresso Dark Chocolate,
+Sea Salt Dark Chocolate]</li>
+</ul>
+<p><strong>Schema Markup:</strong> - Product schema (name, image, price,
+availability, reviews) - Offer schema (price, currency) -
+AggregateRating schema (if reviews exist)</p>
+<hr />
+<h2 id="about-us-page">About Us Page</h2>
+<p><strong>URL:</strong> /pages/about</p>
+<p><strong>Title Tag</strong> (57 characters):</p>
+<pre><code>About Chocolat on James | Hamilton&#39;s Chocolatier Since 2015</code></pre>
+<p><strong>Meta Description</strong> (158 characters):</p>
+<pre><code>Meet the artisans behind Hamilton&#39;s premier chocolate shop. Handcrafting small-batch chocolates on James Street North since 2015. Visit us or order online.</code></pre>
+<p><strong>H1 Tag:</strong></p>
+<pre><code>Hamilton&#39;s Artisan Chocolatier</code></pre>
+<p><strong>Content Structure</strong> (500-700 words):</p>
+<h4 id="h1-hamiltons-artisan-chocolatier">H1: Hamilton’s Artisan
+Chocolatier</h4>
+<h4 id="h2-our-story">H2: Our Story</h4>
+<p>Chocolat on James has been Hamilton’s destination for handcrafted
+artisan chocolates since 2015. Founded by chocolatier Sheryl Cronsberry,
+the shop has built a reputation for exceptional quality and artisan
+craftsmanship. In September 2025, Dan Edwards became the proud new
+owner, continuing the tradition of excellence while bringing fresh
+energy to this beloved James Street North destination.</p>
+<p>Our dedicated team, led by professional pastry baker Mary Nguyen,
+remains committed to the same artisan standards that have made Chocolat
+on James a Hamilton favorite. We’re proud to carry forward the legacy
+while writing the next chapter of Hamilton’s chocolate story.</p>
+<h4 id="h2-our-craft">H2: Our Craft</h4>
+<p>Our chocolates are handmade in small batches using traditional
+techniques passed down through generations of chocolatiers. We source
+premium ingredients and never compromise on quality—no artificial
+flavors, no preservatives, just pure chocolate artistry. To complement
+our house-made creations, we curate premium truffles from partners who
+share our commitment to excellence.</p>
+<h5 id="our-process">Our Process</h5>
+<ol type="1">
+<li><strong>Select Premium Ingredients:</strong> We use only the finest
+chocolate and natural ingredients.</li>
+<li><strong>Handcraft in Small Batches:</strong> Each chocolate is
+finished by hand with care.</li>
+<li><strong>Quality Control:</strong> Every piece is inspected to ensure
+perfection.</li>
+<li><strong>Beautiful Presentation:</strong> Thoughtful packaging for
+every order.</li>
+</ol>
+<h4 id="h2-why-hamilton">H2: Why Hamilton?</h4>
+<p>James Street North is the heart of Hamilton’s arts and culture scene,
+and we’re proud to be part of this vibrant community. As Hamilton’s
+chocolate destination, we’re committed to supporting local suppliers
+whenever possible, participating in community events (Art Crawl,
+Supercrawl), creating jobs in Hamilton, and delivering exceptional
+chocolate experiences to our neighbors.</p>
+<h4 id="h2-meet-our-team">H2: Meet Our Team</h4>
+<ul>
+<li>[Photos and bios of Dan, staff]</li>
+</ul>
+<h4 id="h2-visit-our-shop">H2: Visit Our Shop</h4>
+<p>Experience the art of chocolate-making in person. Watch chocolates
+being crafted, sample our latest creations, and enjoy personalized
+service from our knowledgeable team.</p>
+<ul>
+<li><strong>Location:</strong> 123 James St N, Hamilton, ON L8R 2K8</li>
+<li><strong>Hours:</strong> [Insert hours]</li>
+<li><strong>Phone:</strong> (289) 396-5097</li>
+<li><strong>Primary CTAs:</strong> [Shop Online] · [Visit Us] · [Contact
+Us]</li>
+</ul>
+<p><strong>Internal Links:</strong> - Link to product pages - Link to
+“Our Process” or blog post - Link to “Contact” page - Link to “Corporate
+Gifting”</p>
+<p><strong>Images:</strong> - Team photos (Alt: “Chocolat on James team
+Hamilton Ontario”) - Shop interior (Alt: “Inside Chocolat on James
+chocolate shop Hamilton”) - Chocolate-making process (Alt: “Handcrafting
+artisan chocolates Hamilton”)</p>
+<hr />
+<h2 id="corporate-gifting-page">Corporate Gifting Page</h2>
+<p><strong>URL:</strong> /pages/corporate-gifting</p>
+<p><strong>Title Tag</strong> (59 characters):</p>
+<pre><code>Corporate Chocolate Gifts Hamilton | Chocolat on James</code></pre>
+<p><strong>Meta Description</strong> (160 characters):</p>
+<pre><code>Impress clients &amp; delight employees with premium chocolate gifts. Volume discounts, custom branding &amp; Hamilton delivery. Perfect for corporate gifting programs.</code></pre>
+<p><strong>H1 Tag:</strong></p>
+<pre><code>Corporate Chocolate Gifts in Hamilton</code></pre>
+<p><strong>Content Structure</strong> (400-500 words):</p>
+<h4 id="h1-corporate-chocolate-gifts-in-hamilton">H1: Corporate
+Chocolate Gifts in Hamilton</h4>
+<p>Elevate your corporate gifting with handcrafted artisan chocolates
+from Hamilton’s premier chocolatier. Perfect for client appreciation,
+employee recognition, holiday gifts, and special events.</p>
+<h4 id="h2-why-choose-chocolat-on-james-for-corporate-gifting">H2: Why
+Choose Chocolat on James for Corporate Gifting?</h4>
+<ul>
+<li><strong>Local Hamilton Business:</strong> Support local while
+impressing clients and employees.</li>
+<li><strong>Premium Quality:</strong> Handcrafted chocolates that
+reflect your company’s commitment to excellence.</li>
+<li><strong>Flexible Options:</strong> From small thank-you gifts to
+large holiday programs.</li>
+<li><strong>Volume Discounts:</strong> Competitive pricing for bulk
+orders (10% off 5+ boxes).</li>
+<li><strong>Custom Branding:</strong> Add your company logo to packaging
+(minimum 50 boxes).</li>
+<li><strong>Reliable Delivery:</strong> Same-day delivery in Hamilton,
+scheduled delivery across Ontario.</li>
+</ul>
+<h4 id="h2-corporate-gift-packages">H2: Corporate Gift Packages</h4>
+<ul>
+<li><strong>Executive Gift Box – $84.99:</strong> 24 premium truffles in
+elegant packaging. Ideal for VIP clients, board members, and executive
+gifts.</li>
+<li><strong>Client Appreciation Box – $42.99:</strong> 12 signature
+truffles with custom message card. Great for thank-you gifts, client
+meetings, and closing gifts.</li>
+<li><strong>Employee Recognition Box – $32.99:</strong> 9-piece
+assortment with company branding option. Perfect for employee
+appreciation and milestone celebrations.</li>
+<li><strong>Custom Corporate Packages:</strong> Collaborate with us to
+create a program tailored to your needs.</li>
+</ul>
+<h4 id="h2-volume-pricing">H2: Volume Pricing</h4>
+<table>
+<thead>
+<tr>
+<th>Quantity</th>
+<th>Discount</th>
+<th>Price per Box (12-pc)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-4 boxes</td>
+<td>0%</td>
+<td>$42.99</td>
+</tr>
+<tr>
+<td>5-9 boxes</td>
+<td>10%</td>
+<td>$38.69</td>
+</tr>
+<tr>
+<td>10-24 boxes</td>
+<td>15%</td>
+<td>$36.54</td>
+</tr>
+<tr>
+<td>25-49 boxes</td>
+<td>20%</td>
+<td>$34.39</td>
+</tr>
+<tr>
+<td>50+ boxes</td>
+<td>25%</td>
+<td>$32.24</td>
+</tr>
+</tbody>
+</table>
+<h4 id="h2-how-to-order-2">H2: How to Order</h4>
+<ol type="1">
+<li><strong>Browse Packages:</strong> Review our corporate gift
+options.</li>
+<li><strong>Request Quote:</strong> Contact us with your
+requirements.</li>
+<li><strong>Customize:</strong> Add branding and select delivery
+dates.</li>
+<li><strong>Approve:</strong> Review and approve your order.</li>
+<li><strong>Deliver:</strong> We handle delivery and follow-up.</li>
+<li><strong>Primary CTAs:</strong> [Request a Quote] · [View Packages] ·
+[Contact Us]</li>
+</ol>
+<h4 id="h2-trusted-by-hamilton-businesses">H2: Trusted by Hamilton
+Businesses</h4>
+<ul>
+<li>[Testimonials from corporate clients]</li>
+</ul>
+<h4 id="h2-questions">H2: Questions?</h4>
+<ul>
+<li><strong>Email:</strong> corporate@chocolatonjames.com</li>
+<li><strong>Phone:</strong> (289) 396-5097</li>
+<li><strong>Hours:</strong> Monday-Friday, 9am-5pm</li>
+<li><strong>Support CTAs:</strong> [Request Information] · [Schedule
+Consultation]</li>
+</ul>
+<p><strong>Internal Links:</strong> - Link to product pages - Link to
+“Contact” page - Link to “About Us” - Link to testimonials/case
+studies</p>
+<hr />
+<h2 id="delivery-information-page">Delivery Information Page</h2>
+<p><strong>URL:</strong> /pages/delivery</p>
+<p><strong>Title Tag</strong> (58 characters):</p>
+<pre><code>Chocolate Delivery Hamilton | Same-Day | Chocolat on James</code></pre>
+<p><strong>Meta Description</strong> (159 characters):</p>
+<pre><code>Same-day chocolate delivery in Hamilton. Order by 2pm for delivery today. Local, Ontario &amp; Canada-wide shipping available. Free delivery on orders $75+.</code></pre>
+<p><strong>H1 Tag:</strong></p>
+<pre><code>Chocolate Delivery in Hamilton &amp; Beyond</code></pre>
+<p><strong>Content Structure</strong> (300-400 words):</p>
+<h4 id="h1-chocolate-delivery-in-hamilton-beyond">H1: Chocolate Delivery
+in Hamilton &amp; Beyond</h4>
+<p>Can’t visit our James Street North shop? We deliver Hamilton’s finest
+artisan chocolates right to your door—or to someone special.</p>
+<h4 id="h2-same-day-delivery-in-hamilton-1">H2: Same-Day Delivery in
+Hamilton</h4>
+<p>Order by 2pm for same-day delivery throughout Hamilton. Perfect for
+last-minute gifts, special occasions, or treating yourself to premium
+chocolates. - <strong>Delivery Areas:</strong> All of Hamilton,
+including Dundas, Ancaster, Stoney Creek, and surrounding neighborhoods.
+- <strong>Delivery Fee:</strong> Free on orders $75+; $7.99 on orders
+under $75.</p>
+<h4 id="h2-ontario-canada-wide-shipping">H2: Ontario &amp; Canada-Wide
+Shipping</h4>
+<p>We ship across Ontario and Canada using express courier service with
+cold packs to ensure your chocolates arrive in perfect condition. -
+<strong>Ontario:</strong> $12.99-19.99 (1-3 business days). -
+<strong>Canada:</strong> $19.99-29.99 (2-4 business days).</p>
+<h4 id="h2-delivery-options">H2: Delivery Options</h4>
+<ul>
+<li><strong>Standard Delivery:</strong> Next-day delivery for orders
+placed before 2pm.</li>
+<li><strong>Scheduled Delivery:</strong> Choose a specific delivery date
+for birthdays, anniversaries, or special occasions.</li>
+<li><strong>Gift Delivery:</strong> Send chocolates directly to the
+recipient with a personalized message.</li>
+</ul>
+<h4 id="h2-packaging-care">H2: Packaging &amp; Care</h4>
+<p>All orders are carefully packaged to protect your chocolates during
+transit: - Insulated packaging - Cold packs (May-September) - Branded
+presentation boxes - Care instructions included</p>
+<h4 id="h2-questions-about-delivery">H2: Questions About Delivery?</h4>
+<ul>
+<li><strong>Phone:</strong> (289) 396-5097</li>
+<li><strong>Email:</strong> info@chocolatonjames.com</li>
+<li><strong>Hours:</strong> Monday-Saturday, 10am-6pm</li>
+<li><strong>Primary CTAs:</strong> [Shop Now] · [Track Order] · [Contact
+Us]</li>
+</ul>
+<hr />
+<h2 id="blog-post-template">Blog Post Template</h2>
+<p><strong>URL Structure:</strong> /blog/[post-title]</p>
+<p><strong>Title Tag Formula</strong> (50-60 characters):</p>
+<pre><code>[Topic] | Chocolat on James Hamilton</code></pre>
+<p><strong>Meta Description Formula</strong> (150-160 characters):</p>
+<pre><code>[Brief summary of post with keyword]. Tips from Hamilton&#39;s artisan chocolatier. [Call-to-action].</code></pre>
+<p><strong>H1 Tag:</strong></p>
+<pre><code>[Post Title with Primary Keyword]</code></pre>
+<p><strong>Content Structure</strong> (800-1,500 words):</p>
+<h4 id="h1-post-title">H1: [Post Title]</h4>
+<ul>
+<li>Engaging introduction with the primary keyword in the first 100
+words.</li>
+</ul>
+<h4 id="h2-h2-subheading-with-related-keyword">H2: [H2 Subheading with
+Related Keyword]</h4>
+<ul>
+<li>Content section 1.</li>
+</ul>
+<h4 id="h2-h2-subheading">H2: [H2 Subheading]</h4>
+<ul>
+<li>Content section 2.</li>
+</ul>
+<h5 id="h3-sub-section-if-needed">[H3 Sub-section if needed]</h5>
+<ul>
+<li>Detailed supporting content.</li>
+</ul>
+<h4 id="h2-h2-subheading-1">H2: [H2 Subheading]</h4>
+<ul>
+<li>Content section 3.</li>
+</ul>
+<h4 id="conclusion">Conclusion</h4>
+<ul>
+<li>Summary with clear call-to-action.</li>
+</ul>
+<hr />
+<ul>
+<li><strong>Related Products:</strong> Link to 2-3 relevant
+products.</li>
+<li><strong>Related Posts:</strong> Link to 2-3 related blog posts.</li>
+<li><strong>Primary CTAs:</strong> [Shop Now] · [Visit Us] · [Contact
+Us]</li>
+</ul>
+<p><strong>Internal Links:</strong> 3-5 links to relevant product pages,
+category pages, or other blog posts</p>
+<p><strong>Images:</strong> 3-5 images with descriptive alt text</p>
+<p><strong>Schema Markup:</strong> Article or BlogPosting schema</p>
+<hr />
+<h2 id="technical-seo-requirements">Technical SEO Requirements</h2>
+<h3 id="url-structure">URL Structure</h3>
+<p><strong>Best Practices:</strong> - Use hyphens, not underscores:
+<code>/dark-chocolate-truffles</code> (preferred) instead of
+<code>/dark_chocolate_truffles</code> (avoid) - Keep URLs short and
+descriptive - Include primary keyword - Use lowercase only - Avoid
+unnecessary parameters</p>
+<p><strong>Examples:</strong> - Correct:
+<code>/collections/truffles</code> - Correct:
+<code>/products/sea-salt-caramel-truffle</code> - Correct:
+<code>/pages/corporate-gifting</code> - Avoid:
+<code>/index.php?id=123&amp;cat=truffles</code></p>
+<hr />
+<h3 id="image-optimization">Image Optimization</h3>
+<p><strong>File Names:</strong> - Use descriptive, keyword-rich names -
+Example: <code>dark-chocolate-truffle-hamilton.jpg</code> - Avoid:
+<code>IMG_1234.jpg</code></p>
+<p><strong>Alt Text:</strong> - Describe the image accurately - Include
+relevant keywords naturally - Example:
+<code>Signature dark chocolate truffles at Chocolat on James Hamilton</code>
+- Avoid: <code>chocolate</code> or keyword stuffing</p>
+<p><strong>File Size:</strong> - Compress images to &lt;200KB - Use WebP
+format when possible - Lazy load below-the-fold images</p>
+<hr />
+<h3 id="internal-linking-strategy">Internal Linking Strategy</h3>
+<p><strong>Link from:</strong> - Homepage → Top category pages -
+Category pages → Individual products - Product pages → Related products
+- Blog posts → Relevant products - All pages → Important pages (About,
+Contact, Corporate)</p>
+<p><strong>Anchor Text:</strong> - Use descriptive, keyword-rich anchor
+text - Example: <code>artisan chocolate truffles</code> - Avoid:
+<code>click here</code></p>
+<p><strong>Quantity:</strong> - 3-5 internal links per page minimum -
+Link to relevant, related content - Don’t over-link (max 100 links per
+page)</p>
+<hr />
+<h3 id="mobile-optimization">Mobile Optimization</h3>
+<p><strong>Requirements:</strong> - Responsive design (adapts to all
+screen sizes) - Touch-friendly buttons (minimum 44x44px) - Readable text
+(minimum 16px font size) - Fast loading (&lt;3 seconds) - No horizontal
+scrolling - Mobile-friendly navigation</p>
+<p><strong>Testing:</strong> - Google Mobile-Friendly Test - Test on
+actual devices (iPhone, Android) - Check all page types (homepage,
+product, checkout)</p>
+<hr />
+<h3 id="page-speed-optimization">Page Speed Optimization</h3>
+<p><strong>Target Metrics:</strong> - First Contentful Paint: &lt;1.8s -
+Largest Contentful Paint: &lt;2.5s - Time to Interactive: &lt;3.8s -
+Cumulative Layout Shift: &lt;0.1</p>
+<p><strong>Optimization Tactics:</strong> - Compress images (WebP, lazy
+loading) - Minify CSS and JavaScript - Enable browser caching - Use a
+CDN - Reduce server response time - Remove unused code</p>
+<hr />
+<h2 id="schema-markup-implementation">Schema Markup Implementation</h2>
+<h3 id="localbusiness-schema-homepage">LocalBusiness Schema
+(Homepage)</h3>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;@context&quot;</span><span class="fu">:</span> <span class="st">&quot;https://schema.org&quot;</span><span class="fu">,</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;LocalBusiness&quot;</span><span class="fu">,</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Chocolat on James&quot;</span><span class="fu">,</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;image&quot;</span><span class="fu">:</span> <span class="st">&quot;https://chocolatonjames.com/images/logo.jpg&quot;</span><span class="fu">,</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Hamilton&#39;s premier artisan chocolatier, handcrafting small-batch chocolates and truffles on James Street North since 2015.&quot;</span><span class="fu">,</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;@id&quot;</span><span class="fu">:</span> <span class="st">&quot;https://chocolatonjames.com&quot;</span><span class="fu">,</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://chocolatonjames.com&quot;</span><span class="fu">,</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;telephone&quot;</span><span class="fu">:</span> <span class="st">&quot;+12893965097&quot;</span><span class="fu">,</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;priceRange&quot;</span><span class="fu">:</span> <span class="st">&quot;$$&quot;</span><span class="fu">,</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;address&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;PostalAddress&quot;</span><span class="fu">,</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;streetAddress&quot;</span><span class="fu">:</span> <span class="st">&quot;123 James St N&quot;</span><span class="fu">,</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;addressLocality&quot;</span><span class="fu">:</span> <span class="st">&quot;Hamilton&quot;</span><span class="fu">,</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;addressRegion&quot;</span><span class="fu">:</span> <span class="st">&quot;ON&quot;</span><span class="fu">,</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;postalCode&quot;</span><span class="fu">:</span> <span class="st">&quot;L8R 2K8&quot;</span><span class="fu">,</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;addressCountry&quot;</span><span class="fu">:</span> <span class="st">&quot;CA&quot;</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;geo&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;GeoCoordinates&quot;</span><span class="fu">,</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;latitude&quot;</span><span class="fu">:</span> <span class="fl">43.2609</span><span class="fu">,</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;longitude&quot;</span><span class="fu">:</span> <span class="fl">-79.8686</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;openingHoursSpecification&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;OpeningHoursSpecification&quot;</span><span class="fu">,</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;dayOfWeek&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;Monday&quot;</span><span class="ot">,</span> <span class="st">&quot;Tuesday&quot;</span><span class="ot">,</span> <span class="st">&quot;Wednesday&quot;</span><span class="ot">,</span> <span class="st">&quot;Thursday&quot;</span><span class="ot">,</span> <span class="st">&quot;Friday&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;opens&quot;</span><span class="fu">:</span> <span class="st">&quot;10:00&quot;</span><span class="fu">,</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;closes&quot;</span><span class="fu">:</span> <span class="st">&quot;18:00&quot;</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;OpeningHoursSpecification&quot;</span><span class="fu">,</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;dayOfWeek&quot;</span><span class="fu">:</span> <span class="st">&quot;Saturday&quot;</span><span class="fu">,</span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;opens&quot;</span><span class="fu">:</span> <span class="st">&quot;10:00&quot;</span><span class="fu">,</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;closes&quot;</span><span class="fu">:</span> <span class="st">&quot;17:00&quot;</span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;sameAs&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;https://instagram.com/chocolatonjames&quot;</span><span class="ot">,</span></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;https://facebook.com/chocolatonjames&quot;</span></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<h3 id="product-schema-product-pages">Product Schema (Product
+Pages)</h3>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;@context&quot;</span><span class="fu">:</span> <span class="st">&quot;https://schema.org&quot;</span><span class="fu">,</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;Product&quot;</span><span class="fu">,</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Dark Sea Salt Caramel Truffle&quot;</span><span class="fu">,</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;image&quot;</span><span class="fu">:</span> <span class="st">&quot;https://chocolatonjames.com/images/dark-sea-salt-truffle.jpg&quot;</span><span class="fu">,</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Silky dark chocolate ganache with sea salt caramel center, handmade in Hamilton.&quot;</span><span class="fu">,</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;brand&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;Brand&quot;</span><span class="fu">,</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Chocolat on James&quot;</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;offers&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;Offer&quot;</span><span class="fu">,</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://chocolatonjames.com/products/dark-sea-salt-truffle&quot;</span><span class="fu">,</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;priceCurrency&quot;</span><span class="fu">:</span> <span class="st">&quot;CAD&quot;</span><span class="fu">,</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;price&quot;</span><span class="fu">:</span> <span class="st">&quot;3.99&quot;</span><span class="fu">,</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;availability&quot;</span><span class="fu">:</span> <span class="st">&quot;https://schema.org/InStock&quot;</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;aggregateRating&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;AggregateRating&quot;</span><span class="fu">,</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;ratingValue&quot;</span><span class="fu">:</span> <span class="st">&quot;4.8&quot;</span><span class="fu">,</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;reviewCount&quot;</span><span class="fu">:</span> <span class="st">&quot;24&quot;</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<hr />
+<h2 id="content-writing-guidelines">Content Writing Guidelines</h2>
+<h3 id="keyword-usage">Keyword Usage</h3>
+<p><strong>Primary Keyword:</strong> - Include in title tag - Include in
+H1 - Include in first 100 words - Include 2-3 times naturally in body
+content - Include in meta description - Include in URL</p>
+<p><strong>Related Keywords:</strong> - Use in H2/H3 tags - Sprinkle
+naturally throughout content - Use in image alt text - Use in internal
+link anchor text</p>
+<p><strong>Keyword Density:</strong> - Aim for 1-2% keyword density -
+Don’t force keywords unnaturally - Focus on readability first</p>
+<hr />
+<h3 id="content-quality">Content Quality</h3>
+<p><strong>Best Practices:</strong> - Write for humans first, search
+engines second - Use clear, conversational language - Break up text with
+headings and bullet points - Include relevant images and videos - Answer
+user questions - Provide unique value (don’t copy competitors)</p>
+<p><strong>Minimum Word Counts:</strong> - Homepage: 400-500 words -
+Category pages: 300-400 words - Product pages: 200-300 words - Blog
+posts: 800-1,500 words - About page: 500-700 words</p>
+<hr />
+<h2 id="implementation-checklist">Implementation Checklist</h2>
+<h3 id="phase-1-critical-pages-week-1-2">Phase 1: Critical Pages (Week
+1-2)</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />Homepage optimization</label></li>
+<li><label><input type="checkbox" />Top 3 category pages</label></li>
+<li><label><input type="checkbox" />About Us page</label></li>
+<li><label><input type="checkbox" />Corporate Gifting page</label></li>
+<li><label><input type="checkbox" />Delivery page</label></li>
+<li><label><input type="checkbox" />LocalBusiness schema
+implementation</label></li>
+</ul>
+<h3 id="phase-2-product-pages-week-3-4">Phase 2: Product Pages (Week
+3-4)</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />Top 20 product pages
+optimized</label></li>
+<li><label><input type="checkbox" />Product schema
+implementation</label></li>
+<li><label><input type="checkbox" />Image alt text
+optimization</label></li>
+<li><label><input type="checkbox" />Internal linking
+structure</label></li>
+</ul>
+<h3 id="phase-3-content-expansion-month-2-3">Phase 3: Content Expansion
+(Month 2-3)</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />Blog setup and first 3
+posts</label></li>
+<li><label><input type="checkbox" />Seasonal landing pages</label></li>
+<li><label><input type="checkbox" />FAQ page</label></li>
+<li><label><input type="checkbox" />Additional category
+pages</label></li>
+</ul>
+<h3 id="phase-4-ongoing-optimization-monthly">Phase 4: Ongoing
+Optimization (Monthly)</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />Monitor rankings and
+traffic</label></li>
+<li><label><input type="checkbox" />Update content based on
+performance</label></li>
+<li><label><input type="checkbox" />Add new blog posts
+(1-2/month)</label></li>
+<li><label><input type="checkbox" />Refresh seasonal
+content</label></li>
+<li><label><input type="checkbox" />Fix technical issues</label></li>
+</ul>
+<hr />
+<h2 id="success-metrics">Success Metrics</h2>
+<h3 id="track-monthly">Track Monthly</h3>
+<p><strong>Rankings:</strong> - Top 20 target keywords - Position
+changes - New keywords ranking</p>
+<p><strong>Traffic:</strong> - Organic sessions - Top landing pages -
+Bounce rate - Time on page</p>
+<p><strong>Conversions:</strong> - Organic conversion rate - Revenue
+from organic traffic - Goal completions</p>
+<p><strong>Technical:</strong> - Page speed scores - Mobile usability -
+Core Web Vitals - Crawl errors</p>
+<hr />
+<h2 id="conclusion-1">Conclusion</h2>
+<p>This on-page SEO playbook provides a comprehensive framework for
+optimizing every page of chocolatonjames.com. Consistent implementation
+of these guidelines will result in improved search rankings, increased
+organic traffic, and higher conversion rates.</p>
+<p><strong>Next Steps:</strong> 1. Prioritize critical pages (homepage,
+top categories) 2. Implement optimizations systematically 3. Monitor
+performance weekly 4. Adjust strategy based on data 5. Expand content
+monthly</p>
+<hr />
+<p><strong>Document Status:</strong> Complete<br />
+<strong>Owner:</strong> SEO &amp; Content Agent<br />
+<strong>Implementation Timeline:</strong> 3-6 months<br />
+<strong>Review Frequency:</strong> Monthly performance review</p>
+</body>
+</html>
