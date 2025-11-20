@@ -83,16 +83,25 @@
         .file-link:hover {
             background: #8B5A3C;
         }
+        .file-link.md {
+            background: #28a745;
+        }
+        .file-link.md:hover {
+            background: #218838;
+        }
         .file-link.pdf {
             background: #dc3545;
         }
         .file-link.pdf:hover {
             background: #c82333;
         }
-        .empty {
-            text-align: center;
-            padding: 40px;
+        .file-description {
+            font-size: 0.9em;
             color: #666;
+            margin-top: 5px;
+        }
+        .file-item > div:first-child {
+            flex: 1;
         }
     </style>
 </head>
@@ -109,67 +118,43 @@
         
         <ul class="file-list">
             <li class="file-item">
-                <span class="file-name">Competitive Analysis Report</span>
+                <div>
+                    <span class="file-name">competitive-analysis-report</span>
+                    <div class="file-description">Comprehensive competitive analysis report with detailed competitor profiles and market positioning.</div>
+                </div>
                 <div class="file-links">
-                    <a href="competitive-analysis-report.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                    <a href="competitive-analysis-report.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="competitive-analysis-report.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
             <li class="file-item">
-                <span class="file-name">Competitive Analysis</span>
+                <div>
+                    <span class="file-name">competitive-analysis</span>
+                    <div class="file-description">Detailed competitive analysis covering strengths, weaknesses, and market opportunities.</div>
+                </div>
                 <div class="file-links">
-                    <a href="competitive-analysis.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                    <a href="competitive-analysis.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="competitive-analysis.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
             <li class="file-item">
-                <span class="file-name">Industry Benchmarks</span>
+                <div>
+                    <span class="file-name">industry-benchmarks</span>
+                    <div class="file-description">Industry benchmark data and performance metrics for chocolate retail businesses.</div>
+                </div>
                 <div class="file-links">
-                    <a href="industry-benchmarks.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                    <a href="industry-benchmarks.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="industry-benchmarks.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
             <li class="file-item">
-                <span class="file-name">Market Research</span>
-                <div class="file-links">
-                    <a href="market-research.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                <div>
+                    <span class="file-name">market-research</span>
+                    <div class="file-description">Market research findings including market size, demographics, and customer behavior analysis.</div>
                 </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Competitive Analysis Report</span>
                 <div class="file-links">
-                    <a href="competitive-analysis-report.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
-                </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Competitive Analysis</span>
-                <div class="file-links">
-                    <a href="competitive-analysis.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
-                </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Industry Benchmarks</span>
-                <div class="file-links">
-                    <a href="industry-benchmarks.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
-                </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Market Research</span>
-                <div class="file-links">
-                    <a href="market-research.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
+                    <a href="market-research.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="market-research.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
         </ul>

@@ -83,16 +83,25 @@
         .file-link:hover {
             background: #8B5A3C;
         }
+        .file-link.md {
+            background: #28a745;
+        }
+        .file-link.md:hover {
+            background: #218838;
+        }
         .file-link.pdf {
             background: #dc3545;
         }
         .file-link.pdf:hover {
             background: #c82333;
         }
-        .empty {
-            text-align: center;
-            padding: 40px;
+        .file-description {
+            font-size: 0.9em;
             color: #666;
+            margin-top: 5px;
+        }
+        .file-item > div:first-child {
+            flex: 1;
         }
     </style>
 </head>
@@ -109,59 +118,34 @@
         
         <ul class="file-list">
             <li class="file-item">
-                <span class="file-name">Comprehensive Market Research Report</span>
+                <div>
+                    <span class="file-name">COMPREHENSIVE-MARKET-RESEARCH-REPORT</span>
+                    <div class="file-description">Comprehensive market research report with detailed analysis of Hamilton market size, demographics, and opportunities.</div>
+                </div>
                 <div class="file-links">
-                    <a href="COMPREHENSIVE-MARKET-RESEARCH-REPORT.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                    <a href="COMPREHENSIVE-MARKET-RESEARCH-REPORT.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="COMPREHENSIVE-MARKET-RESEARCH-REPORT.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                    <a href="COMPREHENSIVE-MARKET-RESEARCH-REPORT.html" class="file-link" target="_blank">View HTML</a>
                 </div>
             </li>
             <li class="file-item">
-                <span class="file-name">Expanded Competitive Analysis 50 Businesses</span>
+                <div>
+                    <span class="file-name">expanded-competitive-analysis-50-businesses</span>
+                    <div class="file-description">Expanded competitive analysis covering 50 businesses in the chocolate and confectionery market.</div>
+                </div>
                 <div class="file-links">
-                    <a href="expanded-competitive-analysis-50-businesses.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                    <a href="expanded-competitive-analysis-50-businesses.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="expanded-competitive-analysis-50-businesses.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
             <li class="file-item">
-                <span class="file-name">Market Research Report</span>
-                <div class="file-links">
-                    <a href="market-research-report.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                <div>
+                    <span class="file-name">market-research-report</span>
+                    <div class="file-description">Market research report with customer behavior analysis and market segmentation.</div>
                 </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Comprehensive Market Research Report</span>
                 <div class="file-links">
-                    <a href="COMPREHENSIVE-MARKET-RESEARCH-REPORT.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
-                </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Expanded Competitive Analysis 50 Businesses</span>
-                <div class="file-links">
-                    <a href="expanded-competitive-analysis-50-businesses.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
-                </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Market Research Report</span>
-                <div class="file-links">
-                    <a href="market-research-report.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
-                </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Comprehensive Market Research Report</span>
-                <div class="file-links">
-                    <a href="COMPREHENSIVE-MARKET-RESEARCH-REPORT.html" class="file-link" target="_blank">
-                        View HTML
-                    </a>
+                    <a href="market-research-report.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="market-research-report.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
         </ul>

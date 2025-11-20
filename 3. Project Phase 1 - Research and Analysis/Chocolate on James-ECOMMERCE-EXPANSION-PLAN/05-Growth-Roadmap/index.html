@@ -83,16 +83,25 @@
         .file-link:hover {
             background: #8B5A3C;
         }
+        .file-link.md {
+            background: #28a745;
+        }
+        .file-link.md:hover {
+            background: #218838;
+        }
         .file-link.pdf {
             background: #dc3545;
         }
         .file-link.pdf:hover {
             background: #c82333;
         }
-        .empty {
-            text-align: center;
-            padding: 40px;
+        .file-description {
+            font-size: 0.9em;
             color: #666;
+            margin-top: 5px;
+        }
+        .file-item > div:first-child {
+            flex: 1;
         }
     </style>
 </head>
@@ -109,35 +118,23 @@
         
         <ul class="file-list">
             <li class="file-item">
-                <span class="file-name">Growth Roadmap 12 Month Nov2025</span>
+                <div>
+                    <span class="file-name">GROWTH-ROADMAP-12-MONTH-NOV2025</span>
+                    <div class="file-description">12-month growth roadmap with implementation timeline and milestones to reach $1M+ revenue.</div>
+                </div>
                 <div class="file-links">
-                    <a href="GROWTH-ROADMAP-12-MONTH-NOV2025.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                    <a href="GROWTH-ROADMAP-12-MONTH-NOV2025.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="GROWTH-ROADMAP-12-MONTH-NOV2025.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
             <li class="file-item">
-                <span class="file-name">Market Expansion Plan Nov2025</span>
-                <div class="file-links">
-                    <a href="MARKET-EXPANSION-PLAN-NOV2025.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                <div>
+                    <span class="file-name">MARKET-EXPANSION-PLAN-NOV2025</span>
+                    <div class="file-description">Market expansion plan covering geographic expansion, channel diversification, and growth strategies.</div>
                 </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Growth Roadmap 12 Month Nov2025</span>
                 <div class="file-links">
-                    <a href="GROWTH-ROADMAP-12-MONTH-NOV2025.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
-                </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Market Expansion Plan Nov2025</span>
-                <div class="file-links">
-                    <a href="MARKET-EXPANSION-PLAN-NOV2025.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
+                    <a href="MARKET-EXPANSION-PLAN-NOV2025.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="MARKET-EXPANSION-PLAN-NOV2025.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
         </ul>

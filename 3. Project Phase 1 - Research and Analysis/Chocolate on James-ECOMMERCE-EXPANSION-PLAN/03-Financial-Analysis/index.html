@@ -83,16 +83,25 @@
         .file-link:hover {
             background: #8B5A3C;
         }
+        .file-link.md {
+            background: #28a745;
+        }
+        .file-link.md:hover {
+            background: #218838;
+        }
         .file-link.pdf {
             background: #dc3545;
         }
         .file-link.pdf:hover {
             background: #c82333;
         }
-        .empty {
-            text-align: center;
-            padding: 40px;
+        .file-description {
+            font-size: 0.9em;
             color: #666;
+            margin-top: 5px;
+        }
+        .file-item > div:first-child {
+            flex: 1;
         }
     </style>
 </head>
@@ -109,51 +118,33 @@
         
         <ul class="file-list">
             <li class="file-item">
-                <span class="file-name">Comprehensive Market Analysis</span>
+                <div>
+                    <span class="file-name">comprehensive-market-analysis</span>
+                    <div class="file-description">Comprehensive market analysis covering market size, demographics, and growth opportunities.</div>
+                </div>
                 <div class="file-links">
-                    <a href="comprehensive-market-analysis.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                    <a href="comprehensive-market-analysis.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="comprehensive-market-analysis.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
             <li class="file-item">
-                <span class="file-name">Financial Analysis Report</span>
+                <div>
+                    <span class="file-name">financial-analysis-report</span>
+                    <div class="file-description">Financial analysis report with revenue patterns, profitability analysis, and cost structure evaluation.</div>
+                </div>
                 <div class="file-links">
-                    <a href="financial-analysis-report.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                    <a href="financial-analysis-report.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="financial-analysis-report.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
             <li class="file-item">
-                <span class="file-name">Revenue Projections 2026 2027</span>
-                <div class="file-links">
-                    <a href="REVENUE-PROJECTIONS-2026-2027.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                <div>
+                    <span class="file-name">REVENUE-PROJECTIONS-2026-2027</span>
+                    <div class="file-description">Detailed revenue projections for 2026 and 2027 with growth scenarios and channel breakdowns.</div>
                 </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Comprehensive Market Analysis</span>
                 <div class="file-links">
-                    <a href="comprehensive-market-analysis.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
-                </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Financial Analysis Report</span>
-                <div class="file-links">
-                    <a href="financial-analysis-report.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
-                </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Revenue Projections 2026 2027</span>
-                <div class="file-links">
-                    <a href="REVENUE-PROJECTIONS-2026-2027.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
+                    <a href="REVENUE-PROJECTIONS-2026-2027.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="REVENUE-PROJECTIONS-2026-2027.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
         </ul>

@@ -83,16 +83,25 @@
         .file-link:hover {
             background: #8B5A3C;
         }
+        .file-link.md {
+            background: #28a745;
+        }
+        .file-link.md:hover {
+            background: #218838;
+        }
         .file-link.pdf {
             background: #dc3545;
         }
         .file-link.pdf:hover {
             background: #c82333;
         }
-        .empty {
-            text-align: center;
-            padding: 40px;
+        .file-description {
+            font-size: 0.9em;
             color: #666;
+            margin-top: 5px;
+        }
+        .file-item > div:first-child {
+            flex: 1;
         }
     </style>
 </head>
@@ -109,51 +118,33 @@
         
         <ul class="file-list">
             <li class="file-item">
-                <span class="file-name">Coj Corporate Outreach Kit</span>
+                <div>
+                    <span class="file-name">COJ-Corporate-Outreach-Kit</span>
+                    <div class="file-description">Corporate outreach kit with email templates, follow-up sequences, and B2B sales materials.</div>
+                </div>
                 <div class="file-links">
-                    <a href="COJ-Corporate-Outreach-Kit.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                    <a href="COJ-Corporate-Outreach-Kit.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="COJ-Corporate-Outreach-Kit.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
             <li class="file-item">
-                <span class="file-name">Email Marketing Strategy</span>
+                <div>
+                    <span class="file-name">EMAIL-MARKETING-STRATEGY</span>
+                    <div class="file-description">Email marketing strategy with automation flows, welcome series, and 168-email annual calendar.</div>
+                </div>
                 <div class="file-links">
-                    <a href="EMAIL-MARKETING-STRATEGY.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                    <a href="EMAIL-MARKETING-STRATEGY.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="EMAIL-MARKETING-STRATEGY.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
             <li class="file-item">
-                <span class="file-name">Email Templates Jan Apr 2026</span>
-                <div class="file-links">
-                    <a href="EMAIL-TEMPLATES-JAN-APR-2026.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                <div>
+                    <span class="file-name">EMAIL-TEMPLATES-JAN-APR-2026</span>
+                    <div class="file-description">52 ready-to-use email templates for January through April 2026 with seasonal themes.</div>
                 </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Coj Corporate Outreach Kit</span>
                 <div class="file-links">
-                    <a href="COJ-Corporate-Outreach-Kit.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
-                </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Email Marketing Strategy</span>
-                <div class="file-links">
-                    <a href="EMAIL-MARKETING-STRATEGY.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
-                </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Email Templates Jan Apr 2026</span>
-                <div class="file-links">
-                    <a href="EMAIL-TEMPLATES-JAN-APR-2026.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
+                    <a href="EMAIL-TEMPLATES-JAN-APR-2026.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="EMAIL-TEMPLATES-JAN-APR-2026.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
         </ul>

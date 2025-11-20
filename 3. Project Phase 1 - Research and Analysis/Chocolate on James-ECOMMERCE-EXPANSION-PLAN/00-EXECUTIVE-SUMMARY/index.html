@@ -83,16 +83,25 @@
         .file-link:hover {
             background: #8B5A3C;
         }
+        .file-link.md {
+            background: #28a745;
+        }
+        .file-link.md:hover {
+            background: #218838;
+        }
         .file-link.pdf {
             background: #dc3545;
         }
         .file-link.pdf:hover {
             background: #c82333;
         }
-        .empty {
-            text-align: center;
-            padding: 40px;
+        .file-description {
+            font-size: 0.9em;
             color: #666;
+            margin-top: 5px;
+        }
+        .file-item > div:first-child {
+            flex: 1;
         }
     </style>
 </head>
@@ -109,19 +118,13 @@
         
         <ul class="file-list">
             <li class="file-item">
-                <span class="file-name">Executive Summary</span>
-                <div class="file-links">
-                    <a href="EXECUTIVE-SUMMARY.pdf" class="file-link pdf" target="_blank">
-                        View PDF
-                    </a>
+                <div>
+                    <span class="file-name">EXECUTIVE-SUMMARY</span>
+                    <div class="file-description">Complete executive summary with key findings, strategic overview, and project priorities.</div>
                 </div>
-            </li>
-            <li class="file-item">
-                <span class="file-name">Executive Summary</span>
                 <div class="file-links">
-                    <a href="EXECUTIVE-SUMMARY.md" class="file-link" target="_blank">
-                        View MD
-                    </a>
+                    <a href="EXECUTIVE-SUMMARY.md" class="file-link md" target="_blank">View MD</a>
+                    <a href="EXECUTIVE-SUMMARY.pdf" class="file-link pdf" target="_blank">View PDF</a>
                 </div>
             </li>
         </ul>
