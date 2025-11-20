@@ -273,6 +273,86 @@
             margin-top: 8px;
         }
 
+        /* Grouped Card Styles */
+        .grouped-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0;
+            transition: all 0.3s;
+        }
+
+        .grouped-card:hover {
+            border-color: #6B4423;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .grouped-card h4 {
+            color: #6B4423;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .grouped-card .file-item {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border-left: 3px solid #6B4423;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .grouped-card .file-item:hover {
+            background: #e9ecef;
+        }
+
+        .grouped-card .file-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95em;
+            flex: 1;
+        }
+
+        .grouped-card .file-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .grouped-card .file-link {
+            padding: 6px 12px;
+            background: #6B4423;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.85em;
+            white-space: nowrap;
+        }
+
+        .grouped-card .file-link:hover {
+            background: #8B5A3C;
+        }
+
+        .grouped-card .file-link.md {
+            background: #28a745;
+        }
+
+        .grouped-card .file-link.md:hover {
+            background: #218838;
+        }
+
+        .grouped-card .file-link.pdf {
+            background: #dc3545;
+        }
+
+        .grouped-card .file-link.pdf:hover {
+            background: #c82333;
+        }
+
         .alert {
             padding: 20px;
             border-radius: 10px;
@@ -1213,79 +1293,114 @@
 
             <h3>Corporate Outreach Templates</h3>
             <div class="folder-grid">
-                <a href="../11-Corporate-Gifting/Templates/COJ-Corporate-Outreach-Kit.pdf" class="folder-card" target="_blank">
-                    <h4>Corporate Outreach Kit</h4>
-                    <p>Complete B2B sales kit with cold emails, follow-ups, proposals, holiday pitches, LinkedIn scripts, and voicemail templates.</p>
-                    <span class="file-count">Main Kit</span>
-                </a>
-                <a href="../11-Corporate-Gifting/Templates/Invoices/COJ-Invoice-Templates-Retail.pdf" class="folder-card" target="_blank">
-                    <h4>Invoice Templates (Retail)</h4>
-                    <p>Professional invoice templates for retail and corporate orders with branding and payment terms.</p>
-                    <span class="file-count">Invoices</span>
-                </a>
-                <a href="../11-Corporate-Gifting/Templates/Price-Quotes/COJ-Quote-and-Invoice-Templates.pdf" class="folder-card" target="_blank">
-                    <h4>Quote & Invoice Templates</h4>
-                    <p>Price quote and invoice templates for corporate gifting proposals and order processing.</p>
-                    <span class="file-count">Quotes</span>
-                </a>
+                <div class="grouped-card">
+                    <h4>Corporate Outreach Templates</h4>
+                    <div class="file-item">
+                        <span class="file-name">Corporate Outreach Kit</span>
+                        <div class="file-links">
+                            <a href="../11-Corporate-Gifting/Templates/COJ-Corporate-Outreach-Kit.md" class="file-link md" target="_blank">View MD</a>
+                            <a href="../11-Corporate-Gifting/Templates/COJ-Corporate-Outreach-Kit.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">Invoice Templates (Retail)</span>
+                        <div class="file-links">
+                            <a href="../11-Corporate-Gifting/Templates/Invoices/COJ-Invoice-Templates-Retail.md" class="file-link md" target="_blank">View MD</a>
+                            <a href="../11-Corporate-Gifting/Templates/Invoices/COJ-Invoice-Templates-Retail.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">Quote & Invoice Templates</span>
+                        <div class="file-links">
+                            <a href="../11-Corporate-Gifting/Templates/Price-Quotes/COJ-Quote-and-Invoice-Templates.md" class="file-link md" target="_blank">View MD</a>
+                            <a href="../11-Corporate-Gifting/Templates/Price-Quotes/COJ-Quote-and-Invoice-Templates.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <h3>Blog Post Templates</h3>
             <div class="folder-grid">
-                <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Artisan-Chocolate-Tasting.pdf" class="folder-card" target="_blank">
-                    <h4>Artisan Chocolate Tasting</h4>
-                    <p>SEO-optimized blog template for chocolate tasting guides with H1/H2/H3 structure and meta guidance.</p>
-                    <span class="file-count">Template</span>
-                </a>
-                <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Bean-to-Bar-Journey.pdf" class="folder-card" target="_blank">
-                    <h4>Bean-to-Bar Journey</h4>
-                    <p>Blog template for behind-the-scenes content about the chocolate making process and artisan craftsmanship.</p>
-                    <span class="file-count">Template</span>
-                </a>
-                <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Community-Spotlight.pdf" class="folder-card" target="_blank">
-                    <h4>Community Spotlight</h4>
-                    <p>Template for featuring local Hamilton community stories and partnerships.</p>
-                    <span class="file-count">Template</span>
-                </a>
-                <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Corporate-Gifting-Solutions.pdf" class="folder-card" target="_blank">
-                    <h4>Corporate Gifting Solutions</h4>
-                    <p>Blog template focused on B2B corporate gifting with SEO optimization and CTA placement.</p>
-                    <span class="file-count">Template</span>
-                </a>
-                <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Holiday-Gift-Guide.pdf" class="folder-card" target="_blank">
-                    <h4>Holiday Gift Guide</h4>
-                    <p>Seasonal blog template for holiday gift guides with product recommendations and seasonal themes.</p>
-                    <span class="file-count">Template</span>
-                </a>
+                <div class="grouped-card">
+                    <h4>Blog Post Templates</h4>
+                    <div class="file-item">
+                        <span class="file-name">Artisan Chocolate Tasting</span>
+                        <div class="file-links">
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Artisan-Chocolate-Tasting.md" class="file-link md" target="_blank">View MD</a>
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Artisan-Chocolate-Tasting.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">Bean-to-Bar Journey</span>
+                        <div class="file-links">
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Bean-to-Bar-Journey.md" class="file-link md" target="_blank">View MD</a>
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Bean-to-Bar-Journey.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">Community Spotlight</span>
+                        <div class="file-links">
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Community-Spotlight.md" class="file-link md" target="_blank">View MD</a>
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Community-Spotlight.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">Corporate Gifting Solutions</span>
+                        <div class="file-links">
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Corporate-Gifting-Solutions.md" class="file-link md" target="_blank">View MD</a>
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Corporate-Gifting-Solutions.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">Holiday Gift Guide</span>
+                        <div class="file-links">
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Holiday-Gift-Guide.md" class="file-link md" target="_blank">View MD</a>
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-Blog-Template-Holiday-Gift-Guide.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <h3>Ready-to-Publish Blog Posts</h3>
             <div class="folder-grid">
-                <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Artisan-Chocolate-Tasting.pdf" class="folder-card" target="_blank">
-                    <h4>Artisan Chocolate Tasting (Ready Post)</h4>
-                    <p>700-900 word ready-to-publish article on chocolate tasting, fully optimized and proofread.</p>
-                    <span class="file-count">Ready Post</span>
-                </a>
-                <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Bean-to-Bar-Journey.pdf" class="folder-card" target="_blank">
-                    <h4>Bean-to-Bar Journey (Ready Post)</h4>
-                    <p>Complete ready-to-publish article about the bean-to-bar chocolate making process.</p>
-                    <span class="file-count">Ready Post</span>
-                </a>
-                <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Community-Spotlight.pdf" class="folder-card" target="_blank">
-                    <h4>Community Spotlight (Ready Post)</h4>
-                    <p>Ready-to-publish community story article with local Hamilton focus.</p>
-                    <span class="file-count">Ready Post</span>
-                </a>
-                <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Corporate-Gifting-Solutions.pdf" class="folder-card" target="_blank">
-                    <h4>Corporate Gifting Solutions (Ready Post)</h4>
-                    <p>Complete B2B corporate gifting article ready for immediate publication.</p>
-                    <span class="file-count">Ready Post</span>
-                </a>
-                <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Holiday-Gift-Guide.pdf" class="folder-card" target="_blank">
-                    <h4>Holiday Gift Guide (Ready Post)</h4>
-                    <p>Seasonal holiday gift guide article ready to publish with product recommendations.</p>
-                    <span class="file-count">Ready Post</span>
-                </a>
+                <div class="grouped-card">
+                    <h4>Ready-to-Publish Blog Posts</h4>
+                    <div class="file-item">
+                        <span class="file-name">Artisan Chocolate Tasting (Ready Post)</span>
+                        <div class="file-links">
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Artisan-Chocolate-Tasting.md" class="file-link md" target="_blank">View MD</a>
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Artisan-Chocolate-Tasting.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">Bean-to-Bar Journey (Ready Post)</span>
+                        <div class="file-links">
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Bean-to-Bar-Journey.md" class="file-link md" target="_blank">View MD</a>
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Bean-to-Bar-Journey.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">Community Spotlight (Ready Post)</span>
+                        <div class="file-links">
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Community-Spotlight.md" class="file-link md" target="_blank">View MD</a>
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Community-Spotlight.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">Corporate Gifting Solutions (Ready Post)</span>
+                        <div class="file-links">
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Corporate-Gifting-Solutions.md" class="file-link md" target="_blank">View MD</a>
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Corporate-Gifting-Solutions.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-name">Holiday Gift Guide (Ready Post)</span>
+                        <div class="file-links">
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Holiday-Gift-Guide.md" class="file-link md" target="_blank">View MD</a>
+                            <a href="../08-Social-Media-Strategy/Templates/Blog Post Templates/COJ-ReadyPost-Holiday-Gift-Guide.pdf" class="file-link pdf" target="_blank">View PDF</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <h3>Strategy Documents</h3>
