@@ -1284,6 +1284,33 @@
     </div>
 
     <script>
+        // GitHub Pages URL conversion
+        (function() {
+            // Check if we're on GitHub Pages
+            var isGitHubPages = window.location.hostname === 'kowalcg.github.io' || 
+                               window.location.hostname.includes('github.io');
+            
+            if (isGitHubPages) {
+                // Base path for GitHub Pages (from root of repository)
+                var basePath = '/ChocolateOnJames/3.%20Project%20Phase%201%20-%20Research%20and%20Analysis/Chocolate%20on%20James-ECOMMERCE-EXPANSION-PLAN/';
+                
+                // Convert all relative links to GitHub Pages URLs
+                document.querySelectorAll('a[href^="../"]').forEach(function(link) {
+                    var href = link.getAttribute('href');
+                    // Remove ../ and convert to GitHub Pages path
+                    var newHref = href.replace(/^\.\.\//, basePath);
+                    // Also handle links that might point to files (add .html or keep as-is for folders)
+                    if (!newHref.endsWith('/') && !newHref.match(/\.(html|pdf|md|png|jpg|jpeg|gif)$/i)) {
+                        // If it's a folder link, ensure it ends with /
+                        newHref = newHref + '/';
+                    }
+                    link.setAttribute('href', newHref);
+                });
+                
+                // Also convert the ecosystem diagram link (already handled by the general link conversion above)
+            }
+        })();
+
         function showTab(tabId) {
             // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(function(tab) {
