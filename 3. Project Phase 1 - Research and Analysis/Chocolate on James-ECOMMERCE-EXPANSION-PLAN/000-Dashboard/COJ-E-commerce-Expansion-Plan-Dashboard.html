@@ -441,6 +441,10 @@
                 <strong>Date</strong>
                 November 2025
             </div>
+            <div>
+                <strong>Last Updated</strong>
+                <span id="last-updated-date">Loading...</span>
+            </div>
         </div>
 
         <div class="alert" style="background: #e3f2fd; border-color: #2196f3; color: #0d47a1; margin-bottom: 20px;">
@@ -1294,6 +1298,16 @@
     </div>
 
     <script>
+        // Set last updated date
+        (function() {
+            var lastUpdatedElement = document.getElementById('last-updated-date');
+            if (lastUpdatedElement) {
+                var today = new Date();
+                var options = { year: 'numeric', month: 'long', day: 'numeric' };
+                lastUpdatedElement.textContent = today.toLocaleDateString('en-US', options);
+            }
+        })();
+
         // GitHub Pages URL conversion
         (function() {
             // Check if we're on GitHub Pages
