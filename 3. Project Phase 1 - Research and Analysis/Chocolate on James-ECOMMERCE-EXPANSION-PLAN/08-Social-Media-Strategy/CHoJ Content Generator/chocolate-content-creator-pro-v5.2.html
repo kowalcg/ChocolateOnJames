@@ -759,6 +759,55 @@
             display: none;
         }
 
+        /* Stage Section Headers - Visual Differentiation */
+        .stage-header {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.4), rgba(90, 45, 12, 0.5));
+            border: 2px solid rgba(212, 175, 55, 0.5);
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .stage-header-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #D4AF37;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .stage-header-title .stage-icon {
+            font-size: 1.2em;
+        }
+
+        .stage-header-subtitle {
+            font-size: 0.85em;
+            color: #d4a574;
+            line-height: 1.4;
+        }
+
+        .stage-header.stage-1 {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.5), rgba(100, 50, 15, 0.6));
+            border-color: rgba(255, 215, 0, 0.6);
+        }
+
+        .stage-header.stage-1 .stage-header-title {
+            color: #FFD700;
+        }
+
+        .stage-header.stage-2 {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.4), rgba(90, 45, 12, 0.5));
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+
+        .stage-header.stage-2 .stage-header-title {
+            color: #D4AF37;
+        }
+
         /* Two-Stage Image Workflow Banner */
         .image-upload-banner {
             background: linear-gradient(135deg, rgba(0, 150, 136, 0.15), rgba(0, 200, 83, 0.15));
@@ -826,7 +875,7 @@
         <header>
             <h1>🍫✨ Complete Content Creator PRO</h1>
             <p class="subtitle">AI Image Prompts + 10 Social Media Captions + Export Tools</p>
-            <span class="version-badge">v5.2 - Two-Stage Image Workflow - November 15, 2025</span>
+            <span class="version-badge">v5.3 - Gemini 3 + Two-Stage Workflow - November 27, 2025</span>
             <p style="margin-top: 10px; color: #d4a574; font-size: 0.85em;">Designed by Greg Kowalczyk</p>
 
             <div class="quick-presets">
@@ -840,7 +889,19 @@
         <div class="main-layout">
             <!-- Controls Panel -->
             <div class="controls">
-                                <!-- AI IMAGE ANALYSIS SECTION -->
+                
+                <!-- STAGE 1 HEADER -->
+                <div class="stage-header stage-1">
+                    <div class="stage-header-title">
+                        <span class="stage-icon">⚡</span>
+                        STAGE 1: Quick Image Variations
+                    </div>
+                    <div class="stage-header-subtitle">
+                        Upload image → Get 4 instant prompt variations → Copy or Use (30 seconds)
+                    </div>
+                </div>
+
+                <!-- AI IMAGE ANALYSIS SECTION -->
                 <div class="section" id="image-analysis-section">
                     <div class="section-title">
                         📸 AI Prompt from Image
@@ -869,11 +930,12 @@
                         </div>
 
                         <div class="prompt-variations">
-                            <h4 style="color: #D4AF37; margin-bottom: 15px;">🤖 Generated Prompt Variations</h4>
+                            <h4 style="color: #D4AF37; margin-bottom: 5px;">🤖 Generated Prompt Variations</h4>
+                            <p style="color: #8B7355; font-size: 0.8em; margin-bottom: 15px;">Click "Copy" to use directly • OR "Use" to generate full content below</p>
                             
                             <div class="variation-card">
                                 <div class="variation-header">
-                                    <span class="variation-title">🎯 Exact Match</span>
+                                    <span class="variation-title">🎯 Exact Match - Recreate This Style</span>
                                     <div class="variation-actions">
                                         <button class="btn-icon" onclick="copyPromptVariation(0)">📋 Copy</button>
                                         <button class="btn-icon" onclick="sendToGenerator(0)">➡️ Use</button>
@@ -884,7 +946,7 @@
 
                             <div class="variation-card">
                                 <div class="variation-header">
-                                    <span class="variation-title">✨ Inspired</span>
+                                    <span class="variation-title">✨ Inspired Creative - Fresh Perspective</span>
                                     <div class="variation-actions">
                                         <button class="btn-icon" onclick="copyPromptVariation(1)">📋 Copy</button>
                                         <button class="btn-icon" onclick="sendToGenerator(1)">➡️ Use</button>
@@ -895,7 +957,7 @@
 
                             <div class="variation-card">
                                 <div class="variation-header">
-                                    <span class="variation-title">💎 Premium</span>
+                                    <span class="variation-title">💎 Premium Elevated - Magazine Quality</span>
                                     <div class="variation-actions">
                                         <button class="btn-icon" onclick="copyPromptVariation(2)">📋 Copy</button>
                                         <button class="btn-icon" onclick="sendToGenerator(2)">➡️ Use</button>
@@ -906,7 +968,7 @@
 
                             <div class="variation-card">
                                 <div class="variation-header">
-                                    <span class="variation-title">🍫 CHoJ Branded</span>
+                                    <span class="variation-title">🍫 CHoJ Branded - Hamilton Identity</span>
                                     <div class="variation-actions">
                                         <button class="btn-icon" onclick="copyPromptVariation(3)">📋 Copy</button>
                                         <button class="btn-icon" onclick="sendToGenerator(3)">➡️ Use</button>
@@ -917,24 +979,33 @@
                         </div>
 
                         <div class="workflow-guide">
-                            <strong>💡 Workflow Tips:</strong>
+                            <strong>💡 Two Ways to Use Your Image:</strong>
                             <ul>
-                                <li>Upload your inspiration image to get instant prompt variations</li>
-                                <li>Click "Use" to send any variation directly to the AI image generator</li>
-                                <li>Tweak the generated prompts by editing platform/season settings below</li>
-                                <li>Try different images to explore various styles for your chocolate photography</li>
+                                <li><strong style="color: #FFC107;">Stage 1 (above):</strong> Copy any variation directly into AI</li>
+                                <li><strong style="color: #D4AF37;">Stage 2 (below):</strong> Customize settings → Generate complete content</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
+                <!-- STAGE 2 HEADER -->
+                <div class="stage-header stage-2">
+                    <div class="stage-header-title">
+                        <span class="stage-icon">⚙️</span>
+                        STAGE 2: Full Customization
+                    </div>
+                    <div class="stage-header-subtitle">
+                        Customize all settings below → Generate complete content (prompt + 10 captions + hashtags)
+                    </div>
+                </div>
+
                 <div class="section">
                     <div class="section-title">
-                        🤖 AI Platform
-                        <span class="tooltip" data-tooltip="Gemini = FREE | Grok = Good for text | Sora2 = Video only">ℹ️</span>
+                        🤖 1. AI Platform
+                        <span class="tooltip" data-tooltip="Gemini 3 = FREE & Best Quality | Grok = Good for text | Sora2 = Video only">ℹ️</span>
                     </div>
                     <select id="ai-platform">
-                        <option value="gemini">Gemini (Nano Banana) - FREE</option>
+                        <option value="gemini">Gemini 3 / Nano Banana - FREE ⭐</option>
                         <option value="chatgpt">ChatGPT / DALL-E 3</option>
                         <option value="grok">Grok (xAI) - Good for Text</option>
                         <option value="sora">Sora - Images</option>
@@ -945,7 +1016,7 @@
                 </div>
 
                 <div class="section">
-                    <div class="section-title">📱 Content Category</div>
+                    <div class="section-title">📱 2. Content Category</div>
                     <select id="category">
                         <option value="">Select Category...</option>
                         <option value="product-showcase">Product Showcase</option>
@@ -965,7 +1036,7 @@
                 </div>
 
                 <div class="section">
-                    <div class="section-title">📐 Platform / Format</div>
+                    <div class="section-title">📐 3. Platform / Format</div>
                     <div class="option-group">
                         <div class="option-btn active" data-platform="instagram-square">Instagram Post</div>
                         <div class="option-btn" data-platform="instagram-story">IG Story</div>
@@ -975,7 +1046,7 @@
                 </div>
 
                 <div class="section">
-                    <div class="section-title">📅 Month / Season</div>
+                    <div class="section-title">📅 4. Month / Season</div>
                     <select id="season">
                         <option value="any">Any Time</option>
                         <option value="january">January</option>
@@ -999,7 +1070,7 @@
                 </div>
 
                 <div class="section">
-                    <div class="section-title">👥 Target Audience</div>
+                    <div class="section-title">👥 5. Target Audience</div>
                     <select id="audience">
                         <option value="general">General Audience</option>
                         <option value="hamilton-locals">Hamilton Locals</option>
@@ -1017,7 +1088,7 @@
                 </div>
 
                 <div class="section">
-                    <div class="section-title">🎨 Image Style</div>
+                    <div class="section-title">🎨 6. Image Style</div>
                     <div class="option-group">
                         <div class="option-btn active" data-style="photography">Photography</div>
                         <div class="option-btn" data-style="lifestyle">Lifestyle</div>
@@ -1027,7 +1098,7 @@
                 </div>
 
                 <div class="section">
-                    <div class="section-title">✨ Image Elements</div>
+                    <div class="section-title">✨ 7. Image Elements</div>
                     <div class="checkbox-option">
                         <input type="checkbox" id="include-text" checked>
                         <label for="include-text">Space for text overlay</label>
@@ -1078,7 +1149,7 @@
                 </div>
 
                 <div class="section">
-                    <div class="section-title">💬 Caption Options</div>
+                    <div class="section-title">💬 8. Caption Options</div>
                     <div class="checkbox-option">
                         <input type="checkbox" id="include-emojis" checked>
                         <label for="include-emojis">Include emojis in captions</label>
@@ -1102,7 +1173,7 @@
                 </div>
 
                 <div class="section">
-                    <div class="section-title">🔧 Custom Details</div>
+                    <div class="section-title">🔧 9. Custom Details</div>
                     <div class="input-group">
                         <label class="input-label">Specific Product</label>
                         <input type="text" id="product-name" placeholder="e.g., Dark Chocolate Truffles, Sea Salt Caramels">
@@ -1114,17 +1185,17 @@
                 </div>
 
                 
-                <!-- TWO-STAGE IMAGE WORKFLOW BANNER -->
+                <!-- IMAGE LOADED INDICATOR BANNER -->
                 <div class="image-upload-banner" id="imageModeBanner">
                     <img id="bannerThumbnail" class="image-banner-thumbnail" alt="Uploaded image">
                     <div class="image-banner-content">
-                        <div class="image-banner-title">✓ Using Uploaded Image</div>
-                        <div class="image-banner-description">AI will style YOUR chocolate based on options below</div>
+                        <div class="image-banner-title">✓ Image Loaded from Stage 1</div>
+                        <div class="image-banner-description">Your image will be combined with all settings above</div>
                     </div>
                     <button class="btn-clear-image" onclick="clearUploadedImage()">Clear Image</button>
                 </div>
 
-                <button class="btn-generate" id="generateBtn" onclick="generateContent()">✨ Generate Complete Content</button>
+                <button class="btn-generate" id="generateBtn" onclick="generateContent()">⚙️ Generate Complete Content</button>
                 <button class="btn-regenerate" onclick="regenerateContent()" style="display: none;" id="btn-regenerate">🔄 Regenerate With Current Settings</button>
                 <button class="btn-clear" onclick="clearForm()">🗑️ Clear All Fields & Start Fresh</button>
 
@@ -1704,20 +1775,32 @@ Make it elegant, large, and highly visible with luxury chocolate brand aesthetic
 
             switch(platform) {
                 case 'gemini':
-                    // Conversational, natural language
-                    return `Generate an image for me using these specifications:
+                    // OPTIMIZED FOR GEMINI 3 / NANO BANANA
+                    // Uses conversational structure with clear photography directions
+                    // Emphasizes visual quality keywords that Gemini responds well to
+                    return `Create a stunning professional chocolate photograph for me.
 
-I need a professional chocolate photography image for Chocolate on James,
-an artisan Hamilton chocolate shop on James Street North.
+**THE BUSINESS:**
+Chocolate on James - Hamilton's premier artisan chocolate shop on James Street North.
+Premium handcrafted chocolates made with passion and expertise.
 
+**WHAT I NEED:**
 ${genericPrompt}
 ${customTextInstructions}
 
-Please create this with photorealistic quality, capturing the luxurious artisan
-chocolate aesthetic. The image should be in ${aspectRatio} aspect ratio,
-optimized for ${options.platform} posting.
+**PHOTOGRAPHY QUALITY:**
+- Photorealistic commercial food photography
+- ${aspectRatio} for ${options.platform}
+- Ultra-high detail - I want to see the chocolate texture, the sheen, every delicious detail
+- Professional studio-quality lighting
+- Rich, appetizing color depth
+- Sharp focus on the chocolate with beautiful soft background
 
-Make it drool-worthy and irresistible - something that makes people crave chocolate!`;
+**MAKE IT IRRESISTIBLE:**
+The image should make viewers CRAVE chocolate instantly. Think Godiva campaign quality,
+Bon Appétit magazine worthy, the kind of photo that stops people mid-scroll.
+
+Create something drool-worthy that showcases the artisan quality of Hamilton's finest chocolate!`;
 
                 case 'chatgpt':
                     // Structured markdown format
@@ -1902,145 +1985,247 @@ and irresistible appeal, optimized for ${options.platform} posting.`;
 
 
         // ============================================================================
-        // V5.2 NEW FUNCTION: Build prompt using uploaded image + user controls
+        // STAGE 2: Build prompt combining uploaded image + ALL user controls
+        // ============================================================================
+        // This is fundamentally DIFFERENT from Stage 1 quick variations.
+        // 
+        // Stage 1 = Quick standalone prompts based ONLY on image analysis
+        // Stage 2 = Rich comprehensive prompts that COMBINE:
+        //           - Uploaded image analysis (colors, lighting, mood)
+        //           - User-selected platform (Instagram, Facebook, Pinterest)
+        //           - User-selected category (Product, Seasonal, Lifestyle, etc.)
+        //           - User-selected season/occasion
+        //           - User-selected audience
+        //           - User-selected style (Photography, Lifestyle, Minimalist, Artistic)
+        //           - Custom product name
+        //           - Custom text overlays
+        //           - Special notes/requirements
+        //           - Hamilton branding options
+        //
+        // Optimized for Gemini 3 / Nano Banana with conversational structure.
         // ============================================================================
         function buildImagePromptWithUploadedImage(options, analysis) {
             const productName = options.productName || 'artisan handmade chocolates';
             const brightness = analysis._analysis.brightness;
             const temperature = analysis._analysis.temperature;
             const colors = analysis.colorPalette;
+            const colorHexList = colors.slice(0, 4).join(', ');
 
-            // Build description of the uploaded chocolate arrangement
-            const imageDescription = `${analysis.style} featuring ${productName}`;
-            const colorDescription = `Colors from uploaded image: ${colors.slice(0, 3).join(', ')}`;
+            // Platform aspect ratios
+            const platformSpecs = {
+                'instagram-square': { ratio: '1:1', name: 'Instagram Square Post', desc: 'square format optimized for feed' },
+                'instagram-story': { ratio: '9:16', name: 'Instagram Story', desc: 'vertical full-screen format' },
+                'facebook-ad': { ratio: '1.91:1', name: 'Facebook Ad', desc: 'landscape format for advertising' },
+                'pinterest': { ratio: '2:3', name: 'Pinterest Pin', desc: 'tall vertical format for maximum engagement' }
+            };
+            const platform = platformSpecs[options.platform] || platformSpecs['instagram-square'];
 
-            // Get category details
-            const categoryScenes = {
+            // Photography style descriptions
+            const styleDescriptions = {
+                'photography': 'clean professional product photography with controlled studio lighting',
+                'lifestyle': 'lifestyle editorial photography with natural context and storytelling',
+                'minimalist': 'minimalist zen photography with generous negative space and simplicity',
+                'artistic': 'creative artistic photography with dramatic lighting and unique angles'
+            };
+            const styleDesc = styleDescriptions[options.style] || styleDescriptions['photography'];
+
+            // Category-specific scene directions
+            const categoryDirections = {
                 'product-showcase': {
-                    enhancement: 'professional commercial product photography setup with premium presentation',
-                    focus: 'hero positioning with museum-quality attention to detail'
+                    scene: 'premium product hero shot with museum-quality presentation',
+                    direction: 'Position chocolate as the absolute star with professional studio styling',
+                    props: 'minimal elegant props that enhance without distracting'
                 },
                 'promotional': {
-                    enhancement: 'bold eye-catching promotional photography with strong visual impact',
-                    focus: 'attention-grabbing composition that commands immediate notice'
+                    scene: 'eye-catching promotional photography that commands attention',
+                    direction: 'Bold composition that stops the scroll and creates urgency',
+                    props: 'sale/offer visual elements integrated elegantly'
                 },
                 'seasonal': {
-                    enhancement: 'festive seasonal celebration photography with elegant gift-worthy presentation',
-                    focus: 'holiday styling and celebratory atmosphere'
+                    scene: 'festive seasonal celebration photography',
+                    direction: 'Capture holiday magic and gift-giving atmosphere',
+                    props: 'seasonal decorations, festive accents, holiday colors'
                 },
                 'educational': {
-                    enhancement: 'clear informative editorial photography',
-                    focus: 'clarity and information delivery'
+                    scene: 'clear informative editorial photography',
+                    direction: 'Focus on clarity and information delivery',
+                    props: 'process elements, ingredients, educational context'
                 },
                 'behind-scenes': {
-                    enhancement: 'authentic documentary-style photography',
-                    focus: 'real artisan chocolate creation moments'
+                    scene: 'authentic behind-the-scenes documentary style',
+                    direction: 'Real artisan moments, genuine craft atmosphere',
+                    props: 'actual workshop tools, real environment, authenticity'
                 },
                 'lifestyle': {
-                    enhancement: 'aspirational lifestyle photography',
-                    focus: 'indulgent self-care moments and experiences'
+                    scene: 'aspirational lifestyle moment with chocolate',
+                    direction: 'Self-care, indulgence, cozy enjoyment',
+                    props: 'lifestyle context - books, coffee, cozy elements'
                 },
                 'local-hamilton': {
-                    enhancement: 'vibrant Hamilton community photography',
-                    focus: 'James Street North character and local pride'
+                    scene: 'Hamilton community pride photography',
+                    direction: 'James Street North artistic neighborhood character',
+                    props: 'local references, community vibe, neighborhood pride'
                 },
                 'customer-engagement': {
-                    enhancement: 'dynamic interactive social media photography',
-                    focus: 'maximum shareability and engagement'
+                    scene: 'social media engagement-focused photography',
+                    direction: 'Fun, shareable, conversation-starting',
+                    props: 'interactive elements, relatable moments'
                 },
                 'custom': {
-                    enhancement: options.customCategory || 'professional branded content photography',
-                    focus: 'premium artisan chocolates'
+                    scene: options.customCategory || 'professional branded content',
+                    direction: 'Custom creative direction as specified',
+                    props: 'appropriate styling for custom category'
                 }
             };
+            const category = categoryDirections[options.category] || categoryDirections['product-showcase'];
 
-            const sceneDetails = categoryScenes[options.category] || categoryScenes['custom'];
-
-            // Build seasonal elements
-            let seasonalElements = '';
+            // Build seasonal styling
+            let seasonSection = '';
             if (options.customOccasion) {
-                seasonalElements = `\n\nSEASONAL STYLING:\nIncorporate ${options.customOccasion} theme with appropriate seasonal styling, colors, and festive atmosphere.`;
+                seasonSection = `
+
+**OCCASION STYLING: ${options.customOccasion.toUpperCase()}**
+Incorporate ${options.customOccasion} theme throughout:
+- Appropriate colors and decorative elements
+- Festive atmosphere matching the occasion
+- Blend seamlessly with the uploaded image's aesthetic`;
             } else if (options.season && options.season !== 'any') {
-                const seasonalThemes = {
-                    'february': "Valentine's Day magic with romantic red and pink accents, hearts, intimate love atmosphere",
-                    'march': 'Spring awakening with Easter preparation hints, pastel touches, renewal feeling',
-                    'april': 'Easter celebration with spring colors, Mother\'s Day elegance, bright spring light',
-                    'may': "Mother's Day focus with elegant feminine touches, appreciation and grace",
-                    'june': "Father's Day masculine sophistication with summer warmth, strength and appreciation",
-                    'july': 'Summer vibes with bright fresh energy, warm season atmosphere, vacation mood',
-                    'august': 'Back to school energy with teacher appreciation theme, late summer warmth',
-                    'september': 'Fall arrival with autumn colors beginning, cozy transition mood, harvest feeling',
-                    'october': 'Halloween fun with autumn richness, festive orange and brown tones, playful touches',
-                    'november': 'Thanksgiving gratitude with pre-holiday excitement, warm rich autumn tones',
-                    'december': 'Christmas magic with holiday celebration, festive red green and gold, winter wonder'
+                const seasonalStyles = {
+                    'january': { name: 'New Year / Winter', colors: 'silver, white, deep blue', mood: 'fresh start, winter cozy' },
+                    'february': { name: "Valentine's Day", colors: 'romantic reds, soft pinks, gold', mood: 'love, romance, intimate' },
+                    'march': { name: 'Early Spring / Easter Prep', colors: 'soft pastels, spring green', mood: 'renewal, awakening' },
+                    'april': { name: 'Easter / Spring', colors: 'pastels, spring florals', mood: 'celebration, spring joy' },
+                    'may': { name: "Mother's Day / Late Spring", colors: 'elegant pinks, florals, soft gold', mood: 'appreciation, feminine elegance' },
+                    'june': { name: "Father's Day / Summer", colors: 'deep blues, warm wood tones', mood: 'sophisticated, summer warmth' },
+                    'july': { name: 'Summer', colors: 'bright, fresh, sunny', mood: 'vacation, celebration, fun' },
+                    'august': { name: 'Late Summer', colors: 'warm sunset tones, golden', mood: 'relaxed, abundant' },
+                    'september': { name: 'Early Fall', colors: 'warm oranges, deep reds, brown', mood: 'cozy transition, harvest' },
+                    'october': { name: 'Halloween / Fall', colors: 'orange, black, autumn palette', mood: 'playful, festive, cozy' },
+                    'november': { name: 'Thanksgiving / Pre-Holiday', colors: 'rich autumn, warm metallics', mood: 'gratitude, abundance, anticipation' },
+                    'december': { name: 'Christmas / Holidays', colors: 'red, green, gold, silver', mood: 'magical, festive, joyful, gift-giving' }
                 };
-                if (seasonalThemes[options.season]) {
-                    seasonalElements = `\n\nSEASONAL ATMOSPHERE:\n${seasonalThemes[options.season]}`;
+                const seasonData = seasonalStyles[options.season];
+                if (seasonData) {
+                    seasonSection = `
+
+**SEASONAL STYLING: ${seasonData.name.toUpperCase()}**
+- Season colors to blend with image: ${seasonData.colors}
+- Seasonal mood: ${seasonData.mood}
+- Add subtle ${seasonData.name.toLowerCase()} elements while preserving uploaded image aesthetic`;
                 }
             }
 
-            // Build the comprehensive prompt
-            let prompt = `Create a stunning photograph based on this uploaded chocolate image:
+            // Build audience targeting
+            let audienceSection = '';
+            const targetAudience = options.customAudience || options.audience;
+            if (targetAudience && targetAudience !== 'general') {
+                const audienceStyles = {
+                    'hamilton-locals': 'Local Hamilton community - emphasize neighborhood pride, James Street North character, support local messaging',
+                    'gift-buyers': 'Gift shoppers - emphasize elegant presentation, gift-worthy styling, premium packaging appeal',
+                    'corporate': 'Corporate clients - sophisticated professional presentation, premium business gifting aesthetic',
+                    'foodies': 'Food enthusiasts - emphasize artisan quality, ingredient quality, craftsmanship details',
+                    'luxury': 'Luxury seekers - ultra-premium presentation, exclusive feel, aspirational lifestyle',
+                    'millennials': 'Millennials & Gen Z - Instagram-worthy, trendy, modern aesthetic, shareable'
+                };
+                const audienceDesc = audienceStyles[targetAudience] || targetAudience;
+                audienceSection = `
 
-SUBJECT FROM UPLOADED IMAGE:
-${imageDescription}
-${colorDescription}
-Lighting style: ${analysis.lighting}
-Mood: ${analysis.mood}
-
-STYLING REQUIREMENTS (enhance the uploaded image with these elements):
-Category: ${sceneDetails.enhancement}
-Focus: ${sceneDetails.focus}
-Platform: ${options.platform} (${getAspectRatio(options.platform)})
-
-MAINTAIN FROM ORIGINAL IMAGE:
-- Keep the same chocolate arrangement and product presentation
-- Preserve the ${brightness.description.toLowerCase()}
-- Maintain the ${temperature.description.toLowerCase()}
-- Use similar color palette with the extracted dominant colors
-- Match the overall composition and framing approach${seasonalElements}`;
-
-            if (options.includeText) {
-                prompt += `\n- Strategic negative space: generous clean area for text overlay while maintaining visual balance`;
+**TARGET AUDIENCE: ${targetAudience.toUpperCase()}**
+${audienceDesc}
+Tailor the visual presentation to resonate specifically with this demographic.`;
             }
 
-            if (options.includeLogo) {
-                prompt += `\n- Bottom right corner: naturally darker area for light-colored logo overlay`;
+            // Build special elements
+            let elementsSection = '';
+            if (options.includeText || options.includeLogo || options.includePeople || options.includeLocation) {
+                elementsSection = `
+
+**SPECIAL ELEMENTS:**`;
+                if (options.includeText) {
+                    elementsSection += `
+- Reserve clean negative space for text overlay (maintain visual balance)`;
+                }
+                if (options.includeLogo) {
+                    elementsSection += `
+- Bottom right corner: naturally darker area for logo placement`;
+                }
+                if (options.includePeople) {
+                    elementsSection += `
+- Include human element: elegant hands interacting with chocolate, refined gesture`;
+                }
+                if (options.includeLocation) {
+                    elementsSection += `
+- Subtle Hamilton/James Street North local character in styling`;
+                }
             }
 
-            if (options.includePeople) {
-                prompt += `\n- Human element: elegant hands delicately interacting with the chocolate, refined gesture`;
-            }
-
-            if (options.includeLocation) {
-                prompt += `\n- Hamilton local character: subtle James Street North artistic vibe, local atmosphere`;
-            }
-
-            // v5.0: Hamilton's Chocolate tagline
+            // Build Hamilton branding
+            let brandingSection = '';
             if (options.hamiltonChocolateTagline) {
-                prompt += `\n\nBRAND POSITIONING:
-- This is Hamilton's premier chocolate destination
+                brandingSection = `
+
+**CHOCOLATE ON JAMES BRANDING:**
+Position as Hamilton's premier chocolate destination:
 - Local pride atmosphere with community connection
-- Position as HAMILTON'S chocolate shop`;
+- James Street North artisan character
+- Incorporate brand colors: chocolate brown (#3E2723), cream (#F5F5DC), gold (#D4AF37)
+- "Hamilton's Chocolate" positioning throughout`;
             }
 
-            if (options.customAudience) {
-                prompt += `\n\nTARGET AUDIENCE:
-- Primary audience: ${options.customAudience}
-- Visual appeal crafted to resonate with this demographic`;
-            }
+            // Build special notes
+            let notesSection = '';
+            if (options.specialNotes && options.specialNotes.trim()) {
+                notesSection = `
 
-            if (options.specialNotes) {
-                prompt += `\n\nSPECIAL CREATIVE DIRECTION:
+**SPECIAL CREATIVE NOTES:**
 ${options.specialNotes}`;
             }
 
-            prompt += `\n\nTECHNICAL QUALITY:
-- Ultra-high resolution 4K-8K quality
-- Professional commercial photography standard
-- Maintain the aesthetic of the uploaded image while enhancing with selected styling options
+            // =================================================================
+            // BUILD THE COMPREHENSIVE STAGE 2 PROMPT
+            // =================================================================
+            // This is fundamentally different from Stage 1 - it COMBINES image
+            // analysis with ALL user controls for a rich, customized result.
+            // =================================================================
+            
+            let prompt = `Create a custom ${platform.name} photograph for **${productName}** based on my uploaded reference image and these specific requirements:
 
-GOAL: Take the uploaded chocolate image and enhance it with ${options.category} styling for ${options.platform}, maintaining the core visual aesthetic while adding the selected seasonal, audience, and brand elements.`;
+**REFERENCE IMAGE FOUNDATION:**
+Preserve these key elements from my uploaded image:
+- Lighting style: ${brightness.description} (${brightness.level === 'dark' ? 'moody low-key' : brightness.level === 'bright' ? 'bright high-key' : 'balanced'})
+- Color temperature: ${temperature.description} (${temperature.temperature} tones)
+- Color palette to match: ${colorHexList}
+- Mood quality: ${analysis.mood}
+
+**PLATFORM OPTIMIZATION: ${platform.name.toUpperCase()}**
+- Aspect ratio: ${platform.ratio} (${platform.desc})
+- Composition optimized for ${options.platform} engagement
+
+**CONTENT CATEGORY: ${options.category.toUpperCase().replace('-', ' ')}**
+- Scene direction: ${category.scene}
+- Creative approach: ${category.direction}
+- Styling props: ${category.props}
+
+**PHOTOGRAPHY STYLE: ${options.style.toUpperCase()}**
+${styleDesc}
+Apply this style while maintaining the lighting and color characteristics from my uploaded reference.${seasonSection}${audienceSection}${elementsSection}${brandingSection}${notesSection}
+
+**TECHNICAL REQUIREMENTS:**
+- Resolution: Ultra-high quality 4K-8K, 300 DPI print-ready
+- Sharpness: Tack-sharp focus on chocolate, beautiful bokeh background
+- Color accuracy: Match uploaded image palette (${colorHexList})
+- Lighting: Preserve ${brightness.level} exposure level with ${temperature.temperature} color temperature
+- Quality: Professional commercial photography standard
+
+**FINAL GOAL:**
+Create a ${platform.name} image that COMBINES:
+✓ The visual aesthetic from my uploaded reference (colors, lighting, mood)
+✓ ${options.category} content styling
+✓ ${options.season && options.season !== 'any' ? options.season + ' seasonal elements' : 'timeless appeal'}
+✓ ${targetAudience || 'general audience'} targeting
+✓ ${options.style} photography approach
+
+The result should feel like the uploaded image was professionally restyled for a ${options.category} ${platform.name} campaign.`;
 
             // Call platform-specific optimization
             return {
@@ -3497,6 +3682,9 @@ FINAL RESULT: Museum-quality food photography suitable for premium brand marketi
 
             displayAnalysis(analysis);
             generatePromptVariations(analysis);
+            
+            // Show the Stage 2 banner indicating image is ready for custom generation
+            showImageModeBanner(imageData);
         }
 
         function displayAnalysis(analysis) {
@@ -3542,71 +3730,155 @@ FINAL RESULT: Museum-quality food photography suitable for premium brand marketi
         }
 
         /**
-         * Generate prompt variations based on ACTUAL image analysis
-         * Each prompt is customized to match the specific uploaded image's characteristics
+         * STAGE 1: Generate 4 Quick Prompt Variations
+         * ===========================================
+         * These are STANDALONE prompts based ONLY on image analysis.
+         * They are optimized for Gemini 3 / Nano Banana with conversational structure.
+         * Each variation has a distinct creative direction.
+         * 
+         * User can copy these directly OR click "Use" to generate content.
          */
         function generatePromptVariations(analysis) {
             const brightness = analysis._analysis.brightness;
             const temperature = analysis._analysis.temperature;
             const colors = analysis.colorPalette;
-
-            // Build color description from actual extracted colors
-            const colorDescription = `dominant colors: ${colors.slice(0, 3).join(', ')}`;
+            const colorHexList = colors.slice(0, 4).join(', ');
+            
+            // Descriptive brightness text
+            const brightnessDesc = brightness.level === 'dark' 
+                ? 'moody low-key lighting with dramatic shadows' 
+                : brightness.level === 'bright' 
+                    ? 'bright high-key lighting with clean luminosity'
+                    : 'balanced natural lighting with soft shadows';
+            
+            // Descriptive temperature text
+            const tempDesc = temperature.temperature === 'warm'
+                ? 'warm golden amber tones (3000-3500K)'
+                : temperature.temperature === 'cool'
+                    ? 'cool crisp daylight tones (5500-6500K)'
+                    : 'neutral balanced color temperature (4500-5000K)';
 
             generatedVariations = [
-                // Exact Match - Recreate this specific image's aesthetic
-                `Professional chocolate product photography recreating this EXACT style: ${analysis.style}.
+                // =================================================================
+                // VARIATION 1: EXACT MATCH - Photorealistic recreation
+                // =================================================================
+                `Generate a photorealistic chocolate product photograph that EXACTLY matches this reference style.
 
-LIGHTING SETUP: ${analysis.lighting}. Match the ${brightness.description.toLowerCase()}. Replicate the ${temperature.description.toLowerCase()}.
+**LIGHTING RECREATION:**
+Replicate the ${brightnessDesc} from my uploaded image. Use ${tempDesc}. Position key light to create identical shadow patterns and highlight placement.
 
-COLOR PALETTE: Use these exact ${colorDescription} as seen in the reference image. Maintain the same color grading and tonal balance.
+**COLOR MATCHING:**
+Match these exact extracted colors: ${colorHexList}
+Apply the same color grading - ${brightness.level === 'dark' ? 'rich deep tones with preserved shadow detail' : brightness.level === 'bright' ? 'clean vibrant tones with controlled highlights' : 'natural balanced tonal range'}.
 
-MOOD & ATMOSPHERE: ${analysis.mood}. Capture the same emotional quality and visual feeling.
+**PHOTOGRAPHIC TECHNIQUE:**
+- Aperture: ${brightness.level === 'dark' ? 'f/1.8-f/2.8 for shallow depth' : 'f/4-f/8 for sharpness'}
+- Focus: Tack-sharp on chocolate surface, soft bokeh background
+- Composition: Follow the exact framing and subject placement from reference
 
-TECHNICAL APPROACH: ${analysis.technicalDetails}. Match composition, depth of field, and framing approach of the reference.
+**MOOD:** ${analysis.mood}
 
-GOAL: Recreate the same visual aesthetic, lighting setup, and compositional approach exactly as shown. High-resolution commercial photography suitable for premium brand marketing.`,
+**QUALITY:** Ultra-high resolution 8K, commercial photography standard, magazine-ready, perfect exposure and color accuracy.
 
-                // Inspired - Similar feel but with creative variation
-                `Chocolate product photography INSPIRED by this aesthetic but with creative variation:
+Create this image matching the reference photograph exactly.`,
 
-STYLE FOUNDATION: Based on ${analysis.style}, but experiment with slightly different angles and composition while maintaining quality level.
+                // =================================================================
+                // VARIATION 2: INSPIRED CREATIVE - Same quality, fresh perspective
+                // =================================================================
+                `Create beautiful chocolate photography INSPIRED by my reference image, but with your own creative interpretation.
 
-LIGHTING APPROACH: Similar to ${analysis.lighting}, but with subtle creative adjustments. Keep the ${brightness.level} exposure level and ${temperature.temperature} color temperature.
+**STYLE FOUNDATION:**
+Use the ${brightnessDesc} as your starting point, but feel free to experiment with angle, composition, and props. Maintain the ${tempDesc} that works so well.
 
-COLOR DIRECTION: Inspired by the ${colorDescription} palette, but feel free to shift hues slightly for fresh perspective while maintaining similar saturation and tone.
+**COLOR PALETTE INSPIRATION:**
+Start with these colors from my image: ${colorHexList}
+You can shift hues slightly for a fresh perspective - try complementary accents or subtle variations while keeping the overall ${temperature.temperature} feeling.
 
-MOOD: Maintain the ${analysis.mood} atmosphere but add your own creative interpretation.
+**CREATIVE FREEDOM:**
+- Try a different camera angle (overhead, 45-degree, eye-level)
+- Experiment with depth of field
+- Add or change styling props
+- Play with negative space and composition
 
-CREATIVE FREEDOM: Keep the premium artisan feel and professional quality, but don't be afraid to try new compositions or props. Professional commercial quality.`,
+**MAINTAIN:**
+- ${analysis.mood} emotional quality
+- Premium artisan chocolate presentation
+- Professional commercial photography standard
+- ${brightness.level === 'dark' ? 'Rich dramatic atmosphere' : brightness.level === 'bright' ? 'Clean inviting brightness' : 'Balanced natural appeal'}
 
-                // Premium - Elevated version of the analyzed aesthetic
-                `Ultra-premium luxury chocolate photography ELEVATED beyond the reference image:
+**QUALITY:** 4K-8K resolution, professional food photography, Instagram-worthy aesthetic.
 
-ENHANCED STYLE: ${analysis.style} taken to the next level with even more refined execution, perfect composition, and museum-quality attention to detail.
+Be creative while honoring the successful elements of my reference!`,
 
-PERFECTED LIGHTING: ${analysis.lighting} enhanced with masterful control. ${brightness.level === 'dark' ? 'Deepen the drama with more sophisticated shadow play' : brightness.level === 'bright' ? 'Perfect the luminosity with flawless highlight control' : 'Elevate the balance with gallery-quality light sculpting'}. Maintain ${temperature.temperature} tones but with richer depth.
+                // =================================================================
+                // VARIATION 3: PREMIUM ELEVATED - Luxury magazine quality
+                // =================================================================
+                `Create ULTRA-PREMIUM luxury chocolate photography that ELEVATES my reference image to award-winning magazine cover quality.
 
-PREMIUM COLOR: Build upon the ${colorDescription} foundation with deeper saturation, perfect color accuracy, and award-winning color grading.
+**LIGHTING PERFECTION:**
+Take the ${brightnessDesc} from my reference and perfect it with masterful precision:
+${brightness.level === 'dark' 
+    ? '- Deepen the drama with sophisticated shadow sculpting\n- Add subtle rim lighting for chocolate edge definition\n- Create mysterious, intimate luxury atmosphere' 
+    : brightness.level === 'bright' 
+        ? '- Perfect the luminosity with flawless highlight control\n- Add subtle fill to eliminate any harsh shadows\n- Create pristine, aspirational brightness' 
+        : '- Elevate the balance with gallery-quality light sculpting\n- Perfect the tonal transitions\n- Create effortless sophistication'}
 
-AMPLIFIED MOOD: ${analysis.mood} atmosphere intensified to maximum impact. Magazine cover quality, award-winning food photography standard.
+**ENHANCED COLOR:**
+Build upon ${colorHexList} with:
+- Deeper saturation in chocolate browns
+- Perfect color accuracy (print-ready)
+- Award-winning editorial color grading
+- ${tempDesc} enhanced to maximum beauty
 
-FLAWLESS EXECUTION: Absolutely perfect presentation that commands premium positioning. Every detail refined to perfection.`,
+**PREMIUM EXECUTION:**
+- 8K ultra-high resolution
+- Micro-detail texture visible (chocolate sheen, tempered finish)
+- Perfect composition using golden ratio
+- Museum-quality attention to every detail
+- Hasselblad/Phase One level image quality
 
-                // CHoJ Branded - Adapt the analyzed style for Chocolate on James
-                `Artisan chocolate photography for Chocolate on James, adapting the analyzed style:
+**ELEVATED MOOD:**
+${analysis.mood} - intensified to MAXIMUM emotional impact. The kind of image that stops people mid-scroll and creates instant desire.
 
-BRAND-ADAPTED STYLE: ${analysis.style} tailored specifically for Hamilton's premier chocolatier. Maintain the ${brightness.description.toLowerCase()} that works so well, but ensure it showcases handcrafted chocolate products effectively.
+Create an image worthy of Vogue, Bon Appétit, or a luxury chocolate brand campaign.`,
 
-LIGHTING FOR CHoJ: ${analysis.lighting} adapted to highlight artisan chocolate textures and details. Keep the ${temperature.description.toLowerCase()} as it creates the perfect atmosphere for premium chocolate.
+                // =================================================================
+                // VARIATION 4: CHOCOLATE ON JAMES BRANDED - Local artisan identity
+                // =================================================================
+                `Create branded chocolate photography for **Chocolate on James** (Hamilton, Ontario's premier artisan chocolatier) adapting my reference style.
 
-CHoJ COLOR PALETTE: While inspired by the ${colorDescription} from reference, incorporate Chocolate on James brand colors - rich chocolate browns (#3E2723), warm cream (#F5F5DC), and elegant gold (#D4AF37) - naturally into the scene.
+**BRAND CONTEXT:**
+- Location: James Street North, Hamilton - artistic neighborhood known for galleries and local businesses
+- Positioning: Premium handcrafted artisan chocolates
+- Personality: Warm, welcoming, locally-proud, sophisticated but approachable
 
-BRAND MOOD: ${analysis.mood} atmosphere that communicates local artisan quality, James Street North heritage, and premium craftsmanship. Warm, inviting, and approachable while maintaining sophistication.
+**ADAPTED LIGHTING:**
+Keep the ${brightnessDesc} that works beautifully for chocolate, but adjust to:
+- Highlight handcrafted textures and artisan quality
+- Create warm, inviting shop atmosphere
+- ${tempDesc} leaning slightly warmer for approachability
 
-HAMILTON CHARACTER: Subtle hints of Hamilton's artistic James Street North neighborhood character. Local pride and community connection visible in the aesthetic.
+**BRAND COLOR INTEGRATION:**
+My image colors: ${colorHexList}
+Blend with Chocolate on James brand palette:
+- Deep chocolate brown (#3E2723) - dominant
+- Warm cream (#F5F5DC) - accents
+- Elegant gold (#D4AF37) - highlights and touches
 
-Professional commercial photography for Chocolate on James social media and marketing, maintaining the successful visual approach of the reference image while strengthening brand identity.`
+**HAMILTON CHARACTER:**
+Subtle hints of James Street North's artistic, local-business vibe:
+- Warm neighborhood feel
+- Artisan craft visible in presentation
+- Community pride atmosphere
+- Not generic commercial - authentically LOCAL
+
+**BRAND MOOD:**
+${analysis.mood} + Local Pride + Artisan Authenticity + Premium Quality
+The image should say: "This is Hamilton's chocolate shop - handmade with love on James Street North"
+
+**QUALITY:** Professional commercial photography for social media, website, and marketing. 4K-8K resolution.
+
+Create an image that's unmistakably Chocolate on James!`
             ];
 
             generatedVariations.forEach((variation, index) => {
@@ -3639,17 +3911,19 @@ Professional commercial photography for Chocolate on James social media and mark
             // Scroll to output area
             document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
 
+            // Get the button reference BEFORE the timeout
+            const btn = event.target;
+            const originalText = btn.textContent;
+
             // Trigger generation (DO NOT populate custom-text-in-image field)
             // The prompt will be used internally by generateContent()
             setTimeout(() => {
-                generateAllContent();
+                generateContent();
 
                 // Clear the stored prompt after generation
                 window.selectedImagePrompt = null;
 
                 // Visual feedback
-                const btn = event.target;
-                const originalText = btn.textContent;
                 btn.textContent = '✅ Sent!';
                 btn.style.background = 'rgba(0, 200, 0, 0.3)';
 
@@ -3673,15 +3947,15 @@ Professional commercial photography for Chocolate on James social media and mark
             if (imageData && currentImageData) {
                 banner.classList.add('active');
                 thumbnail.src = imageData;
-                generateBtn.innerHTML = '✨ Generate Content Using Uploaded Image';
+                generateBtn.innerHTML = '⚙️ Generate (Using Your Image)';
             } else {
                 banner.classList.remove('active');
-                generateBtn.innerHTML = '✨ Generate Complete Content';
+                generateBtn.innerHTML = '⚙️ Generate Complete Content';
             }
         }
 
         function clearUploadedImage() {
-            if (confirm('Clear the uploaded image? The AI will generate generic chocolate images instead.')) {
+            if (confirm('Clear the uploaded image? Stage 1 variations will be removed. Stage 2 will generate generic chocolate prompts instead.')) {
                 // Clear the image data
                 currentImageData = null;
                 currentAnalysis = null;
@@ -3691,7 +3965,7 @@ Professional commercial photography for Chocolate on James social media and mark
                 document.getElementById('imageModeBanner').classList.remove('active');
 
                 // Reset generate button text
-                document.getElementById('generateBtn').innerHTML = '✨ Generate Complete Content';
+                document.getElementById('generateBtn').innerHTML = '⚙️ Generate Complete Content';
 
                 // Hide image analysis section
                 document.getElementById('imageAnalysisResults').classList.add('hidden');
@@ -3701,8 +3975,8 @@ Professional commercial photography for Chocolate on James social media and mark
 
                 // Show success message
                 const output = document.getElementById('output');
-                if (output.innerHTML.includes('Generated using uploaded image')) {
-                    output.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📸</div><div class="empty-state-text">Image cleared! Click "Generate" to create content with generic chocolate images.</div></div>';
+                if (output.innerHTML.includes('Using Your Image') || output.innerHTML.includes('usingUploadedImage')) {
+                    output.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📸</div><div class="empty-state-text">Image cleared! Upload a new image or click "Generate" to create content with generic chocolate prompts.</div></div>';
                 }
             }
         }
