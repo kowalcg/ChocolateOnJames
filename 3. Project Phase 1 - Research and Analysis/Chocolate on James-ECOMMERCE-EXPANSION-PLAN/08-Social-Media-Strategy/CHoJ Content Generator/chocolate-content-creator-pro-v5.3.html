@@ -1796,6 +1796,12 @@ ${customTextInstructions}
 - Rich, appetizing color depth
 - Sharp focus on the chocolate with beautiful soft background
 
+🚫 **IMPORTANT - DO NOT ADD:**
+- No hex color codes visible in the image
+- No color swatches or color bars
+- No text overlays of technical specs
+- Color codes mentioned above are for COLOR GRADING only - use them to match color tones, never display them
+
 **MAKE IT IRRESISTIBLE:**
 The image should make viewers CRAVE chocolate instantly. Think Godiva campaign quality,
 Bon Appétit magazine worthy, the kind of photo that stops people mid-scroll.
@@ -1815,7 +1821,9 @@ ${customTextInstructions}
 
 **Format:** ${aspectRatio} aspect ratio for ${options.platform}
 **Quality:** Photorealistic, professional commercial food photography
-**Brand Colors:** Chocolate brown (#8B4513), Gold (#D4AF37), Cream (#F5F5DC)
+**Color Palette for Grading:** Use chocolate brown, gold, and cream tones (do not display color codes in the image)
+
+🚫 **DO NOT ADD:** Hex codes, color swatches, or color bars visible in the image. Colors are for internal grading only.
 
 Generate a high-quality image that captures the artisan luxury and irresistible
 appeal of handcrafted chocolate.`;
@@ -1900,10 +1908,11 @@ Technical Generation Parameters:
 - Output format: ${aspectRatio} aspect ratio (${options.platform} optimized)
 - Rendering mode: Photorealistic commercial food photography
 - Image quality: 4K-8K resolution, print-quality 300 DPI
-- Color space: sRGB, brand colors: #8B4513 (chocolate), #D4AF37 (gold), #F5F5DC (cream)
+- Color space: sRGB, color palette of chocolate brown, gold, and cream tones
 - Lighting model: Natural/studio food photography lighting
 - Material physics: Accurate chocolate texture, glossy ganache, cocoa dust realism
 - Food styling: Professional commercial food photography standards
+- IMPORTANT: Do not add hex codes or color swatches to the final image
 
 Grok-Specific Optimization:
 - Real-world material physics (chocolate melting point, texture accuracy)
@@ -1968,7 +1977,9 @@ Sora Image Parameters:
 - Quality: Photorealistic commercial food photography
 - Lighting: Natural window light with warm artisan glow
 - Style: Lifestyle editorial with indulgent atmosphere
-- Brand Colors: Chocolate brown (#8B4513), Gold (#D4AF37), Cream (#F5F5DC)
+- Color Palette: Chocolate brown, gold, and cream tones (for color grading, do not display as text)
+
+IMPORTANT: Do not add hex codes or color swatches to the image.
 
 Generate a compelling single-frame chocolate image that captures artisan luxury
 and irresistible appeal, optimized for ${options.platform} posting.`;
@@ -2168,7 +2179,7 @@ Tailor the visual presentation to resonate specifically with this demographic.`;
 Position as Hamilton's premier chocolate destination:
 - Local pride atmosphere with community connection
 - James Street North artisan character
-- Incorporate brand colors: chocolate brown (#3E2723), cream (#F5F5DC), gold (#D4AF37)
+- Color palette: warm chocolate brown, cream, and gold tones (for color grading, not as displayed text)
 - "Hamilton's Chocolate" positioning throughout`;
             }
 
@@ -2188,14 +2199,22 @@ ${options.specialNotes}`;
             // analysis with ALL user controls for a rich, customized result.
             // =================================================================
             
-            let prompt = `Create a custom ${platform.name} photograph for **${productName}** based on my uploaded reference image and these specific requirements:
+            let prompt = `I am uploading a REFERENCE IMAGE that shows the EXACT chocolate product and styling I want you to recreate for **${productName}**.
 
-**REFERENCE IMAGE FOUNDATION:**
-Preserve these key elements from my uploaded image:
-- Lighting style: ${brightness.description} (${brightness.level === 'dark' ? 'moody low-key' : brightness.level === 'bright' ? 'bright high-key' : 'balanced'})
+🚨 CRITICAL: Use my uploaded reference image as the PRIMARY source for:
+- The specific chocolate product type and presentation shown
+- The exact arrangement, packaging, and styling visible in the image
+- The overall composition and framing
+- Props, background elements, and scene setup
+
+**REFERENCE IMAGE VISUAL ANALYSIS:**
+From my uploaded reference photo, match these extracted characteristics:
+- Lighting approach: ${brightness.description} (${brightness.level === 'dark' ? 'moody low-key' : brightness.level === 'bright' ? 'bright high-key' : 'balanced'})
 - Color temperature: ${temperature.description} (${temperature.temperature} tones)
-- Color palette to match: ${colorHexList}
-- Mood quality: ${analysis.mood}
+- Color grading palette: Use colors similar to ${colorHexList} for overall color grading
+- Mood and atmosphere: ${analysis.mood}
+
+⚠️ IMPORTANT: The hex color codes above are for COLOR GRADING only - DO NOT add visible color swatches, hex codes, or color bars to the image. These colors should be used to match the overall color tone, not displayed as text or graphic elements.
 
 **PLATFORM OPTIMIZATION: ${platform.name.toUpperCase()}**
 - Aspect ratio: ${platform.ratio} (${platform.desc})
@@ -2213,19 +2232,28 @@ Apply this style while maintaining the lighting and color characteristics from m
 **TECHNICAL REQUIREMENTS:**
 - Resolution: Ultra-high quality 4K-8K, 300 DPI print-ready
 - Sharpness: Tack-sharp focus on chocolate, beautiful bokeh background
-- Color accuracy: Match uploaded image palette (${colorHexList})
+- Color grading: Apply color tones from the uploaded reference image (internal color matching - do not display color codes)
 - Lighting: Preserve ${brightness.level} exposure level with ${temperature.temperature} color temperature
 - Quality: Professional commercial photography standard
 
-**FINAL GOAL:**
-Create a ${platform.name} image that COMBINES:
-✓ The visual aesthetic from my uploaded reference (colors, lighting, mood)
-✓ ${options.category} content styling
-✓ ${options.season && options.season !== 'any' ? options.season + ' seasonal elements' : 'timeless appeal'}
-✓ ${targetAudience || 'general audience'} targeting
-✓ ${options.style} photography approach
+🚫 DO NOT ADD TO IMAGE:
+- No hex codes or color values as text
+- No color swatches or color bars
+- No technical specifications visible in the image
+- Keep the image clean and professional - colors are for grading only
 
-The result should feel like the uploaded image was professionally restyled for a ${options.category} ${platform.name} campaign.`;
+**WHAT TO CREATE:**
+Recreate the EXACT chocolate product and presentation from my uploaded reference image, adapted for a ${platform.name} ${options.category} post:
+✓ Match the specific chocolate type/product shown in my reference
+✓ Replicate the arrangement, packaging, and styling from my reference
+✓ Use the same lighting mood: ${brightness.level} with ${temperature.temperature} tones
+✓ Apply the visual aesthetic: ${analysis.mood}
+✓ Add ${options.category} content styling
+✓ Incorporate ${options.season && options.season !== 'any' ? options.season + ' seasonal elements' : 'timeless appeal'}
+✓ Target ${targetAudience || 'general audience'}
+✓ Use ${options.style} photography approach
+
+The result should look like a professionally photographed version of the EXACT product in my reference image, optimized for ${platform.name}.`;
 
             // Call platform-specific optimization
             return {
@@ -2427,9 +2455,10 @@ ${lightingSetups[options.style]}
 - Color temperature: warm inviting tones (3200-4000K) creating cozy premium atmosphere`;
 
             prompt += `\n\nCOLOR PALETTE & VISUAL IDENTITY:
-- Primary brand colors: deep rich chocolate brown (#3E2723 - dominant), luxurious warm cream (#F5F5DC - accent), elegant antique gold (#D4AF37 - highlight touches)
+- Primary color scheme: deep rich chocolate brown (dominant), luxurious warm cream (accent), elegant antique gold (highlight touches)
 - Color grading: rich saturated chocolate tones, warm inviting palette, premium color depth, professional color accuracy
-- Texture materials: smooth polished surfaces, natural wood elements, elegant fabric textures, refined materials`;
+- Texture materials: smooth polished surfaces, natural wood elements, elegant fabric textures, refined materials
+- NOTE: Color descriptions are for overall tone and grading - do not add visible hex codes or color swatches to the image`;
 
             if (options.category === 'educational') {
                 prompt += `\n- Educational visual keywords: informative diagrams, step-by-step clarity, expert demonstration, chocolate science, artisan techniques, knowledge sharing, tutorial quality`;
