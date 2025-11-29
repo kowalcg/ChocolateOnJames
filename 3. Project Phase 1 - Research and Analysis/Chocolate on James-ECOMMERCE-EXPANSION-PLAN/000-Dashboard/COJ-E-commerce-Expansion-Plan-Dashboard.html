@@ -1578,22 +1578,37 @@
             
             if (isGitHubPages) {
                 // Base path for GitHub Pages (from root of repository)
-                var basePath = '/ChocolateOnJames/3.%20Project%20Phase%201%20-%20Research%20and%20Analysis/Chocolate%20on%20James-ECOMMERCE-EXPANSION-PLAN/';
+                var basePath = '/ChocolateOnJames/3. Project Phase 1 - Research and Analysis/Chocolate on James-ECOMMERCE-EXPANSION-PLAN/';
                 
                 // Convert all relative links to GitHub Pages URLs
                 document.querySelectorAll('a[href^="../"]').forEach(function(link) {
                     var href = link.getAttribute('href');
-                    // Remove ../ and convert to GitHub Pages path
-                    var newHref = href.replace(/^\.\.\//, basePath);
-                    // Also handle links that might point to files (add .html or keep as-is for folders)
+                    
+                    // Decode the href first to handle any existing encoding
+                    var decodedHref = decodeURIComponent(href);
+                    
+                    // Remove ../ and build the full path
+                    var relativePath = decodedHref.replace(/^\.\.\//, '');
+                    var fullPath = basePath + relativePath;
+                    
+                    // Split path into segments, encode each segment, then rejoin
+                    // This ensures spaces and special characters are properly encoded
+                    var pathParts = fullPath.split('/');
+                    var encodedParts = pathParts.map(function(part) {
+                        // Don't encode the empty string or path separators
+                        if (part === '') return part;
+                        // Encode each part but preserve the path structure
+                        return encodeURIComponent(part).replace(/%2F/g, '/');
+                    });
+                    var newHref = encodedParts.join('/');
+                    
+                    // Handle folder links (ensure they end with /)
                     if (!newHref.endsWith('/') && !newHref.match(/\.(html|pdf|md|png|jpg|jpeg|gif)$/i)) {
-                        // If it's a folder link, ensure it ends with /
                         newHref = newHref + '/';
                     }
+                    
                     link.setAttribute('href', newHref);
                 });
-                
-                // Also convert the ecosystem diagram link (already handled by the general link conversion above)
             }
         })();
 
